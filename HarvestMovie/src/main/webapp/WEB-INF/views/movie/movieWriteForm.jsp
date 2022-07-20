@@ -33,7 +33,7 @@
     기본정보<br>
     <textarea name="mv_summary" id="mv_summary" cols="30" rows="10"></textarea><br>
 
-    예고편<br>
+    예고편<br>j
     <span id="show_mv_trailer"></span>
 
     <input type="text" id="mv_trailer" name="mv_trailer"><br>
