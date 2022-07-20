@@ -9,7 +9,7 @@
 <body>
 메인 <br>
 <c:forEach var="mainVO" items="${mainVOList}">
-<img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}">
+    <a href="movieModifyMain.do?mv_num=${param.mv_num}"><img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"></a>
 </c:forEach>
 
 <br><br><br>

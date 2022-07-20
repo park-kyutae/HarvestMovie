@@ -485,7 +485,32 @@ public class MovieDAO {
 
     }
 
-    public void setMainMovie(int mv_main_list_num) {
+    public void setMainMovie(int mv_num, int mv_main_list_num) throws Exception{
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String sql = null;
+
+        try {
+            if (mv_main_list_num >= 1 && mv_main_list_num < 4) {
+                throw new Exception();
+//                TODO 사용자 예외 만들기
+            }
+            conn = DBUtil.getConnection();
+            sql = "MERGE INTO movie_main_list s " +
+                    "USING DUAL" +
+                    "   ON s.mv_main_list_num=?" +
+                    "WHEN MATCHED THEN" +
+                    "    UPDATE SET s.mv_num = ?" +
+                    "WHEN NOT MATCHED THEN" +
+                    "    INSERT (mv_main_list_num, mv_num)" +
+                    "    VALUES (?,?)";
+            pstmt = conn.prepareStatement(sql);
+        } catch (Exception e) {
+            throw new Exception(e);
+        } finally {
+            DBUtil.executeClose(null, pstmt, conn);
+        }
 
     }
 

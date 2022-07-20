@@ -60,7 +60,7 @@ ${movieVO.avg_rating}<br>
 
 <br><br>
 
-
+<input type="button" value="이 영화를 메인 영화로 만들기" onclick="location.href='movieUpdateMain.do?mv_num=${param.mv_num}'">
 
 </body>
 </html>
