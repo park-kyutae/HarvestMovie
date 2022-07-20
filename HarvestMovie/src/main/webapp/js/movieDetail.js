@@ -7,7 +7,7 @@ $(function () {
 
     function get_rating() {
         $.ajax({
-            url: 'movieGetRatingAction.do',
+            url: 'movieGetRating.do',
             type: 'post',
             data: {
                 mv_num: $('#mv_num').val()
@@ -54,7 +54,7 @@ $(function () {
         var rating = this.getAttribute('id');
 
         $.ajax({
-            url: 'movieRatingAction.do',
+            url: 'movieRating.do',
             type: 'post',
             data: {
                 mv_num: $('#mv_num').val(),
@@ -114,7 +114,7 @@ $(function () {
     get_will_watch();
     $('#mv_will_watch').click(function () {
         $.ajax({
-            url: 'movieWillWatchAction.do',
+            url: 'movieWillWatch.do',
             type: 'post',
             data: {
                 mv_num: $('#mv_num').val()

@@ -314,7 +314,8 @@ public class MovieDAO {
                     "         join (select MV_NUM,MV_GENRE from MOVIE_DETAIL) a on s.MV_NUM = a.MV_NUM " +
                     "where rownum <=10 and MV_GENRE =?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "1");
+            //추후 장르 선택 추가
+            pstmt.setString(1, "west");
             rs = pstmt.executeQuery();
 
             while (rs.next()) {

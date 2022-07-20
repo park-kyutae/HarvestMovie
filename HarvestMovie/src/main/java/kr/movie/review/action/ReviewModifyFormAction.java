@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ReviewModifyFormAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int mem_num = 3;
+        int mem_num = 999;
         request.setCharacterEncoding("utf-8");
         int mv_num = Integer.parseInt(request.getParameter("mv_num"));
 

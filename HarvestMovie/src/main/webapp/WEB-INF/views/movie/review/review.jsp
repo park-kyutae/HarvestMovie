@@ -14,29 +14,25 @@
     <script type="text/javascript" ></script>
 </head>
 <body>
+<%--TODO 평론가 인증 마크 추가--%>
+-----내리뷰----<br>
+멤버이름 <br>
+${myReviewVO.mem_id}<br>
+리뷰 메세지 <br>
+${myReviewVO.review_message} <br>
 
 <c:forEach var="reviewVO" items="${reviewVOList}">
-    멤버이름
-    ${reviewVO.mem_id}
-    리뷰 메세지
-    ${reviewVO.review_message}
+    멤버이름 <br>
+    ${reviewVO.mem_id}<br>
+    리뷰 메세지 <br>
+    ${reviewVO.review_message} <br>
 </c:forEach>
-
-<c:if test="${result=='write'}">
-    <script>
-        alert('리뷰 작성이 완료되었습니다.');
-    </script>
-</c:if>
-<c:if test="${result=='modify'}">
-    <script>
-        alert('리뷰 수정이 완료되었습니다.');
-    </script>
-</c:if>
 리뷰쓰기
-<input type="button" onclick="location.href='/movie/review/reviewWriteForm.do?mv_num=${param.mv_num}'">
+<input type="button" onclick="location.href='/movie/review/reviewWriteForm.do?mv_num=${param.mv_num}'" value="리뷰 작성">
 
 <%--추후 인증 추가--%>
 <%--추후 내 리뷰 있는지 체크--%>
-<input type="button" value="내 리뷰 수정하기" onclick="location.href='reviewModifyFormAction.do?mv_num=${param.mv_num}'">
+<input type="button" value="내 리뷰 수정하기" onclick="location.href='reviewModifyForm.do?mv_num=${param.mv_num}'">
+<input type="button" value="내 리뷰 삭제하기" onclick="location.href='reviewDelete.do?mv_num=${param.mv_num}'">
 </body>
 </html>

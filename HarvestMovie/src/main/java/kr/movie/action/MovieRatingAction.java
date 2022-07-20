@@ -14,7 +14,7 @@ public class MovieRatingAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
 
-        int mem_num = 3;
+        int mem_num = 999;
         //로그인 기능 추가전 임시 값 추후 삭제  세션으로 처ㅡㅍ_
 
         int mv_num = Integer.parseInt(request.getParameter("mv_num"));

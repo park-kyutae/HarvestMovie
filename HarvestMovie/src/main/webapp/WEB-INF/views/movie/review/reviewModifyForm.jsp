@@ -11,9 +11,9 @@
     <title>리뷰 수정</title>
 </head>
 <body>
-<form action="reviewModifyAction.do?mv_num=${param.mv_num}" method="post">
-    <textarea name="review_modify"
-              id="review_modify" cols="30"
+<form action="reviewModify.do?mv_num=${param.mv_num}" method="post">
+    <textarea name="review_message"
+              id="review_message" cols="30"
               rows="10">${reviewVO.review_message}</textarea>
     <input type="submit" value="완료">
     <input type="button" value="취소" onclick="history.go(-1)">

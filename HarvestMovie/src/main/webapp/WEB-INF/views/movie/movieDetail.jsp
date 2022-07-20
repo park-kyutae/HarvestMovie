@@ -52,7 +52,7 @@ ${movieVO.avg_rating}<br>
 <img src="${pageContext.request.contextPath}/images/will_watch.png" id="mv_will_watch">
 
 리뷰
-<a href="/movie/review/review.do?mv_num=${movieVO.mv_num}">리뷰 작성하기</a><br>
+<a href="/movie/review/review.do?mv_num=${movieVO.mv_num}">리뷰 상세</a><br>
 리뷰 목록
 <c:forEach var="reviewVO" items="${reviewVOList}">
     ${reviewVO.review_message}
