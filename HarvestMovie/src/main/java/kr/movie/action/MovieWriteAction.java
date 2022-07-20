@@ -51,10 +51,10 @@ public class MovieWriteAction implements Action {
         mv_pic.remove(mv_poster);
 
 
-        HashMap<Integer, List<String>> staffInfo = new HashMap<>();
-        staffInfo.put(0, Arrays.asList(multi.getParameter("mv_director")));
-        staffInfo.put(1, Arrays.asList(multi.getParameter("mv_actor")));
-        staffInfo.put(3, Arrays.asList(multi.getParameter("mv_writer")));
+        HashMap<Integer, List<String>> mv_staff_info = new HashMap<>();
+        mv_staff_info.put(0, Arrays.asList(multi.getParameter("mv_director")));
+        mv_staff_info.put(1, Arrays.asList(multi.getParameter("mv_actor")));
+        mv_staff_info.put(2, Arrays.asList(multi.getParameter("mv_writer")));
 
         movieVO.setMv_title(multi.getParameter("mv_title"));
         movieVO.setMv_main_pic(mv_main_pic);
@@ -65,7 +65,7 @@ public class MovieWriteAction implements Action {
         movieVO.setMv_location(multi.getParameter("mv_location"));
         movieVO.setMv_summary(multi.getParameter("mv_summary"));
         movieVO.setMv_launch_date(mv_launch_date);
-        movieVO.setStaffInfo(staffInfo);
+        movieVO.setMv_staff_info(mv_staff_info);
 
 
         movieVO.setMv_pic(mv_pic);
@@ -73,6 +73,7 @@ public class MovieWriteAction implements Action {
 
         movieDAO.writeMovie(movieVO);
         //추후 중복 같이 실패에 따라 alert창으로 알려주는 기능 추가
-        return "/WEB-INF/views/movie/movieWrite.jsp";
+        request.setAttribute("result","write");
+        return "/WEB-INF/views/movie/movieResult.jsp";
     }
 }

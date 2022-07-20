@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -8,11 +7,6 @@
 </head>
 <body>
 메인 <br>
-<c:forEach var="mainVO" items="${mainVOList}">
-    <a href="movieModifyMain.do?mv_num=${param.mv_num}"><img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"></a>
-</c:forEach>
-
-<br><br><br>
 
 장르
 <span id="genre_span">

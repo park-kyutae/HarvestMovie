@@ -14,7 +14,7 @@ public class MovieDAO {
 
     public static final int DIRECTOR = 0;
     public static final int ACTOR = 1;
-    public static final int WRITER = 2;
+    public static final int  WRITER = 2;
 
     //싱글턴 패턴
     private static MovieDAO instance = new MovieDAO();
@@ -92,6 +92,8 @@ public class MovieDAO {
                 movieVO.setMv_main_pic(rs.getString("mv_main_pic"));
                 movieVO.setMv_poster(rs.getString("mv_poster"));
                 movieVO.setMv_genre(rs.getString("mv_genre"));
+                movieVO.setMv_location(rs.getString("mv_location"));
+                movieVO.setMv_launch_date(rs.getDate("mv_launch_date"));
                 movieVO.setMv_runningtime(rs.getString("mv_runningtime"));
                 movieVO.setMv_limit_age(rs.getInt("mv_limit_age"));
                 movieVO.setMv_summary(rs.getString("mv_summary"));
@@ -122,7 +124,7 @@ public class MovieDAO {
             pstmt4 = conn.prepareStatement(sql);
             pstmt4.setInt(1, mv_num);
             rs = pstmt4.executeQuery();
-            HashMap<Integer, List<String>> staffInfo = new HashMap<>();
+            HashMap<Integer, List<String>> mv_staff_info = new HashMap<>();
             List<String> director = new ArrayList<>();
             List<String> actor = new ArrayList<>();
             List<String> writer = new ArrayList<>();
@@ -140,11 +142,11 @@ public class MovieDAO {
                     writer.add(staffName);
                 }
             }
-            staffInfo.put(DIRECTOR, director);
-            staffInfo.put(ACTOR, actor);
-            staffInfo.put(WRITER, writer);
+            mv_staff_info.put(DIRECTOR, director);
+            mv_staff_info.put(ACTOR, actor);
+            mv_staff_info.put(WRITER, writer);
 
-            movieVO.setStaffInfo(staffInfo);
+            movieVO.setMv_staff_info(mv_staff_info);
 
         } catch (Exception e) {
             throw new Exception(e);
@@ -455,8 +457,8 @@ public class MovieDAO {
 
             sql = "insert into  MOVIE_STAFF_LIST values (movie_staff_seq.nextval,?,?,?)";
             pstmt6 = conn.prepareStatement(sql);
-            for (int keys : movieVO.getStaffInfo().keySet()) {
-                List<String> staffList = movieVO.getStaffInfo().get(keys);
+            for (int keys : movieVO.getMv_staff_info().keySet()) {
+                List<String> staffList = movieVO.getMv_staff_info().get(keys);
                 for (String staffName : staffList) {
                     pstmt6.setInt(1, movieNUM);
                     pstmt6.setString(2, staffName);
@@ -492,20 +494,24 @@ public class MovieDAO {
         String sql = null;
 
         try {
-            if (mv_main_list_num >= 1 && mv_main_list_num < 4) {
+            if (mv_main_list_num <= 0 && mv_main_list_num > 4) {
                 throw new Exception();
 //                TODO 사용자 예외 만들기
             }
             conn = DBUtil.getConnection();
             sql = "MERGE INTO movie_main_list s " +
                     "USING DUAL" +
-                    "   ON s.mv_main_list_num=?" +
+                    " ON (s.mv_main_list_num=?)" +
                     "WHEN MATCHED THEN" +
                     "    UPDATE SET s.mv_num = ?" +
                     "WHEN NOT MATCHED THEN" +
                     "    INSERT (mv_main_list_num, mv_num)" +
                     "    VALUES (?,?)";
             pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,mv_main_list_num);
+            pstmt.setInt(2,mv_num);
+            pstmt.setInt(3,mv_main_list_num);
+            pstmt.setInt(4,mv_num);
         } catch (Exception e) {
             throw new Exception(e);
         } finally {

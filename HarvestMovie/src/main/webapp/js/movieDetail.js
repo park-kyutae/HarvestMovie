@@ -82,7 +82,7 @@ $(function () {
 
     function get_will_watch() {
         $.ajax({
-            url: 'movieGetWillWatchAction.do',
+            url: 'movieGetWillWatch.do',
             type: 'post',
             data: {
                 mv_num: $('#mv_num').val()
