@@ -5,7 +5,8 @@
 <head>
     <title>영화 상세 페이지</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/movieDetail.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/movieDetail.js"></script><!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </head>
 <body>
 <input type="hidden" value="${movieVO.mv_num}" id="mv_num" >
