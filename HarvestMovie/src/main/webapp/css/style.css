@@ -59,6 +59,10 @@ body{
 .align-right{
 	text-align:right;
 }
+.align-left{
+	text-align:left;
+	padding: 10px;
+}
 a:link{
 	text-decoration:none;
 	color:#000000;
