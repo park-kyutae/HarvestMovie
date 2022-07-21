@@ -13,6 +13,7 @@ public class NewsVO {
 	private int news_like;
 	private int mem_num;
 	
+	
 	private String id;//회원 아이디 읽어올 예정
 	private String mem_photo;//회원 프로필 사진 읽어올 예정
 	

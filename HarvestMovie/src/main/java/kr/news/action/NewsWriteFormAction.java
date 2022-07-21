@@ -18,6 +18,7 @@ public class NewsWriteFormAction implements Action{
 			return "redirect:/member/loginForm.do";
 		}
 		
+		
 		return "/WEB-INF/views/news/newsWriteForm.jsp";
 	}
 

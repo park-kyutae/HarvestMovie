@@ -23,6 +23,7 @@ public class NewsWriteAction implements Action{
 			return "redirect:/member/loginForm.jsp";
 		}
 		
+		
 		//로그인이 된 경우
 		MultipartRequest multi = 
 				FileUtil.createFile(request);

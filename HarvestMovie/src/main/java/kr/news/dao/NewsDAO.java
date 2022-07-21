@@ -25,6 +25,7 @@ public class NewsDAO {
 			PreparedStatement pstmt = null;
 			String sql = null;
 			
+			
 			try {
 				//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 				conn = DBUtil.getConnection();

@@ -15,6 +15,7 @@ public class StringUtil {
 		public static String useBrNoHtml(String str) {
 			if(str == null) return null;
 			
+			
 			return str.replaceAll("<", "&lt;")
 						   .replaceAll(">", "&gt;")
 						   .replaceAll("\r\n", "<br>")

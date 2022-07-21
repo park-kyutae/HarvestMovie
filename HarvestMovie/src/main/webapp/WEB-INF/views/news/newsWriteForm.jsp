@@ -18,6 +18,7 @@
 		   method="post" enctype="multipart/form-data">
 			<ul>
 				<li>
+				
 					<label for="title">제목</label>
 					<input type="text" name="title" 
 					      id="title" maxlength="50">
