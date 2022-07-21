@@ -15,6 +15,13 @@ public class MemberVO {
 	private String photo;
 	private Date reg_date;
 	
+	public boolean isCheckedPassword(String passwd) {
+		if(auth > 1 && pw.equals(passwd)) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public int getMem_num() {
 		return mem_num;
@@ -89,4 +96,5 @@ public class MemberVO {
 		this.modify_date = modify_date;
 	}
 	private Date modify_date;
+
 }

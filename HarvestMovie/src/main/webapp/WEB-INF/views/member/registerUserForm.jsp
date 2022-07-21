@@ -46,8 +46,8 @@
  		<input type="text" class="form-control" name="addr2" id="addr2" placeholder="상세주소">
 		</div>
   			<input type="submit" class="form-control" value="등록">
-  			</div>
 		</form>
+		</div>
         
     </div>
     <div class="row"></div>

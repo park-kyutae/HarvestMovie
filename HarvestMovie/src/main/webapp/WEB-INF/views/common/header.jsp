@@ -13,13 +13,13 @@
 			<a href="${pageContext.request.contextPath}/board/list.do">게시판</a>
 		</li>
 		
-		<c:if test="${!empty user_num && user_auth == 3}">
+		<c:if test="${!empty user_num && user_auth == 9}">
 		<li>
 			<a href="${pageContext.request.contextPath}/member/memberList.do">회원관리</a>
 		</li>
 		</c:if>
 		
-		<c:if test="${!empty user_num && user_auth == 2}">
+		<c:if test="${!empty user_num && user_auth >= 2}">
 		<li>
 			<a href="${pageContext.request.contextPath}/member/myPage.do">MY페이지</a>
 		</li>
@@ -49,7 +49,7 @@
 			<a href="${pageContext.request.contextPath}/member/registerUserForm.do">회원가입</a>
 		</li>
 		<li>
-			<a href="${pageContext.request.contextPath}/member/loginForm.do">로그인</a>
+			<a href="${pageContext.request.contextPath}/member/loginUserForm.do">로그인</a>
 		</li>
 		</c:if>
 	</ul>

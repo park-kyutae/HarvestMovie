@@ -24,7 +24,6 @@ public class RegisterUserAction implements Action{
 		member.setZipcode(request.getParameter("zipcode"));
 		member.setAddr1(request.getParameter("addr1"));
 		member.setAddr2(request.getParameter("addr2"));
-		member.setPhoto("경로추후수정");
 		
 			  
 		MemberDAO dao = MemberDAO.getInstance();
