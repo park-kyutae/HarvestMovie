@@ -1,13 +1,12 @@
 package kr.util;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 
 public class DBUtil {
 	//context.xml에서 설정정보를 읽어들여 커넥션풀로부터 커넥션을 할당
