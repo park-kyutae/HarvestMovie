@@ -7,9 +7,15 @@
 		<a href="${pageContext.request.contextPath}/main/main.do">회원제 게시판</a>
 	</h1>
 </div>
-<div id="main_nav">
-	<ul>
-		<li>
+<!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+            <div class="main_nav">
+                <a class="navbar-brand" href="#">HarvestMovie</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                        <li>
 			<a href="${pageContext.request.contextPath}/board/list.do">게시판</a>
 		</li>
 		
@@ -52,9 +58,25 @@
 			<a href="${pageContext.request.contextPath}/member/loginUserForm.do">로그인</a>
 		</li>
 		</c:if>
-	</ul>
-</div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 <!-- header 끝 -->
+<!-- 모바일에서 화면 축소/확대 방지 좀더 네이티브앱 처럼 느껴짐) -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 
 
