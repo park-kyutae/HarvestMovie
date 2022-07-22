@@ -24,19 +24,33 @@
 <body>
 
 	<div class="container">
+		<%--상단바 시작--%>
+		<div>상단바</div>
+		<%--상단바 끝--%>
 
+		<%--영화 뉴스 목록 시작--%>
+		<%--페이지 제목--%>
 		<div class="row d-flex justify-content-center">
-			<div class="col col-sm-9">영화 뉴스</div>
+			<div class="col col-sm-9">
+				<h2>영화 뉴스</h2>
+			</div>
+		</div>
+		<%--페이지 제목--%>
+		<%--최신글--%>
+		<div class="row d-flex justify-content-center">
+			<div class="col col-sm-9 d-flex justify-content-end font-weight-bold">최신글 조회수</div>
 		</div>
 		<div class="row d-flex justify-content-center">
-			<div class="col col-sm-9 d-flex justify-content-end">최신글 조회수</div>
-		</div>
-		<div class="row  d-flex justify-content-center">
+			<br>
+			</div>
+		<%--최신글--%>
+		<%--게시판 목록--%>
+		<div class="row d-flex justify-content-center">
 			<div class="col col-sm-2">
 				<img src="${pageContext.request.contextPath}/images/face.png"
 					width="100">
 			</div>
-			<div class="col col-sm-7">
+			<div class="col col-sm-6">
 				<div class="row ">
 					<div class="col ">제목</div>
 				</div>
@@ -44,28 +58,96 @@
 					<div class="col ">날짜</div>
 				</div>
 			</div>
+			<div class="col col-sm-1">
+				<div class="row ">
+					<div class="col d-flex justify-content-center">좋아요</div>
+				</div>
+			</div>
+			</div>
 			
+			<div class="row d-flex justify-content-center">
+			<br>
+			</div>
 			
-			<form id="search_form" action="newslist.do" 
-		                                    method="get">
-			<ul class="search">
-				<li>
-					<select name="keyfield">
-						<option value="1">제목</option>
-						<option value="2">작성자</option>
-						<option value="3">내용</option>
-					</select>
-				</li>
-				<li>
-					<input type="search" size="16" 
-					  name="keyword" id="keyword"
-					  value="${param.keyword}">
-				</li>
-				<li>
-					<input type="submit" value="검색">
-				</li>
-			</ul>
-		</form>
+			<div class="row d-flex justify-content-center">
+			<div class="col col-sm-2">
+				<img src="${pageContext.request.contextPath}/images/face.png"
+					width="100">
+			</div>
+			<div class="col col-sm-6">
+				<div class="row ">
+					<div class="col ">제목</div>
+				</div>
+				<div class="row ">
+					<div class="col ">날짜</div>
+				</div>
+			</div>
+			<div class="col col-sm-1">
+				<div class="row ">
+					<div class="col d-flex justify-content-center">좋아요</div>
+				</div>
+			</div>
+			</div>
+			
+			<div class="row d-flex justify-content-center">
+			<br>
+			</div>
+			
+			<div class="row d-flex justify-content-center">
+			<div class="col col-sm-2">
+				<img src="${pageContext.request.contextPath}/images/face.png"
+					width="100">
+			</div>
+			<div class="col col-sm-6">
+				<div class="row ">
+					<div class="col ">제목</div>
+				</div>
+				<div class="row ">
+					<div class="col ">날짜</div>
+				</div>
+			</div>
+			<div class="col col-sm-1">
+				<div class="row ">
+					<div class="col d-flex justify-content-center">좋아요</div>
+				</div>
+			</div>
+			</div>
+			<%--게시판 목록--%>
+			<%--영화 뉴스 목록 끝--%>
+
+			<div class="align-center">${page}</div>
+			<div class="row d-flex justify-content-center">
+			<div class="col col-sm-9">
+				<div class="col d-flex justify-content-end">
+					<input type="button" value="글쓰기"
+						onclick="location.href='newsWriteForm.do'" class="col col-sm-1">
+					<input type="button" value="목록"
+						onclick="location.href='newslist.do'" class="col col-sm-1">
+					<input type="button" value="홈으로"
+						onclick="location.href='${pageContext.request.contextPath}/main/main.do'"
+						class="col col-sm-1">
+				</div>
+			</div>
+			</div>
+			
+			<div class="row d-flex justify-content-center">
+			<div class="col col-sm-9">
+				<form id="search_form" action="newslist.do" method="get" class="col col-sm-9 d-flex justify-content-center">
+				<ul class="search">
+					<li>
+						<select name="keyfield">
+							<option value="1">제목</option>
+							<option value="2">작성자</option>
+							<option value="3">내용</option>
+						</select>
+					</li>
+					<li><input type="search" size="16" name="keyword" id="keyword"
+						value="${param.keyword}"></li>
+					<li><input type="submit" value="검색"></li>
+				</ul>
+			</form>
+			</div>
+			</div>
 
 		</div>
 </body>

@@ -7,7 +7,6 @@ create table news(
  news_date date default sysdate not null,
  news_modifydate date,
  news_photo varchar2(300),
- news_like number not null,
  mem_num number not null,
  constraint news_pk primary key (news_num),
  constraint member_fk foreign key (mem_num) 

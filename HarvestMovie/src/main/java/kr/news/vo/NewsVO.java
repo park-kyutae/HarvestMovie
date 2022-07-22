@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package kr.news.vo;
 
 import java.sql.Date;
@@ -11,7 +10,6 @@ public class NewsVO {
 	private Date news_date;
 	private Date news_modifydate;
 	private String news_photo;
-	private int news_like;
 	private int mem_num;
 	
 	
@@ -60,12 +58,6 @@ public class NewsVO {
 	public void setNews_photo(String news_photo) {
 		this.news_photo = news_photo;
 	}
-	public int getNews_like() {
-		return news_like;
-	}
-	public void setNews_like(int news_like) {
-		this.news_like = news_like;
-	}
 	public int getMem_num() {
 		return mem_num;
 	}
@@ -84,13 +76,4 @@ public class NewsVO {
 	public void setMem_photo(String mem_photo) {
 		this.mem_photo = mem_photo;
 	}
-	
-	
 }
-=======
-package kr.news.vo;
-
-public class NewsVO {
-	private int news_num;
-}
->>>>>>> ab133d73e72c45b22841f86a3b7a93dc9e8822bf
