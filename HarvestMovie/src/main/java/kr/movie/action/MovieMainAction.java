@@ -13,7 +13,7 @@ public class MovieMainAction implements Action{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-
+        request.setCharacterEncoding("utf-8");
 
 
 

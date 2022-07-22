@@ -20,7 +20,7 @@ public class MovieVO {
 	//영화 평점
 	private float mv_rating;
 	//영화 스태프
-	private HashMap<Integer, List<String>> mv_staff_info = new HashMap<>();
+	private HashMap<String, List<String>> mv_staff_info = new HashMap<>();
 	//영화 트레일러
 	private List<String> mv_trailer;
 	//영화 사진
@@ -129,11 +129,11 @@ public class MovieVO {
 	}
 
 
-	public HashMap<Integer, List<String>> getMv_staff_info() {
+	public HashMap<String, List<String>> getMv_staff_info() {
 		return mv_staff_info;
 	}
 
-	public void setMv_staff_info(HashMap<Integer, List<String>> mv_staff_info) {
+	public void setMv_staff_info(HashMap<String, List<String>> mv_staff_info) {
 		this.mv_staff_info = mv_staff_info;
 	}
 

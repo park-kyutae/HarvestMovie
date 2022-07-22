@@ -13,6 +13,6 @@
 <script type="text/javascript">
     alert('영화를 추가했습니다.');
     //추후 수정
-    location.href='${pageContext.request.contextPath}/main/movieMain.do'
+    location.href='movieMain.do'
 </script>
     </c:if>

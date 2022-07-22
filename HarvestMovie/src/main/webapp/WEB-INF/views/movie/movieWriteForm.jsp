@@ -23,7 +23,7 @@
         <div>
             <br>
             <h4 class="mb-3">영화 정보</h4>
-            <form class="needs-validation" novalidate method="post">
+            <form class="needs-validation" novalidate method="post" action="movieWrite.do" enctype="multipart/form-data">
                 <div>
                     <div class="col-sm-6">
                         <label for="mv_title" class="form-label">제목</label>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn-secondary btn-lg" style="float: right" type="submit">제출</button>
+                        <button class="btn btn-secondary btn-lg mx-2" style="float: right" type="submit">제출</button>
                         <button class="btn btn-outline-secondary btn-lg" style="float: right" type="button"
                                 onclick="history.go(-1)">취소
                         </button>

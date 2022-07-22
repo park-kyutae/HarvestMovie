@@ -124,7 +124,7 @@ public class MovieDAO {
             pstmt4 = conn.prepareStatement(sql);
             pstmt4.setInt(1, mv_num);
             rs = pstmt4.executeQuery();
-            HashMap<Integer, List<String>> mv_staff_info = new HashMap<>();
+            HashMap<String, List<String>> mv_staff_info = new HashMap<>();
             List<String> director = new ArrayList<>();
             List<String> actor = new ArrayList<>();
             List<String> writer = new ArrayList<>();
@@ -142,9 +142,9 @@ public class MovieDAO {
                     writer.add(staffName);
                 }
             }
-            mv_staff_info.put(DIRECTOR, director);
-            mv_staff_info.put(ACTOR, actor);
-            mv_staff_info.put(WRITER, writer);
+            mv_staff_info.put("감독", director);
+            mv_staff_info.put("배우", actor);
+            mv_staff_info.put("각본", writer);
 
             movieVO.setMv_staff_info(mv_staff_info);
 
@@ -457,12 +457,18 @@ public class MovieDAO {
 
             sql = "insert into  MOVIE_STAFF_LIST values (movie_staff_seq.nextval,?,?,?)";
             pstmt6 = conn.prepareStatement(sql);
-            for (int keys : movieVO.getMv_staff_info().keySet()) {
+            for (String keys : movieVO.getMv_staff_info().keySet()) {
                 List<String> staffList = movieVO.getMv_staff_info().get(keys);
                 for (String staffName : staffList) {
                     pstmt6.setInt(1, movieNUM);
                     pstmt6.setString(2, staffName);
-                    pstmt6.setInt(3, keys);
+                    if (keys.equals("감독")) {
+                        pstmt6.setInt(3, DIRECTOR);
+                    } else if (keys.equals("배우")) {
+                        pstmt6.setInt(3, ACTOR);
+                    } else {
+                        pstmt6.setInt(3,WRITER);
+                    }
                     pstmt6.addBatch();
                     pstmt6.clearParameters();
 

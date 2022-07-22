@@ -51,10 +51,10 @@ public class MovieWriteAction implements Action {
         mv_pic.remove(mv_poster);
 
 
-        HashMap<Integer, List<String>> mv_staff_info = new HashMap<>();
-        mv_staff_info.put(0, Arrays.asList(multi.getParameter("mv_director")));
-        mv_staff_info.put(1, Arrays.asList(multi.getParameter("mv_actor")));
-        mv_staff_info.put(2, Arrays.asList(multi.getParameter("mv_writer")));
+        HashMap<String, List<String>> mv_staff_info = new HashMap<>();
+        mv_staff_info.put("감독", Arrays.asList(multi.getParameter("mv_director")));
+        mv_staff_info.put("배우", Arrays.asList(multi.getParameter("mv_actor")));
+        mv_staff_info.put("각본", Arrays.asList(multi.getParameter("mv_writer")));
 
         movieVO.setMv_title(multi.getParameter("mv_title"));
         movieVO.setMv_main_pic(mv_main_pic);

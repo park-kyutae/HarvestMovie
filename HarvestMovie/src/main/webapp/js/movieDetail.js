@@ -20,16 +20,16 @@ $(function () {
                 var index = 0;
                 $('.mv_star').each(function () {
                     if (index % 1 == 0.5 && index < param.mv_rating) {
-                        $(this).attr('src', ctx + '/images/star_reverse.jpg');
+                        $(this).attr('src', ctx + '/images/star_reverse.png');
 
                     } else if (index < param.mv_rating && index < param.mv_rating) {
-                        $(this).attr('src', ctx + '/images/star.jpg');
+                        $(this).attr('src', ctx + '/images/star.png');
 
                     } else if (index % 1 == 0.5) {
-                        $(this).attr('src', ctx + '/images/start_blank_reverse.jpg');
+                        $(this).attr('src', ctx + '/images/star_blank_reverse.png');
 
                     } else {
-                        $(this).attr('src', ctx + '/images/start_blank.jpg');
+                        $(this).attr('src', ctx + '/images/star_blank.png');
 
                     }
                     index += 0.5;
@@ -94,9 +94,9 @@ $(function () {
                 var ctx = getContextPath();
 
                 if (param.mv_will_watch_num == '0') {
-                    ctx += '/images/will_watch.png'
+                    ctx += '/images/unchecked.svg'
                 } else {
-                    ctx += '/images/will_watch_checked.png';
+                    ctx += '/images/checked.svg';
                 }
                 $('#mv_will_watch').attr('src', ctx)
                 mv_will_watch_num = param.mv_will_watch_num;
