@@ -45,6 +45,11 @@
 			</div>
 		<%--최신글--%>
 		<%--게시판 목록--%>
+		<c:if test="${count == 0}">
+		<div>
+			표시할 게시물이 없습니다.
+		</div>
+		</c:if>
 		<div class="row d-flex justify-content-center">
 			<div class="col col-sm-2">
 				<img src="${pageContext.request.contextPath}/images/face.png"
@@ -69,49 +74,6 @@
 			<br>
 			</div>
 			
-			<div class="row d-flex justify-content-center">
-			<div class="col col-sm-2">
-				<img src="${pageContext.request.contextPath}/images/face.png"
-					width="100">
-			</div>
-			<div class="col col-sm-6">
-				<div class="row ">
-					<div class="col ">제목</div>
-				</div>
-				<div class="row ">
-					<div class="col ">날짜</div>
-				</div>
-			</div>
-			<div class="col col-sm-1">
-				<div class="row ">
-					<div class="col d-flex justify-content-center">좋아요</div>
-				</div>
-			</div>
-			</div>
-			
-			<div class="row d-flex justify-content-center">
-			<br>
-			</div>
-			
-			<div class="row d-flex justify-content-center">
-			<div class="col col-sm-2">
-				<img src="${pageContext.request.contextPath}/images/face.png"
-					width="100">
-			</div>
-			<div class="col col-sm-6">
-				<div class="row ">
-					<div class="col ">제목</div>
-				</div>
-				<div class="row ">
-					<div class="col ">날짜</div>
-				</div>
-			</div>
-			<div class="col col-sm-1">
-				<div class="row ">
-					<div class="col d-flex justify-content-center">좋아요</div>
-				</div>
-			</div>
-			</div>
 			<%--게시판 목록--%>
 			<%--영화 뉴스 목록 끝--%>
 
@@ -132,18 +94,18 @@
 			
 			<div class="row d-flex justify-content-center">
 			<div class="col col-sm-9">
-				<form id="search_form" action="newslist.do" method="get" class="col col-sm-9 d-flex justify-content-center">
-				<ul class="search">
-					<li>
+				<form id="search_form" action="newslist.do" method="get" class="d-flex justify-content-center">
+				<ul class="list-group list-group-horizontal" >
+					<li class="list-group-item">
 						<select name="keyfield">
 							<option value="1">제목</option>
 							<option value="2">작성자</option>
 							<option value="3">내용</option>
 						</select>
 					</li>
-					<li><input type="search" size="16" name="keyword" id="keyword"
+					<li class="list-group-item"><input type="search" size="16" name="keyword" id="keyword"
 						value="${param.keyword}"></li>
-					<li><input type="submit" value="검색"></li>
+					<li class="list-group-item"><input type="submit" value="검색"></li>
 				</ul>
 			</form>
 			</div>
