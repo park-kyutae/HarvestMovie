@@ -14,26 +14,26 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
 		<h2>영화 뉴스 글쓰기</h2>
-		<form id="write_form" action="newswrite.do" 
+		<form id="write_form" action="newsWrite.do" 
 		   method="post" enctype="multipart/form-data">
 			<ul>
 				<li>
 				
-					<label for="title">제목</label>
-					<input type="text" name="title" 
-					      id="title" maxlength="50">
+					<label for="new_title">뉴스 제목</label>
+					<input type="text" name="new_title" 
+					      id="new_title" maxlength="50">
 				</li>
 				<li>
-					<label for="photo">사진</label>
+					<label for="new_photo">사진</label>
 					<div class="new_photo">
-						<input type="file" name="photo" 
-						 id="photo" accept="image/gif,image/png,image/jpeg">
+						<input type="file" name="new_photo" 
+						 id="new_photo" accept="image/gif,image/png,image/jpeg">
 					</div>
 				</li>
 				<li>
-					<label for="content">내용</label>
-					<textarea rows="5" cols="30" name="content"
-					     id="content"></textarea>
+					<label for="new_content">내용</label>
+					<textarea rows="5" cols="30" name="new_content"
+					     id="new_content"></textarea>
 				</li>
 			</ul>
 			<div class="align-center">

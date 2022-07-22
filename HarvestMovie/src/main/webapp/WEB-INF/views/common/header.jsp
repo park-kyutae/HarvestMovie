@@ -10,7 +10,7 @@
 <div id="main_nav">
 	<ul>
 		<li>
-			<a href="${pageContext.request.contextPath}/board/list.do">게시판</a>
+			<a href="${pageContext.request.contextPath}/news/newslist.do">영화 뉴스</a>
 		</li>
 		
 		<c:if test="${!empty user_num && user_auth == 3}">

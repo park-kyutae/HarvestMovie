@@ -29,11 +29,11 @@ public class FileUtil {
 	}
 	//파일 삭제
 	public static void removeFile(
-			HttpServletRequest request,String filename) {
-		if(filename!=null) {
+			HttpServletRequest request,String news_photo) {
+		if(news_photo!=null) {
 			String upload=
 		request.getServletContext().getRealPath(UPLOAD_PATH);
-			File file = new File(upload+"/"+filename);
+			File file = new File(upload+"/"+news_photo);
 			if(file.exists()) file.delete();
 		}
 	}
