@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package kr.news.vo;
 
 import java.sql.Date;
@@ -86,3 +87,10 @@ public class NewsVO {
 	
 	
 }
+=======
+package kr.news.vo;
+
+public class NewsVO {
+	private int news_num;
+}
+>>>>>>> ab133d73e72c45b22841f86a3b7a93dc9e8822bf
