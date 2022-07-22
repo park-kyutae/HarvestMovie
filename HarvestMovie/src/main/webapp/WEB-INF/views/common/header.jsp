@@ -21,7 +21,12 @@
 		<li>
 			<a href="${pageContext.request.contextPath}/shop/shopMain.do">굿즈스토어</a>
 		</li>
-		
+		<li>
+			<a href="${pageContext.request.contextPath}/event/eventList.do">이벤트</a>
+		</li>
+		<li>
+			<a href="${pageContext.request.contextPath}/news/newslist.do">뉴스</a>
+		</li>
 		<c:if test="${!empty user_num && user_auth == 9}">
 		<li>
 			<a href="${pageContext.request.contextPath}/member/memberList.do">회원관리</a>
