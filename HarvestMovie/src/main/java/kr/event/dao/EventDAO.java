@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import kr.board.vo.BoardVO;
 import kr.event.vo.EventVO;
 import kr.util.DBUtil;
 import kr.util.StringUtil;
@@ -159,12 +159,146 @@ public class EventDAO {
 		return list;
 	}
 	//글상세
-	
+	public EventVO getEvent(int event_board_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		EventVO event= null;
+		String sql = null;
+		
+		try {
+			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "SELECT * FROM event b JOIN member m "
+				+ "USING(mem_num) JOIN member_detail d "
+				+ "USING(mem_num) WHERE b.event_board_num=?";
+			
+			//JDBC 수행 3단계 : PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, event_board_num);
+			//JDBC 수행 4단계
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				event = new EventVO();
+				event.setEvent_board_num(rs.getInt("event_board_num"));
+				event.setEvent_title(rs.getString("event_title"));
+				event.setEvent_content(rs.getString("event_content"));
+				event.setEvent_hit(rs.getInt("event_hit"));
+				event.setEvent_reg_date(rs.getDate("event_reg_date"));
+				event.setEvent_modify_date(rs.getDate("event_modify_date"));
+				event.setEvent_filename(rs.getString("event_filename"));
+				event.setMem_num(rs.getInt("mem_num"));
+				event.setId(rs.getString("id"));
+				event.setPhoto(rs.getString("photo"));
+			}
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			//자원정리
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return event;
+		
+	}
 	//조회수 증가
-	
+	public void updateReadcount(int event_board_num)
+			throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+
+		try {
+			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성 
+			sql = "UPDATE event SET hit=hit+1 WHERE event_board_num=?";
+
+			//JDBC 수행 3단계 : PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, event_board_num);
+			//JDBC 수행 4단계
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			//자원정리
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+
 	//파일 삭제
-	
+	public void deleteFile(int event_board_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt=null;
+		String sql = null;
+		
+		try {
+			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성 
+			sql = "UPDATE event SET event_filename='' WHERE event_board_num=?";
+			
+			//JDBC 수행 3단계 : PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, event_board_num);
+			//JDBC 수행 4단계
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			//자원정리
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 	//글수정
+	public void updateEvent(EventVO event)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt=null;
+		String sql = null;
+		String sub_sql = "";
+		int cnt = 0;
+		
+		try {
+			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			
+			if(event.getEvent_filename()!=null) {
+				//업로드한 파일이 있는 경우
+				sub_sql = ",event_filename=?";
+			}
+			
+			sql = "UPDATE event SET event_title=?,event_content=?,event_modify_date=SYSDATE"+sub_sql
+					+",event_ip=? WHERE event_board_num=?";
+			
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setString(++cnt, event.getEvent_title());
+			pstmt.setString(++cnt, event.getEvent_content());
+			if(event.getEvent_filename()!=null) {
+				pstmt.setString(++cnt, event.getEvent_filename());
+			}
+			pstmt.setString(++cnt, event.getEvent_ip());
+			pstmt.setInt(++cnt, event.getEvent_board_num());
+			
+			//JDBC 수행 4단계
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			//자원정리
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 	
 	//글삭제
 	

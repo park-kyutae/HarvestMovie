@@ -36,10 +36,10 @@
 			</ul>
 		</form>
 		<div class="list-space align-right">
-		    <c:if test="${!empty user_num}">
+		    <%-- <c:if test="${!empty user_num}"> --%>
 			<input type="button" value="글쓰기"
-			   onclick="location.href='writeForm.do'">
-			</c:if>   
+			   onclick="location.href='eventWriteForm.do'">
+			<%-- </c:if>  --%>  
 			<input type="button" value="목록"
 			       onclick="location.href='list.do'"> 
 			<input type="button" value="홈으로"

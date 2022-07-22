@@ -37,7 +37,7 @@
 			<div class="align-center">
 				<input type="submit" value="등록">
 				<input type="button" value="목록" 
-				             onclick="location.href='list.do'">
+				             onclick="location.href='eventList.do'">
 			</div>
 		</form>
 	</div>

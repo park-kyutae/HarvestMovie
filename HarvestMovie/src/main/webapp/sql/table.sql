@@ -36,7 +36,7 @@ create table event(
  mem_num number not null,
  constraint event_pk primary key (event_board_num),
  constraint event_fk foreign key (mem_num) 
-                             references zmember (mem_num)
+                             references member (mem_num)
 );
 
 create sequence event_seq;
@@ -48,7 +48,7 @@ create table event_fav(
  mem_num number not null,
  constraint event_fav_pk primary key(event_fav_num),
  constraint event_fav_fk1 foreign key (event_board_num) references event (event_board_num),
- constraint event_fav_fk2 foreign key (mem_num) references zmember (mem_num)
+ constraint event_fav_fk2 foreign key (mem_num) references member (mem_num)
 );
 
 create sequence eventfav_seq;
@@ -64,7 +64,7 @@ create table event_reply(
  mem_num number not null,
  constraint ereply_pk primary key (event_re_num),
  constraint ereply_fk foreign key (event_board_num) references event (event_board_num),
- constraint ereply_fk2 foreign key (mem_num) references zmember (mem_num)
+ constraint ereply_fk2 foreign key (mem_num) references member (mem_num)
 );
 
 create sequence ereply_seq;
