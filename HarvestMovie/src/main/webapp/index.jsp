@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <%
 	response.sendRedirect(
-			request.getContextPath()+"/movie/movieMain.do");
+			request.getContextPath()+"/main/main.do");
 %>
