@@ -4,7 +4,7 @@
 <!-- header 시작 -->
 <div id="main_logo">
 	<h1 class="align-center">
-		<a href="${pageContext.request.contextPath}/main/main.do">회원제 게시판</a>
+		<a href="${pageContext.request.contextPath}/main/main.do">HarvestMovie</a>
 	</h1>
 </div>
 <div id="main_nav">
