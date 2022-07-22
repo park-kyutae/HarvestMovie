@@ -11,7 +11,7 @@
             crossorigin="anonymous"></script>
     <title>Harvest Movie</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/movieDetail.js"></script>
+<%--    <script type="text/javascript" src="${pageContext.request.contextPath}/js/movieDetail.js"></script>--%>
 </head>
 <body>
 
@@ -44,7 +44,7 @@
             <div class="col">
                 <h4>평점</h4>
             </div>
-        </div>
+        </div>rr
         <div class="row">
             <c:forEach var="ratingVO" items="${ratingVOList}">
                 <div class="col col-sm-2">

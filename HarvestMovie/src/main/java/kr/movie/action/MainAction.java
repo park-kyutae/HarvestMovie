@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class MovieMainAction implements Action{
+public class MainAction implements Action{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -26,7 +26,7 @@ public class MovieMainAction implements Action{
         request.setAttribute("genreVOList",genreVOList);
         request.setAttribute("ratingVOList",ratingVOList);
 
-        return "/WEB-INF/views/movie/movieMain.jsp";
+        return "/WEB-INF/views/main/main.jsp";
 
     }
 
