@@ -1,12 +1,11 @@
 package kr.util;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 
 public class FileUtil {
 	//인코딩 타입
@@ -29,11 +28,11 @@ public class FileUtil {
 	}
 	//파일 삭제
 	public static void removeFile(
-			HttpServletRequest request,String filename) {
-		if(filename!=null) {
+			HttpServletRequest request,String news_photo) {
+		if(news_photo!=null) {
 			String upload=
 		request.getServletContext().getRealPath(UPLOAD_PATH);
-			File file = new File(upload+"/"+filename);
+			File file = new File(upload+"/"+news_photo);
 			if(file.exists()) file.delete();
 		}
 	}
