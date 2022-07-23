@@ -16,5 +16,5 @@ public class MovieDeleteAction implements Action {
 
         request.setAttribute("result","delete");
         return "/WEB-INF/views/movie/movieResult.jsp";
-    }
+    }ㅁ
 }
