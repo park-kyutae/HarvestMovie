@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class MovieDetailAction implements Action {
-    private static final int REVIEW_COUNT=4;//가져올 리뷰 개수
+    private static final int REVIEW_COUNT=3;//가져올 리뷰 개수
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");

@@ -21,7 +21,7 @@ public class ReviewDAO {
 
     }
 
-    public boolean checkDuplicatedReview(int mv_num,int mem_num) throws Exception{
+    public boolean checkDuplicatedReview(int mv_num, int mem_num) throws Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String sql = null;
@@ -75,6 +75,7 @@ public class ReviewDAO {
 
 
     }
+
     public void modifyReview(int mv_num, int mem_num, String review_message) throws Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -98,6 +99,7 @@ public class ReviewDAO {
 
 
     }
+
     public void deleteReview(int mv_num, int mem_num) throws Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -137,12 +139,21 @@ public class ReviewDAO {
             pstmt.setInt(1, mv_num);
             pstmt.setInt(2, count);
             rs = pstmt.executeQuery();
-            while (rs.next()) {
+            for (int i = 0; i < count; i++) {
                 reviewVO = new ReviewVO();
-                reviewVO.setMv_num(rs.getInt("mv_num"));
-                reviewVO.setMem_num(rs.getInt("mem_num"));
-                reviewVO.setMem_id(rs.getString("mem_id"));
-                reviewVO.setReview_message(rs.getString("review_message"));
+                int mem_num = 0;
+                String mem_id = "";
+                String rv_message = "";
+                if (rs.next()) {
+                    mem_num = rs.getInt("mem_num");
+                    mem_id = rs.getString("mem_id");
+                    rv_message = rs.getString("review_message");
+                }
+                reviewVO.setMv_num(mv_num);
+                reviewVO.setMem_num(mem_num);
+                reviewVO.setMem_id(mem_id);
+                reviewVO.setReview_message(rv_message);
+
                 reviewVOList.add(reviewVO);
             }
         } catch (Exception e) {
@@ -154,7 +165,7 @@ public class ReviewDAO {
         return reviewVOList;
     }
 
-    public ReviewVO getUserReview(int mv_num,int mem_num) throws Exception {
+    public ReviewVO getUserReview(int mv_num, int mem_num) throws Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String sql = null;

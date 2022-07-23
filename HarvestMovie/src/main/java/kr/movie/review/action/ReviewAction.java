@@ -20,6 +20,7 @@ public class ReviewAction implements Action {
         List<ReviewVO> reviewVOList =  reviewDAO.getReviewList(mv_num, REVIEW_COUNT);
         ReviewVO myReviewVO = reviewDAO.getUserReview(mv_num, mem_num);
 
+request.setAttribute("myReviewVO",myReviewVO);
         request.setAttribute("reviewVOList",reviewVOList);
 
         return "/WEB-INF/views/movie/review/review.jsp?mv_num="+request.getParameter("mv_num");

@@ -493,6 +493,25 @@ public class MovieDAO {
 
     }
 
+    public void deleteMovie(int mv_num) throws Exception{
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String sql = null;
+
+        try {
+            conn = DBUtil.getConnection();
+            sql = "delete movie_info where mv_num=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,mv_num);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            throw new Exception(e);
+        } finally {
+            DBUtil.executeClose(null, pstmt, conn);
+        }
+
+    }
     public void setMainMovie(int mv_num, int mv_main_list_num) throws Exception{
 
         Connection conn = null;
@@ -518,6 +537,8 @@ public class MovieDAO {
             pstmt.setInt(2,mv_num);
             pstmt.setInt(3,mv_main_list_num);
             pstmt.setInt(4,mv_num);
+
+            pstmt.executeUpdate();
         } catch (Exception e) {
             throw new Exception(e);
         } finally {

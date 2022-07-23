@@ -81,8 +81,13 @@
                     </div>
                     <div class="row ">
                         <div class="col d-flex justify-content-end">
-                            <input type="submit" value="메인 영화">
-                            <input type="button" value="영화 수정하기" onclick="location.href='movieModifyForm.do?mv_num=${movieVO.mv_num}'">
+                            <form action="movieModifyMain.do?mv_num=${movieVO.mv_num}" method="post">
+                                <input type="number" id="mv_main_list_num" name="mv_main_list_num" max="3" min="1">
+                                <input type="submit" value="메인 영화">
+                            </form>
+                            <input type="button" value="영화 수정"
+                                   onclick="location.href='/movie/movieModifyForm.do?mv_num=${movieVO.mv_num}'">
+                            <input type="button" value="영화 삭제" onclick="location.href='/movie/movieDelete.do?mv_num=${movieVO.mv_num}'">
                         </div>
                     </div>
                 </div>
@@ -115,14 +120,17 @@
                 <div class="col">
                     <h4>리뷰</h4>
                 </div>
+                <div class="col col-sm-3">
+                    <input type="button" onclick="location.href='/movie/review/review.do?mv_num=${movieVO.mv_num}'" value="리뷰">
+                </div>
             </div>
-            <div class="row g-3">
-                    <c:forEach var="reviewVO" items="${reviewVOList}">
-                        <div class="col">
-                        ${reviewVO.review_message}
-                        </div>
-                    </c:forEach>
-                    <%--                TODO 리뷰 없을떄 처리--%>
+            <div class="row">
+                <c:forEach var="reviewVO" items="${reviewVOList}">
+                    <div class="col mx-3" style="background: #f2f2f2">
+                        <span class="ratio " style="--bs-aspect-ratio: 100%"> ${reviewVO.review_message}
+                        </span>
+                    </div>
+                </c:forEach>
             </div>
         </div>
 
@@ -329,14 +337,6 @@
 <%-------------------------------관리자 기능--------------------------------------------------------%>
 <%--<br><br>--%>
 
-<%--<form action="movieModifyMain.do?mv_num=${movieVO.mv_num}" method="post">--%>
-<%--    <input type="number" id="mv_main_list_num" name="mv_main_list_num">1-3범위--%>
-
-<%--    <input type="submit" value="이 영화를 메인 영화로 만들기">--%>
-
-
-<%--</form>--%>
-<%--<input type="button" value="영화 수정하기" onclick="location.href='movieModifyForm.do?mv_num=${movieVO.mv_num}'">--%>
 
 
 </body>
