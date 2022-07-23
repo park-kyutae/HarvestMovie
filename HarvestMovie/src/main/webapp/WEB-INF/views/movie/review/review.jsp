@@ -15,14 +15,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col col-sm-3" onclick="history.go(-1)" style="font-size: medium">
-            <img src="${pageContext.request.contextPath}/images/back_arrow.svg"> 코멘트
-        </div>
+        <a href="/movie/movieDetail.do?mv_num=${param.mv_num}" class="text-decoration-none text-dark">
+            <div class="col col-sm-3 fs-5" style="font-size: medium">
+                <img height="60%" src="${pageContext.request.contextPath}/images/back_arrow.svg">
+                <span class="align-middle">코멘트</span>
+            </div>
+        </a>
     </div>
     <c:if test="${myReviewVO.mem_num > 0}">
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center mb-2">
             <div class="col col-sm-6" style="font-size: x-large">
-                <b>내 리뷰</b>
+                <span class="fs-4 fw-bolder">내 리뷰</span>
             </div>
         </div>
         <div class="row d-flex justify-content-center" style="padding-bottom: 3%">
@@ -30,18 +33,26 @@
                 <div class=" card-body ">
                     <h5 class="card-title">${myReviewVO.mem_id}</h5>
                     <p class="card-text">${myReviewVO.review_message}</p>
-                    <input type="button" value="수정"
-                           onclick="location.href='/movie/review/reviewModifyForm.do?mv_num=${param.mv_num}'">
-                    <input type="button" value="삭제"
-                           onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}'">
+                    <div class="d-flex justify-content-end">
+                        <input type="button" value="수정" class="btn btn-outline-secondary mx-2"
+                               onclick="location.href='/movie/review/reviewModifyForm.do?mv_num=${param.mv_num}'">
+                        <input type="button" value="삭제" class="btn btn-secondary"
+                               onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}'">
+                    </div>
                 </div>
             </div>
         </div>
     </c:if>
-    <div class="row d-flex justify-content-center py-3 px-0 ">
-        <div class="col col-sm-6 d-flex justify-content-end">
-                <input type="button" value="리뷰 작성"
-                       onclick="location.href='/movie/review/reviewWriteForm.do?mv_num=${param.mv_num}'">
+
+    <div class="row d-flex justify-content-center mb-2">
+        <div class="col col-sm-6" style="font-size: x-large">
+            <span class="fs-4 fw-bolder">리뷰</span>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center my-1 mx-0">
+        <div class="col col-sm-6 d-flex justify-content-end p-0 m-0">
+            <input type="button" value="리뷰 작성" class="btn btn-secondary"
+                   onclick="location.href='/movie/review/reviewWriteForm.do?mv_num=${param.mv_num}'">
 
         </div>
     </div>
@@ -52,7 +63,10 @@
                     <div class="card-body">
                         <h5 class="card-title">${reviewVO.mem_id}</h5>
                         <p class="card-text">${reviewVO.review_message}</p>
-                        <input type="button" value="삭제">
+                        <div class="d-flex justify-content-end">
+                            <input type="button" value="삭제" class="btn btn-secondary"
+                                   onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}'">
+                        </div>
                     </div>
                 </div>
             </div>

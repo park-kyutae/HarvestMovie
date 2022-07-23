@@ -1,6 +1,5 @@
 package kr.movie.vo;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class MovieVO {
 	private String mv_location;
 	private String mv_summary;
 	private String mv_main_pic;
-	private Date mv_launch_date;
+	private String mv_launch_date;
 	private String mv_poster;
 	//영화 평점
 	private float mv_rating;
@@ -104,11 +103,11 @@ public class MovieVO {
 		this.mv_main_pic = mv_main_pic;
 	}
 
-	public Date getMv_launch_date() {
+	public String getMv_launch_date() {
 		return mv_launch_date;
 	}
 
-	public void setMv_launch_date(Date mv_launch_date) {
+	public void setMv_launch_date(String mv_launch_date) {
 		this.mv_launch_date = mv_launch_date;
 	}
 

@@ -16,8 +16,8 @@
 </head>
 <body>
 
-<div class="container-fluid" >
-    <div class="row  d-flex justify-content-center" id="main_background">
+<div class="container-fluid m-0 p-0">
+    <div class="row  d-flex justify-content-center mb-5 bg-black">
         <div class="col col-sm-9">
             <div id="main_movie_carousel" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
@@ -32,14 +32,17 @@
                     <c:forEach var="mainVO" items="${mainVOList}" varStatus="status">
                         <c:if test="${status.count ==1}">
                             <div class="carousel-item active">
-                                <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}"><img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
-                                        class="d-block w-100"></a>
+                                <a href="/movie/movieDetail.do?mv_num=${mainVO.mv_num}">
+                                    <img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
+                                         class="d-block w-100">
+                                </a>
                             </div>
                         </c:if>
                         <c:if test="${status.count !=1}">
                             <div class="carousel-item">
-                                <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}"><img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
-                                                                                              class="d-block w-100"></a>
+                                <a href="/movie/movieDetail.do?mv_num=${mainVO.mv_num}">
+                                    <img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
+                                         class="d-block w-100"></a>
                             </div>
                         </c:if>
                     </c:forEach>
@@ -48,47 +51,54 @@
         </div>
 
     </div>
-    <div class="row">
-        <div class="row">
-            <div class="col">
-                <h4>평점</h4>
+    <div class="row d-flex justify-content-center mb-3">
+        <div class="col col-sm-9">
+            <div class="row mb-2">
+                <div class="col">
+                    <span class="fw-bolder fs-3">평점 순위</span>
+                </div>
+            </div>
+            <div class="row">
+                <c:forEach var="ratingVO" items="${ratingVOList}">
+                    <div class="col col-sm-3">
+                        <a href="/movie/movieDetail.do?mv_num=${ratingVO.mv_num}">
+                            <img class="ratio rounded"
+                                 src="${pageContext.request.contextPath}/upload/${ratingVO.mv_poster}"
+                                 style="--bs-aspect-ratio: 100%" ;
+                                 width="71%"></a><br>
+                        <span class="fs-4">${ratingVO.mv_title}<br></span>
+                        <span class="text-secondary fs-6 ">${ratingVO.mv_launch_date} · ${ratingVO.mv_location}<br></span>
+                        <img src="${pageContext.request.contextPath}/images/start_small.svg"
+                             height="6%"><span class="text-secondary fs-6 align-middle">${ratingVO.avg_rating}</span>
+                    </div>
+                </c:forEach>
             </div>
         </div>
-        rr
-        <div class="row">
-            <c:forEach var="ratingVO" items="${ratingVOList}">
-                <div class="col col-sm-2">
-                    <a href="/movie/movieDetail.do?mv_num=${ratingVO.mv_num}"><img class="ratio"
-                                                                                   src="${pageContext.request.contextPath}/upload/${ratingVO.mv_poster}"
-                                                                                   style="--bs-aspect-ratio: 100%" ;
-                                                                                   width="71%"></a><br>
-                        ${ratingVO.mv_title}<br>
-                        ${ratingVO.mv_launch_date} · ${ratingVO.mv_location}<br>
-                        ${ratingVO.avg_rating}
-                </div>
-            </c:forEach>
-        </div>
     </div>
-    <div class="row d-flex justify-content-center">
-        <div class="row">
-            <div class="col">
-                <h4>장르</h4>
+    <div class="row d-flex justify-content-center mb-3">
+        <div class="col col-sm-9">
+            <div class="row mb-2">
+                <div class="col">
+                    <span class="fw-bolder fs-3">SF</span>
+                </div>
+            </div>
+            <div class="row">
+                <c:forEach var="genreVO" items="${genreVOList}">
+                    <div class="col col-sm-3">
+                        <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}">
+                            <img class="ratio rounded"
+                                 src="${pageContext.request.contextPath}/upload/${genreVO.mv_poster}"
+                                 style="--bs-aspect-ratio: 100%" ;
+                                 width="71%"></a><br>
+                        <span class="fs-4">${genreVO.mv_title}<br></span>
+                        <span class="text-secondary fs-6 ">${genreVO.mv_launch_date} · ${genreVO.mv_location}<br></span>
+                        <img src="${pageContext.request.contextPath}/images/start_small.svg"
+                             height="6%"><span class="text-secondary fs-6 align-middle">${genreVO.avg_rating}</span>
+                    </div>
+                </c:forEach>
             </div>
         </div>
-        <div class="row">
-            <c:forEach var="genreVO" items="${genreVOList}">
-                <div class="col col-sm-2">
-                    <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}"><img class="ratio"
-                                                                                  src="${pageContext.request.contextPath}/upload/${genreVO.mv_poster}"
-                                                                                  style="--bs-aspect-ratio: 100%" ;
-                                                                                  width="71%"></a><br>
-                        ${genreVO.mv_title}<br>
-                        ${genreVO.mv_launch_date} · ${genreVO.mv_location}<br>
-                        ${genreVO.avg_rating}
-                </div>
-            </c:forEach></div>
     </div>
-
 </div>
 
 

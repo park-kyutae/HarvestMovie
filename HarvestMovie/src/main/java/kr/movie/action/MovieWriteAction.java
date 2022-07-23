@@ -41,7 +41,6 @@ public class MovieWriteAction implements Action {
         List<String> trailer = Arrays.asList(
                 multi.getParameter("mv_trailer").split(","));
         //str형식 yyyy-mm-dd
-        Date mv_launch_date = Date.valueOf(multi.getParameter("mv_launch_date"));
 
         String mv_main_pic = multi.getFilesystemName("mv_main_pic");
         String mv_poster = multi.getFilesystemName("mv_poster");
@@ -64,7 +63,7 @@ public class MovieWriteAction implements Action {
         movieVO.setMv_limit_age(Integer.parseInt(multi.getParameter("mv_limit_age")));
         movieVO.setMv_location(multi.getParameter("mv_location"));
         movieVO.setMv_summary(multi.getParameter("mv_summary"));
-        movieVO.setMv_launch_date(mv_launch_date);
+        movieVO.setMv_launch_date(multi.getParameter("mv_launch_date"));
         movieVO.setMv_staff_info(mv_staff_info);
 
 

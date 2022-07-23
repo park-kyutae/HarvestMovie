@@ -17,27 +17,31 @@
 
 <div class="container">
     <div class="row">
-        <div class="col col-sm-3" onclick="history.go(-1)" style="font-size: medium">
-            <img src="${pageContext.request.contextPath}/images/back_arrow.svg"> 리뷰
-        </div>
+        <a class="text-decoration-none text-dark" href="/movie/review/reivew.do?mv_num=${param.mv_num}">
+            <div class="col col-sm-3 fs-5" style="font-size: medium">
+                <img height="60%" src="${pageContext.request.contextPath}/images/back_arrow.svg"><span
+                    class="align-middle">리뷰 수정</span>
+            </div>
+        </a>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center mb2">
         <div class="col col-sm-6" style="font-size: x-large">
-            <b>리뷰 수정</b>
+            <span class="fs-4 fw-bolder">리뷰 수정</span>
         </div>
     </div>
     <div class="row d-flex justify-content-center" style="padding-bottom: 3%">
         <div class="col col-sm-6 p-0 m-0">
             <div class="card-body">
                 <div class="input-group">
-                    <form action="reviewModify.do?mv_num=${param.mv_num}" method="post" class="form-control">
+                    <form action="reviewModify.do?mv_num=${param.mv_num}" method="post" class="form-control p-3">
                         <textarea name="review_message"
-                                  id="review_message" class="w-100 form-control"
+                                  id="review_message" class="w-100 form-control mb-2"
                                   rows="15">${reviewVO.review_message}</textarea>
-                        <input type="button" value="취소"
-                               onclick="history.go(-1)">
-                        <input type="button" value="수정"
-                               onclick="location.href='/movie/review/reviewModify.do?mv_num=${param.mv_num}'">
+                        <div class="d-flex justify-content-end">
+                            <input type="button" value="취소" class="btn btn-outline-secondary mx-2"
+                                   onclick="history.go(-1)">
+                            <input type="button" value="수정" class="btn btn-secondary"
+                                   onclick="location.href='/movie/review/reviewModify.do?mv_num=${param.mv_num}'"></div>
                     </form>
                 </div>
             </div>

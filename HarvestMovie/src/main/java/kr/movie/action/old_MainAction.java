@@ -1,4 +1,4 @@
-package kr.main.action;
+package kr.movie.action;
 
 import kr.controller.Action;
 import kr.movie.dao.MovieDAO;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class MainAction implements Action {
+public class old_MainAction implements Action{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -16,15 +16,15 @@ public class MainAction implements Action {
         request.setCharacterEncoding("utf-8");
 
 
+
         MovieDAO movieDAO = MovieDAO.getInstance();
         List<MovieVO> ratingVOList = movieDAO.getRatingTheme();
         List<MovieVO> genreVOList = movieDAO.getGenreTheme();
         List<MovieVO> mainVOList = movieDAO.getMainMovie();
 
-
-        request.setAttribute("mainVOList", mainVOList);
-        request.setAttribute("genreVOList", genreVOList);
-        request.setAttribute("ratingVOList", ratingVOList);
+        request.setAttribute("mainVOList",mainVOList);
+        request.setAttribute("genreVOList",genreVOList);
+        request.setAttribute("ratingVOList",ratingVOList);
 
         return "/WEB-INF/views/main/main.jsp";
 
