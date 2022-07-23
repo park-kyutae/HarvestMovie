@@ -32,14 +32,14 @@
                     <c:forEach var="mainVO" items="${mainVOList}" varStatus="status">
                         <c:if test="${status.count ==1}">
                             <div class="carousel-item active">
-                                <img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
-                                     class="d-block w-100">
+                                <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}"><img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
+                                        class="d-block w-100"></a>
                             </div>
                         </c:if>
                         <c:if test="${status.count !=1}">
                             <div class="carousel-item">
-                                <img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
-                                     class="d-block w-100">
+                                <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}"><img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
+                                                                                              class="d-block w-100"></a>
                             </div>
                         </c:if>
                     </c:forEach>

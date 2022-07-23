@@ -19,40 +19,46 @@
             <img src="${pageContext.request.contextPath}/images/back_arrow.svg"> 코멘트
         </div>
     </div>
-            <c:if test="${myReviewVO.mem_num > 0}">
-                <div class="row d-flex justify-content-center">
-                    <div class="w-50" style="font-size: x-large">
-                        <b>내 리뷰</b>
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-center" style="padding-bottom: 3%">
-                    <div class="card w-50">
-                        <div class="col card-body">
-                            <h5 class="card-title">${myReviewVO.mem_id}</h5>
-                            <p class="card-text">${myReviewVO.review_message}</p>
-                            <input type="button" value="수정">
-                            <input type="button" value="삭제">
-                            <input type="button" value="수정" onclick="location.href='/movie/review/reviewModifyForm.do?mv_num=${param.mv_num}'">
-                            <input type="button" value="삭제" onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}'">
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-
-            <c:forEach var="reviewVO" items="${reviewVOList}">
-                <c:if test="${reviewVO.mem_num != 0}">
-                    <div class="row d-flex justify-content-center">
-                        <div class="card w-50">
-                            <div class="col card-body">
-                                <h5 class="card-title">${reviewVO.mem_id}</h5>
-                                <p class="card-text">${reviewVO.review_message}</p>
-                                <input type="button" value="삭제">
-                            </div>
-                        </div>
-                    </div>
-                </c:if>
-            </c:forEach>
+    <c:if test="${myReviewVO.mem_num > 0}">
+        <div class="row d-flex justify-content-center">
+            <div class="col col-sm-6" style="font-size: x-large">
+                <b>내 리뷰</b>
+            </div>
         </div>
+        <div class="row d-flex justify-content-center" style="padding-bottom: 3%">
+            <div class="col col-sm-6 card">
+                <div class=" card-body ">
+                    <h5 class="card-title">${myReviewVO.mem_id}</h5>
+                    <p class="card-text">${myReviewVO.review_message}</p>
+                    <input type="button" value="수정"
+                           onclick="location.href='/movie/review/reviewModifyForm.do?mv_num=${param.mv_num}'">
+                    <input type="button" value="삭제"
+                           onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}'">
+                </div>
+            </div>
+        </div>
+    </c:if>
+    <div class="row d-flex justify-content-center py-3 px-0 ">
+        <div class="col col-sm-6 d-flex justify-content-end">
+                <input type="button" value="리뷰 작성"
+                       onclick="location.href='/movie/review/reviewWriteForm.do?mv_num=${param.mv_num}'">
+
+        </div>
+    </div>
+    <c:forEach var="reviewVO" items="${reviewVOList}">
+        <c:if test="${reviewVO.mem_num != 0}">
+            <div class="row d-flex justify-content-center">
+                <div class="card col col-sm-6 ">
+                    <div class="card-body">
+                        <h5 class="card-title">${reviewVO.mem_id}</h5>
+                        <p class="card-text">${reviewVO.review_message}</p>
+                        <input type="button" value="삭제">
+                    </div>
+                </div>
+            </div>
+        </c:if>
+    </c:forEach>
+</div>
 
 </body>
 </html>
