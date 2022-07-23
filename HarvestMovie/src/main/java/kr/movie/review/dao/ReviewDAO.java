@@ -51,7 +51,7 @@ public class ReviewDAO {
 
 
     //리뷰 작성
-    public void writeReview(int mv_num, int mem_num, String mem_id, String review_message) throws Exception {
+    public void writeReview(int mv_num, int mem_num, String review_message) throws Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String sql = null;
@@ -62,7 +62,6 @@ public class ReviewDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mv_num);
             pstmt.setInt(2, mem_num);
-            pstmt.setString(3, mem_id);
             pstmt.setString(4, review_message);
             pstmt.executeUpdate();
 
@@ -134,7 +133,7 @@ public class ReviewDAO {
 
         try {
             conn = DBUtil.getConnection();
-            sql = "select * from review_info where mv_num =? and rownum<=? order by REVIEW_NUM desc";
+            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM where mv_num =? and rownum<=? order by REVIEW_NUM desc";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mv_num);
             pstmt.setInt(2, count);
@@ -142,16 +141,17 @@ public class ReviewDAO {
             for (int i = 0; i < count; i++) {
                 reviewVO = new ReviewVO();
                 int mem_num = 0;
-                String mem_id = "";
+                String mem_name = "";
                 String rv_message = "";
                 if (rs.next()) {
                     mem_num = rs.getInt("mem_num");
-                    mem_id = rs.getString("mem_id");
+                    mem_name = rs.getString("mem_name");
                     rv_message = rs.getString("review_message");
                 }
                 reviewVO.setMv_num(mv_num);
-                reviewVO.setMem_num(mem_num);
-                reviewVO.setMem_id(mem_id);
+//                TODO 리뷰vo에서 유저넘 삭제
+                reviewVO.setUser_num(mem_num);
+                reviewVO.setMem_name(mem_name);
                 reviewVO.setReview_message(rv_message);
 
                 reviewVOList.add(reviewVO);
@@ -174,7 +174,7 @@ public class ReviewDAO {
 
         try {
             conn = DBUtil.getConnection();
-            sql = "select * from review_info where mv_num =? and MEM_NUM=?";
+            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM where mv_num =? and d.MEM_NUM=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mv_num);
             pstmt.setInt(2, mem_num);
@@ -182,9 +182,9 @@ public class ReviewDAO {
             if (rs.next()) {
                 reviewVO = new ReviewVO();
                 reviewVO.setMv_num(rs.getInt("mv_num"));
-                reviewVO.setMem_num(rs.getInt("mem_num"));
-                reviewVO.setMem_id(rs.getString("mem_id"));
+                reviewVO.setUser_num(rs.getInt("mem_num"));
                 reviewVO.setReview_message(rs.getString("review_message"));
+                reviewVO.setMem_name(rs.getString("mem_name"));
             }
         } catch (Exception e) {
             throw new Exception(e);

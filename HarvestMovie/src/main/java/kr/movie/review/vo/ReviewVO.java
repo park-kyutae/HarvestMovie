@@ -3,9 +3,17 @@ package kr.movie.review.vo;
 public class ReviewVO {
     private int review_num;
     private int mv_num;
-    private int mem_num;
-    private String mem_id;
+    private int user_num;
     private String review_message;
+    private String mem_name;
+
+    public String getMem_name() {
+        return mem_name;
+    }
+
+    public void setMem_name(String mem_name) {
+        this.mem_name = mem_name;
+    }
 
     public int getReview_num() {
         return review_num;
@@ -23,21 +31,14 @@ public class ReviewVO {
         this.mv_num = mv_num;
     }
 
-    public int getMem_num() {
-        return mem_num;
+    public int getUser_num() {
+        return user_num;
     }
 
-    public void setMem_num(int mem_num) {
-        this.mem_num = mem_num;
+    public void setUser_num(int user_num) {
+        this.user_num = user_num;
     }
 
-    public String getMem_id() {
-        return mem_id;
-    }
-
-    public void setMem_id(String mem_id) {
-        this.mem_id = mem_id;
-    }
 
     public String getReview_message() {
         return review_message;

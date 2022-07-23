@@ -16,6 +16,8 @@ public class MovieVO {
 	private String mv_main_pic;
 	private String mv_launch_date;
 	private String mv_poster;
+
+
 	//영화 평점
 	private float mv_rating;
 	//영화 스태프

@@ -22,7 +22,7 @@
             </div>
         </a>
     </div>
-    <c:if test="${myReviewVO.mem_num > 0}">
+    <c:if test="${myReviewVO.user_num > 0}">
         <div class="row d-flex justify-content-center mb-2">
             <div class="col col-sm-6" style="font-size: x-large">
                 <span class="fs-4 fw-bolder">내 리뷰</span>
@@ -31,7 +31,7 @@
         <div class="row d-flex justify-content-center" style="padding-bottom: 3%">
             <div class="col col-sm-6 card">
                 <div class=" card-body ">
-                    <h5 class="card-title">${myReviewVO.mem_id}</h5>
+                    <h5 class="card-title">${myReviewVO.mem_name}</h5>
                     <p class="card-text">${myReviewVO.review_message}</p>
                     <div class="d-flex justify-content-end">
                         <input type="button" value="수정" class="btn btn-outline-secondary mx-2"
@@ -57,11 +57,11 @@
         </div>
     </div>
     <c:forEach var="reviewVO" items="${reviewVOList}">
-        <c:if test="${reviewVO.mem_num != 0}">
+        <c:if test="${reviewVO.user_num != 0}">
             <div class="row d-flex justify-content-center">
                 <div class="card col col-sm-6 ">
                     <div class="card-body">
-                        <h5 class="card-title">${reviewVO.mem_id}</h5>
+                        <h5 class="card-title">${reviewVO.mem_name}</h5>
                         <p class="card-text">${reviewVO.review_message}</p>
                         <div class="d-flex justify-content-end">
                             <input type="button" value="삭제" class="btn btn-secondary"

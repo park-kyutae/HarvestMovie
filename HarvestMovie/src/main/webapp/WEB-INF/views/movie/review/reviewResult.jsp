@@ -31,3 +31,9 @@
         location.href = '/movie/review/review.do?mv_num=${param.mv_num}';
     </script>
 </c:if>
+<c:if test="${result == 'wrong_id'}">
+    <script>
+        alert('다른 아이디로 접속해 주십시오.');
+        location.href = '/movie/review/review.do?mv_num=${param.mv_num}';
+    </script>
+</c:if>

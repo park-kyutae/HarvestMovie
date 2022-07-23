@@ -149,10 +149,10 @@
             <div class="row">
                 <c:forEach var="reviewVO" items="${reviewVOList}">
                     <div class="col mx-3 rounded" style="background: #f2f2f2">
-                        <a href="/movie/review/review/do?mv_num=${movieVO.mv_num}"
+                        <a href="/movie/review/review.do?mv_num=${movieVO.mv_num}"
                            class="text-decoration-none text-black">
 
-                            <div class="ratio fs-5 my-2 mx-2" style="height: 10%">${reviewVO.mem_id}</div>
+                            <div class="ratio fs-5 my-2 mx-2" style="height: 10%">${reviewVO.mem_name}</div>
                             <div class="ratio border-top border-secondary" style="--bs-aspect-ratio: 90%">
                                 <span class="fs-6 mx-2">${reviewVO.review_message}</span>
                             </div>

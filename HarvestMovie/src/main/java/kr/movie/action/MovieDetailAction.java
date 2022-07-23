@@ -8,6 +8,7 @@ import kr.movie.vo.MovieVO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDetailAction implements Action {
@@ -22,6 +23,11 @@ public class MovieDetailAction implements Action {
 
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
         List<ReviewVO> reviewVOList = reviewDAO.getReviewList(mv_num,REVIEW_COUNT);
+        List<String> memNameList = new ArrayList<>();
+        for (String memName: memNameList ) {
+            memNameList.add(memName);
+        }
+
 
         request.setAttribute("movieVO",movieVO);
         request.setAttribute("reviewVOList",reviewVOList);

@@ -5,6 +5,7 @@ import kr.controller.Action;
 import kr.movie.dao.MovieDAO;
 import kr.movie.vo.MovieVO;
 import kr.util.FileUtil;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,19 @@ public class MovieWriteAction implements Action {
         //추후 관리자 인증 추가
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
+        Integer user_auth = (Integer) session.getAttribute("user_auth");
+
+        if (user_auth ==null) {
+            request.setAttribute("result","try_login");
+            return "/WEB-INF/views/movie/movieResult.jsp";
+
+        } else if (user_auth != 9) {
+            request.setAttribute("result","wrong_id");
+            return "/WEB-INF/views/movie/movieResult.jsp";
+
+        }
+
+
         MovieDAO movieDAO = MovieDAO.getInstance();
 
         MovieVO movieVO = new MovieVO();

@@ -41,7 +41,7 @@
                             <input type="button" value="취소" class="btn btn-outline-secondary mx-2"
                                                                        onclick="history.go(-1)">
                             <input type="button" value="작성" class="btn btn-secondary"
-                                   onclick="location.href='/movie/review/reviewModify.do?mv_num=${param.mv_num}'"></div>
+                                   onclick="location.href='/movie/review/reviewWrite.do?mv_num=${param.mv_num}'"></div>
                     </form>
                 </div>
             </div>

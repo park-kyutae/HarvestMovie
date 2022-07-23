@@ -24,3 +24,11 @@
         location.href = '/main/main.do'
     </script>
 </c:if>
+<c:if test="${result == 'try_login'}">
+
+    <script type="text/javascript">
+        alert('로그인이 필요합니다.');
+        //추후 수정
+        history.go(-1);
+    </script>
+</c:if>
