@@ -17,7 +17,7 @@ public class MovieGetWillWatchAction implements Action {
 
         HttpSession session = request.getSession();
         Integer user_num = (Integer) session.getAttribute("user_num");
-
+        user_num=3;
         Map<String, String> mapAjax = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 

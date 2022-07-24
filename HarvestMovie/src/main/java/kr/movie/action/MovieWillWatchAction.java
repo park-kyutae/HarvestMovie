@@ -16,26 +16,26 @@ public class MovieWillWatchAction implements Action {
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         Integer user_num = (Integer) session.getAttribute("user_num");
-
+        user_num=3;
         Map<String, String> mapAjax = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
         if (user_num == null) {
 
-            mapAjax.put("result", "try_login");
+            mapAjax.put("isSuccess", "try_login");
 
             String ajaxData = mapper.writeValueAsString(mapAjax);
 
             request.setAttribute("ajaxData", ajaxData);
 
-            return "/WEB-INF/views/movie/movieResult.jsp";
+            return "/WEB-INF/views/common/ajax_view.jsp";
         }
         int mv_num = Integer.parseInt(request.getParameter("mv_num"));
 
         MovieDAO movieDAO = MovieDAO.getInstance();
         boolean isSuccess = movieDAO.setWillWatch(mv_num,user_num);
 
-        mapAjax.put("mv_will_watch_num", String.valueOf(isSuccess));
+        mapAjax.put("isSuccess", String.valueOf(isSuccess));
 
 
         String ajaxData = mapper.writeValueAsString(mapAjax);

@@ -32,3 +32,11 @@
         history.go(-1);
     </script>
 </c:if>
+<c:if test="${result == 'wrong_id'}">
+
+    <script type="text/javascript">
+        alert('아이디가 잘못되었습니다.');
+        //추후 수정
+        history.go(-1);
+    </script>
+</c:if>

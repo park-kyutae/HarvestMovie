@@ -16,20 +16,20 @@ public class MovieRatingAction implements Action {
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         Integer user_num = (Integer) session.getAttribute("user_num");
-
+        user_num=3;
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> mapAjax = new HashMap<>();
 
         if (user_num == null) {
 
-            mapAjax.put("result","try_login" );
+            mapAjax.put("isSuccess","try_login" );
 
 
             String ajaxData = mapper.writeValueAsString(mapAjax);
 
             request.setAttribute("ajaxData", ajaxData);
 
-            return "/WEB-INF/views/movie/movieResult.jsp";
+            return "/WEB-INF/views/common/ajax_view.jsp";
         }
         int mv_num = Integer.parseInt(request.getParameter("mv_num"));
         float mv_rating = Float.parseFloat(request.getParameter("mv_rating"));

@@ -58,11 +58,11 @@ public class ReviewDAO {
 
         try {
             conn = DBUtil.getConnection();
-            sql = "insert into review_info values (review_info_seq.nextval,?,?,?,?)";
+            sql = "insert into review_info values (review_info_seq.nextval,?,?,?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mv_num);
             pstmt.setInt(2, mem_num);
-            pstmt.setString(4, review_message);
+            pstmt.setString(3, review_message);
             pstmt.executeUpdate();
 
 
@@ -133,7 +133,7 @@ public class ReviewDAO {
 
         try {
             conn = DBUtil.getConnection();
-            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM where mv_num =? and rownum<=? order by REVIEW_NUM desc";
+            sql = "select r.*, d.MEM_NAME,m.AUTH from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM join MEMBER m on r.MEM_NUM = m.MEM_NUM where mv_num =? and rownum<=? order by REVIEW_NUM desc";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mv_num);
             pstmt.setInt(2, count);
@@ -143,16 +143,21 @@ public class ReviewDAO {
                 int mem_num = 0;
                 String mem_name = "";
                 String rv_message = "";
+                boolean isCritic = false;
                 if (rs.next()) {
                     mem_num = rs.getInt("mem_num");
                     mem_name = rs.getString("mem_name");
                     rv_message = rs.getString("review_message");
+                    if (rs.getInt("auth") == 3) {
+                        isCritic = true;
+                    }
                 }
                 reviewVO.setMv_num(mv_num);
 //                TODO 리뷰vo에서 유저넘 삭제
                 reviewVO.setUser_num(mem_num);
                 reviewVO.setMem_name(mem_name);
                 reviewVO.setReview_message(rv_message);
+                reviewVO.setIsCritic(isCritic);
 
                 reviewVOList.add(reviewVO);
             }
@@ -174,17 +179,23 @@ public class ReviewDAO {
 
         try {
             conn = DBUtil.getConnection();
-            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM where mv_num =? and d.MEM_NUM=?";
+            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM join MEMBER m on d.MEM_NUM = m.MEM_NUM where mv_num =? and d.MEM_NUM=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mv_num);
             pstmt.setInt(2, mem_num);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 reviewVO = new ReviewVO();
+                boolean isCritic = false;
                 reviewVO.setMv_num(rs.getInt("mv_num"));
                 reviewVO.setUser_num(rs.getInt("mem_num"));
                 reviewVO.setReview_message(rs.getString("review_message"));
                 reviewVO.setMem_name(rs.getString("mem_name"));
+                if (rs.getInt("auth") == 3) {
+                    isCritic = true;
+                }
+                reviewVO.setIsCritic(isCritic);
+
             }
         } catch (Exception e) {
             throw new Exception(e);

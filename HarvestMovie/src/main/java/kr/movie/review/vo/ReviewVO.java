@@ -6,6 +6,16 @@ public class ReviewVO {
     private int user_num;
     private String review_message;
     private String mem_name;
+    private boolean isCritic;
+
+    public boolean getIsCritic() {
+        return isCritic;
+    }
+
+    public void setIsCritic(boolean critic) {
+        isCritic = critic;
+    }
+
 
     public String getMem_name() {
         return mem_name;

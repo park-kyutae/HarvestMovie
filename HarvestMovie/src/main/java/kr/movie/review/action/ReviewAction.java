@@ -18,7 +18,7 @@ public class ReviewAction implements Action {
 
         HttpSession session = request.getSession();
         Integer user_num = (Integer) session.getAttribute("user_num");
-
+        user_num = 3;
 
         int mv_num = Integer.parseInt(request.getParameter("mv_num"));
 

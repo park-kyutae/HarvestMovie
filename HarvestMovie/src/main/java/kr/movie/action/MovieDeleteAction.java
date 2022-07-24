@@ -13,7 +13,7 @@ public class MovieDeleteAction implements Action {
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         Integer user_auth =(Integer)session.getAttribute("user_auth");
-
+        user_auth=2;
         if (user_auth ==null) {
             request.setAttribute("result","try_login");
             return "/WEB-INF/views/movie/movieResult.jsp";

@@ -64,8 +64,10 @@ $(function () {
             cache: false,
             timeout: 30000,
             success: function (param) {
-                if (param.isSucess == 'false') {
+                if (param.isSuccess == 'false') {
                     alert('오류 발생')
+                }else if (param.isSuccess == 'try_login') {
+                    alert('로그인이 필요합니다.');
                 } else {
                     get_rating();
                 }
@@ -124,8 +126,10 @@ $(function () {
             timeout: 30000,
             success: function (param) {
 
-                if (param.isSucess == 'false') {
+                if (param.isSuccess == 'false') {
                     alert('오류 발생');
+                }else if (param.isSuccess == 'try_login') {
+                    alert('로그인이 필요합니다.');
                 } else {
                     get_will_watch();
 

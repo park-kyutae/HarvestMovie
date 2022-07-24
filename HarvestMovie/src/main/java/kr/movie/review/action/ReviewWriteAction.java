@@ -13,17 +13,17 @@ public class ReviewWriteAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        request.setCharacterEncoding("utf-8");
 
         HttpSession session = request.getSession();
         Integer user_num = (Integer) session.getAttribute("user_num");
-
+        user_num=3;
         if (user_num == null) {
             request.setAttribute("result","try_login");
             return "/WEB-INF/views/movie/movieResult.jsp";
 
         }
 
-        request.setCharacterEncoding("utf-8");
         int mv_num = Integer.parseInt(request.getParameter("mv_num"));
         String review_message = request.getParameter("review_message");
 

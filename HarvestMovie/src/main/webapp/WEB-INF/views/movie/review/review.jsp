@@ -31,13 +31,15 @@
         <div class="row d-flex justify-content-center" style="padding-bottom: 3%">
             <div class="col col-sm-6 card">
                 <div class=" card-body ">
-                    <h5 class="card-title">${myReviewVO.mem_name}</h5>
+                    <h5 class="card-title">${myReviewVO.mem_name}
+                        <c:if test="${myReviewVO.isCritic == 'true'}">
+                            <img src="${pageContext.request.contextPath}/images/critic.svg" width="5%"></c:if></h5>
                     <p class="card-text">${myReviewVO.review_message}</p>
                     <div class="d-flex justify-content-end">
                         <input type="button" value="수정" class="btn btn-outline-secondary mx-2"
                                onclick="location.href='/movie/review/reviewModifyForm.do?mv_num=${param.mv_num}'">
                         <input type="button" value="삭제" class="btn btn-secondary"
-                               onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}'">
+                               onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}&rv_user_num=${myReviewVO.user_num}'">
                     </div>
                 </div>
             </div>
@@ -61,11 +63,12 @@
             <div class="row d-flex justify-content-center">
                 <div class="card col col-sm-6 ">
                     <div class="card-body">
-                        <h5 class="card-title">${reviewVO.mem_name}</h5>
+                        <h5 class="card-title">${reviewVO.mem_name}<c:if test="${reviewVO.isCritic == 'true'}">
+                            <img src="${pageContext.request.contextPath}/images/critic.svg" width="4%"></c:if></h5>
                         <p class="card-text">${reviewVO.review_message}</p>
                         <div class="d-flex justify-content-end">
                             <input type="button" value="삭제" class="btn btn-secondary"
-                                   onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}'">
+                                   onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}&rv_user_num=${reviewVO.user_num}'">
                         </div>
                     </div>
                 </div>

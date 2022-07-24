@@ -220,7 +220,10 @@ public class MovieDAO {
             pstmt.setFloat(4, mv_num);
             pstmt.setFloat(5, mem_num);
             pstmt.setFloat(6, rating);
-            pstmt.executeUpdate();
+            if (pstmt.executeUpdate() > 0) {
+                isSuccess = true;
+            }
+
 
 
         } catch (Exception e) {
@@ -259,7 +262,9 @@ public class MovieDAO {
             pstmt.setInt(4, mem_num);
             pstmt.setInt(5, mv_num);
             pstmt.setInt(6, mem_num);
-            pstmt.executeUpdate();
+            if (pstmt.executeUpdate() > 0) {
+                isSuccess = true;
+            }
 
 
         } catch (Exception e) {

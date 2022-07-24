@@ -15,7 +15,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
+<div><input type="button" value="임시 글쓰기" onclick="location.href='/movie/movieWriteForm.do'"></div>
 <div class="container-fluid m-0 p-0">
     <div class="row  d-flex justify-content-center mb-5 bg-black">
         <div class="col col-sm-9">
@@ -64,7 +64,7 @@
                         <a href="/movie/movieDetail.do?mv_num=${ratingVO.mv_num}">
                             <img class="ratio rounded"
                                  src="${pageContext.request.contextPath}/upload/${ratingVO.mv_poster}"
-                                 style="--bs-aspect-ratio: 100%" ;
+                                 style="--bs-aspect-ratio: 100%; object-fit: fill" ;
                                  width="71%"></a><br>
                         <span class="fs-4">${ratingVO.mv_title}<br></span>
                         <span class="text-secondary fs-6 ">${ratingVO.mv_launch_date} · ${ratingVO.mv_location}<br></span>

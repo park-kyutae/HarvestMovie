@@ -91,7 +91,7 @@
                         <div class="col  d-flex justify-content-end">
                             <form action="movieModifyMain.do?mv_num=${movieVO.mv_num}" method="post">
                                 <input type="number" id="mv_main_list_num" name="mv_main_list_num" max="3" min="1"
-                                       class="form-control">
+                                       class="form-control" required>
                                 <input type="submit" class="btn btn-secondary btn-sm" value="메인 영화">
                             </form>
                         </div>
@@ -118,7 +118,7 @@
             <div class="fs-4 fw-bolder mb-2">기본정보<br></div>
             <div class="mx-1 text-secondary">${movieVO.mv_launch_date} · ${movieVO.mv_genre}
                 · ${movieVO.mv_location}<br></div>
-            <div class="mb-2 mx-1 text-secondary">${movieVO.mv_runningtime} · ${movieVO.mv_limit_age}세<br></div>
+            <div class="mb-2 mx-1 text-secondary">${movieVO.mv_runningtime}분 · ${movieVO.mv_limit_age}세<br></div>
             <p class="mx-1 text-break">${movieVO.mv_summary}</p>
 
 
@@ -152,7 +152,8 @@
                         <a href="/movie/review/review.do?mv_num=${movieVO.mv_num}"
                            class="text-decoration-none text-black">
 
-                            <div class="ratio fs-5 my-2 mx-2" style="height: 10%">${reviewVO.mem_name}</div>
+                            <div class="ratio fs-5 my-2 mx-2" style="height: 10%">${reviewVO.mem_name}</div><c:if test="${reviewVO.isCritic == 'true'}">
+                            <img src="${pageContext.request.contextPath}/images/critic.svg" width="5%"></c:if>
                             <div class="ratio border-top border-secondary" style="--bs-aspect-ratio: 90%">
                                 <span class="fs-6 mx-2">${reviewVO.review_message}</span>
                             </div>

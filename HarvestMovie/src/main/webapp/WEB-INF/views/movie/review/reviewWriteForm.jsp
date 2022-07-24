@@ -20,7 +20,7 @@
         <a class="text-decoration-none text-dark" href="/movie/review/reivew.do?mv_num=${param.mv_num}">
             <div class="col col-sm-3 fs-5"  style="font-size: medium">
                 <img height="60%" src="${pageContext.request.contextPath}/images/back_arrow.svg"><span
-                    class="align-middle">리뷰 수정</span>
+                    class="align-middle">리뷰 작성</span>
             </div>
         </a>
     </div>
@@ -33,15 +33,14 @@
         <div class="col col-sm-6 p-0 m-0">
             <div class="card-body">
                 <div class="input-group">
-                    <form action="reviewModify.do?mv_num=${param.mv_num}" method="post" class="form-control p-3">
+                    <form action="reviewWrite.do?mv_num=${param.mv_num}&rv_user_num=${param.rv_user_num}" method="post" class="form-control p-3">
                         <textarea name="review_message"
                                   id="review_message" class="w-100 form-control mb-2"
                                   rows="15"></textarea>
                         <div class="d-flex justify-content-end">
                             <input type="button" value="취소" class="btn btn-outline-secondary mx-2"
                                                                        onclick="history.go(-1)">
-                            <input type="button" value="작성" class="btn btn-secondary"
-                                   onclick="location.href='/movie/review/reviewWrite.do?mv_num=${param.mv_num}'"></div>
+                            <input type="submit" value="작성" class="btn btn-secondary"                                   ></div>
                     </form>
                 </div>
             </div>
