@@ -13,6 +13,7 @@
     <script type="text/javascript"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 
 <div class="container">

@@ -13,7 +13,7 @@ public class ReviewModifyAction implements Action {
 
         HttpSession session = request.getSession();
         Integer user_num = (Integer) session.getAttribute("user_num");
-        user_num=3;
+        ;
         if (user_num == null) {
             request.setAttribute("result","try_login");
             return "/WEB-INF/views/movie/movieResult.jsp";

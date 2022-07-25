@@ -14,6 +14,7 @@
 </head>
 <body>
 
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <div class="container">
     <div class="row">

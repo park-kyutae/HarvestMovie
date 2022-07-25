@@ -16,8 +16,8 @@ public class ReviewDeleteAction implements Action {
         Integer user_num = (Integer) session.getAttribute("user_num");
         Integer user_auth = (Integer) session.getAttribute("user_auth");
         int mv_num = Integer.parseInt(request.getParameter("mv_num"));
-        user_auth=2;
-        user_num=3;
+        ;
+        ;
         int rv_user_num = Integer.parseInt(request.getParameter("rv_user_num"));
 
         if (user_auth ==null) {

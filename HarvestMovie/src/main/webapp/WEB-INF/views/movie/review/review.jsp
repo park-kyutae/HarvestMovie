@@ -12,6 +12,7 @@
     <script type="text/javascript"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <div class="container">
     <div class="row">
@@ -51,6 +52,7 @@
             <span class="fs-4 fw-bolder">리뷰</span>
         </div>
     </div>
+    <c:if test="${memberVO.auth > 0}">
     <div class="row d-flex justify-content-center my-1 mx-0">
         <div class="col col-sm-6 d-flex justify-content-end p-0 m-0">
             <input type="button" value="리뷰 작성" class="btn btn-secondary"
@@ -58,17 +60,22 @@
 
         </div>
     </div>
+    </c:if>
     <c:forEach var="reviewVO" items="${reviewVOList}">
         <c:if test="${reviewVO.user_num != 0}">
-            <div class="row d-flex justify-content-center">
+            <div class="row d-flex justify-content-center mb-3">
                 <div class="card col col-sm-6 ">
                     <div class="card-body">
                         <h5 class="card-title">${reviewVO.mem_name}<c:if test="${reviewVO.isCritic == 'true'}">
                             <img src="${pageContext.request.contextPath}/images/critic.svg" width="4%"></c:if></h5>
                         <p class="card-text">${reviewVO.review_message}</p>
                         <div class="d-flex justify-content-end">
+                            <c:if test="${memberVO.auth ==9}">
+
                             <input type="button" value="삭제" class="btn btn-secondary"
                                    onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}&rv_user_num=${reviewVO.user_num}'">
+                            </c:if>
+
                         </div>
                     </div>
                 </div>

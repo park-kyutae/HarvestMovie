@@ -1,5 +1,3 @@
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -15,10 +13,11 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<div><input type="button" value="임시 글쓰기" onclick="location.href='/movie/movieWriteForm.do'"></div>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 <div class="container-fluid m-0 p-0">
     <div class="row  d-flex justify-content-center mb-5 bg-black">
-        <div class="col col-sm-9">
+        <div class="col col-sm-8">
             <div id="main_movie_carousel" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#main_movie_carousel" data-bs-slide-to="0" class="active"
@@ -51,21 +50,31 @@
         </div>
 
     </div>
+
     <div class="row d-flex justify-content-center mb-3">
-        <div class="col col-sm-9">
+
+        <div class="col col-sm-8">
+
             <div class="row mb-2">
                 <div class="col">
                     <span class="fw-bolder fs-3">평점 순위</span>
                 </div>
+                <c:if test="${memberVO.auth == 9 }">
+                        <div class="col col-sm-2">
+                            <div><input type="button" value="영화 작성" onclick="location.href='/movie/movieWriteForm.do'"
+                                        class="form-control"></div>
+                        </div>
+                </c:if>
             </div>
-            <div class="row">
+            <div class="row g-3">
                 <c:forEach var="ratingVO" items="${ratingVOList}">
                     <div class="col col-sm-3">
-                        <a href="/movie/movieDetail.do?mv_num=${ratingVO.mv_num}">
-                            <img class="ratio rounded"
-                                 src="${pageContext.request.contextPath}/upload/${ratingVO.mv_poster}"
-                                 style="--bs-aspect-ratio: 100%; object-fit: fill" ;
-                                 width="71%"></a><br>
+                        <div class="ratio" style="--bs-aspect-ratio: 140%">
+                            <a href="/movie/movieDetail.do?mv_num=${ratingVO.mv_num}">
+                                <img class=" rounded " style="width: 100%; height: 100%"
+                                     src="${pageContext.request.contextPath}/upload/${ratingVO.mv_poster}">
+                            </a><br>
+                        </div>
                         <span class="fs-4">${ratingVO.mv_title}<br></span>
                         <span class="text-secondary fs-6 ">${ratingVO.mv_launch_date} · ${ratingVO.mv_location}<br></span>
                         <img src="${pageContext.request.contextPath}/images/start_small.svg"
@@ -76,20 +85,22 @@
         </div>
     </div>
     <div class="row d-flex justify-content-center mb-3">
-        <div class="col col-sm-9">
+        <div class="col col-sm-8">
             <div class="row mb-2">
                 <div class="col">
                     <span class="fw-bolder fs-3">SF</span>
                 </div>
             </div>
-            <div class="row">
+            <div class="row g-3">
                 <c:forEach var="genreVO" items="${genreVOList}">
                     <div class="col col-sm-3">
-                        <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}">
-                            <img class="ratio rounded"
-                                 src="${pageContext.request.contextPath}/upload/${genreVO.mv_poster}"
-                                 style="--bs-aspect-ratio: 100%" ;
-                                 width="71%"></a><br>
+
+                        <div class="ratio" style="--bs-aspect-ratio: 140%">
+                            <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}">
+                                <img class=" rounded " style="width: 100%; height: 100%"
+                                     src="${pageContext.request.contextPath}/upload/${genreVO.mv_poster}">
+                            </a><br>
+                        </div>
                         <span class="fs-4">${genreVO.mv_title}<br></span>
                         <span class="text-secondary fs-6 ">${genreVO.mv_launch_date} · ${genreVO.mv_location}<br></span>
                         <img src="${pageContext.request.contextPath}/images/start_small.svg"

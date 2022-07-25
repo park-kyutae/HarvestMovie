@@ -17,6 +17,7 @@
 
 </head>
 <body class="bg-light">
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <div class="container">
     <main>

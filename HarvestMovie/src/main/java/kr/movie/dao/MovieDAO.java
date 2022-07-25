@@ -13,10 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MovieDAO {
-
-    public static final int DIRECTOR = 0;
-    public static final int ACTOR = 1;
-    public static final int WRITER = 2;
+    private static final int MAX_LIST = 8;
+    private static final String GENRE = "SF";
+    private static final int DIRECTOR = 0;
+    private static final int ACTOR = 1;
+    private static final int WRITER = 2;
 
     //싱글턴 패턴
     private static MovieDAO instance = new MovieDAO();
@@ -164,11 +165,6 @@ public class MovieDAO {
     //메인페이지
 
 
-    //메인페이지 랭킹 구하기
-    public List<MovieVO> getRanking() {
-
-        return null;
-    }
 
     public float getRating(int mv_num, int mem_num) throws Exception {
         Connection conn = null;
@@ -223,7 +219,6 @@ public class MovieDAO {
             if (pstmt.executeUpdate() > 0) {
                 isSuccess = true;
             }
-
 
 
         } catch (Exception e) {
@@ -325,7 +320,7 @@ public class MovieDAO {
                     "where rownum <=10 and MV_GENRE =?";
             pstmt = conn.prepareStatement(sql);
             //추후 장르 선택 추가
-            pstmt.setString(1, "west");
+            pstmt.setString(1, GENRE);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -365,8 +360,9 @@ public class MovieDAO {
                     "left join (select i.MV_NUM,avg(MV_RATING) avg_rating from MOVIE_INFO i " +
                     "join MOVIE_RATINGS r on i.MV_NUM=r.MV_NUM " +
                     "group by i.MV_NUM) e " +
-                    "on s.MV_NUM = e.MV_NUM where rownum <=10 ";
+                    "on s.MV_NUM = e.MV_NUM where rownum <=? ";
             pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,MAX_LIST);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -428,7 +424,7 @@ public class MovieDAO {
             pstmt2.setString(3, movieVO.getMv_main_pic());
             pstmt2.setString(4, movieVO.getMv_poster());
             Date mv_launch_date = new Date(simpleDateFormat.parse(movieVO.getMv_launch_date()).getTime());
-            pstmt2.setDate(5,mv_launch_date);
+            pstmt2.setDate(5, mv_launch_date);
             pstmt2.setString(6, movieVO.getMv_location());
 
             pstmt2.executeUpdate();

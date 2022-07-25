@@ -16,7 +16,7 @@ public class MovieWillWatchAction implements Action {
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         Integer user_num = (Integer) session.getAttribute("user_num");
-        user_num=3;
+        ;
         Map<String, String> mapAjax = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 

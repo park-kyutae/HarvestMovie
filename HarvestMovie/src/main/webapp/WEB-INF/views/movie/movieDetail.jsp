@@ -15,6 +15,8 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 <input type="hidden" value="${movieVO.mv_num}" id="mv_num">
 <div class="container-fluid">
     <div class="row">
@@ -22,10 +24,10 @@
              style="--bs-aspect-ratio: 30%;background: url(${pageContext.request.contextPath}/upload/${movieVO.mv_main_pic});background-size: cover">
         </div>
     </div>
-    <div class="row  d-flex justify-content-center border-bottom" style="background: whitesmoke">
+    <div class="row  d-flex justify-content-center border-bottom border-top border-1" style="background: whitesmoke">
         <div class="col-sm-2 position-relative d-flex justify-content-center">
             <img src="${pageContext.request.contextPath}/upload/${movieVO.mv_poster}"
-                 class="ratio position-absolute border border-2 border-white"
+                 class="ratio position-absolute img-thumbnail"
                  style="bottom: 5%;--bs-aspect-ratio: 100%; width: 71%"><br>
         </div>
         <div class="col-sm-7">
@@ -52,29 +54,29 @@
                         <div class="col d-flex justify-content-end mb-2 mt-4">
                             <img src="${pageContext.request.contextPath}/images/star_blank.png" id="0.5"
                                  class="mv_star"
-                                 width="6%">
+                                 width="5%">
                             <img src="${pageContext.request.contextPath}/images/star_blank_reverse.png" id="1"
-                                 class="mv_star" width="6%">
+                                 class="mv_star" width="5%">
                             <img src="${pageContext.request.contextPath}/images/star_blank.png" id="1.5"
                                  class="mv_star"
-                                 width="6%">
+                                 width="5%">
                             <img src="${pageContext.request.contextPath}/images/star_blank_reverse.png" id="2"
-                                 class="mv_star" width="6%">
+                                 class="mv_star" width="5%">
                             <img src="${pageContext.request.contextPath}/images/star_blank.png" id="2.5"
                                  class="mv_star"
-                                 width="6%">
+                                 width="5%">
                             <img src="${pageContext.request.contextPath}/images/star_blank_reverse.png" id="3"
-                                 class="mv_star" width="6%">
+                                 class="mv_star" width="5%">
                             <img src="${pageContext.request.contextPath}/images/star_blank.png" id="3.5"
                                  class="mv_star"
-                                 width="6%">
+                                 width="5%">
                             <img src="${pageContext.request.contextPath}/images/star_blank_reverse.png" id="4"
-                                 class="mv_star" width="6%">
+                                 class="mv_star" width="5%">
                             <img src="${pageContext.request.contextPath}/images/star_blank.png" id="4.5"
                                  class="mv_star"
-                                 width="6%">
+                                 width="5%">
                             <img src="${pageContext.request.contextPath}/images/star_blank_reverse.png" id="5"
-                                 class="mv_star" width="6%">
+                                 class="mv_star" width="5%">
 
                         </div>
                     </div>
@@ -82,31 +84,34 @@
                         <div class="col  d-flex justify-content-end mb-2">
                             <img src="${pageContext.request.contextPath}/images/unchecked.svg"
                                  id="mv_will_watch"
-                                 width="10%">
-                            <span class="fs-4">보고싶어요</span>
+                                 width="9%">
+                            <span class="fs-5">보고싶어요</span>
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col  d-flex justify-content-end">
-                            <form action="movieModifyMain.do?mv_num=${movieVO.mv_num}" method="post">
-                                <input type="number" id="mv_main_list_num" name="mv_main_list_num" max="3" min="1"
-                                       class="form-control" required>
-                                <input type="submit" class="btn btn-secondary btn-sm" value="메인 영화">
-                            </form>
-                        </div>
+                    <c:if test="${memberVO.auth ==9}">
 
-                    </div>
-                    <div class="row  d-flex justify-content-end">
-                        <div class="col  d-flex justify-content-end">
-                            <button type="button" class="btn btn-outline-secondary btn-sm mx-2"
-                                    onclick="location.href='/movie/movieModifyForm.do?mv_num=${movieVO.mv_num}'">수정
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm"
-                                    onclick="location.href='/movie/movieDelete.do?mv_num=${movieVO.mv_num}'">삭제
-                            </button>
+                        <div class="row">
+                            <div class="col  d-flex justify-content-end">
+                                <form action="movieModifyMain.do?mv_num=${movieVO.mv_num}" method="post">
+                                    <input type="number" id="mv_main_list_num" name="mv_main_list_num" max="3" min="1"
+                                           class="form-control" required>
+                                    <input type="submit" class="btn btn-secondary btn-sm" value="메인 영화">
+                                </form>
+                            </div>
+
                         </div>
-                    </div>
+                        <div class="row  d-flex justify-content-end">
+                            <div class="col  d-flex justify-content-end">
+                                <button type="button" class="btn btn-outline-secondary btn-sm mx-2"
+                                        onclick="location.href='/movie/movieModifyForm.do?mv_num=${movieVO.mv_num}'">수정
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                        onclick="location.href='/movie/movieDelete.do?mv_num=${movieVO.mv_num}'">삭제
+                                </button>
+                            </div>
+                        </div>
+                    </c:if>
                 </div>
 
             </div>
@@ -119,11 +124,11 @@
             <div class="mx-1 text-secondary">${movieVO.mv_launch_date} · ${movieVO.mv_genre}
                 · ${movieVO.mv_location}<br></div>
             <div class="mb-2 mx-1 text-secondary">${movieVO.mv_runningtime}분 · ${movieVO.mv_limit_age}세<br></div>
-            <p class="mx-1 text-break">${movieVO.mv_summary}</p>
+            <p class="mx-1 text-break me-5">${movieVO.mv_summary}</p>
 
 
         </div>
-        <div class="col col-sm-2">
+        <div class="col col-sm-2 mt-3">
             <c:forEach var="staff_job" items="${movieVO.mv_staff_info}">
                 <span class="fw-bolder">${staff_job.key}<br></span>
                 <span class="text-secondary">
@@ -146,22 +151,30 @@
                     더 보기
                 </a>
             </div>
-            <div class="row">
-                <c:forEach var="reviewVO" items="${reviewVOList}">
-                    <div class="col mx-3 rounded" style="background: #f2f2f2">
-                        <a href="/movie/review/review.do?mv_num=${movieVO.mv_num}"
-                           class="text-decoration-none text-black">
-
-                            <div class="ratio fs-5 my-2 mx-2" style="height: 10%">${reviewVO.mem_name}</div><c:if test="${reviewVO.isCritic == 'true'}">
-                            <img src="${pageContext.request.contextPath}/images/critic.svg" width="5%"></c:if>
-                            <div class="ratio border-top border-secondary" style="--bs-aspect-ratio: 90%">
-                                <span class="fs-6 mx-2">${reviewVO.review_message}</span>
+            <a href="/movie/review/review.do?mv_num=${movieVO.mv_num}" class="text-decoration-none text-black">
+                <div class="row">
+                    <c:forEach var="reviewVO" items="${reviewVOList}">
+                        <div class="col  rounded mx-3" style="background: #f2f2f2">
+                            <div class="row">
+                                <div class="col col-sm-3 ratio" style="--bs-aspect-ratio: 17%">
+                                    <div class="mx-3 my-2" style="font-size: 110%">
+                                            ${reviewVO.mem_name}<c:if test="${reviewVO.isCritic == 'true'}"><img
+                                            src="${pageContext.request.contextPath}/images/critic.svg"
+                                            class="ratio-1x1 align-self-auto mx-1" height="57%">
+                                        </c:if>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
+                            <div class="row">
+                                <div class="col ratio border-top border-secondary" style="--bs-aspect-ratio: 90%">
+                                    <span class="fs-6 mx-3 mt-1">${reviewVO.review_message}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </a>
 
-                    </div>
-                </c:forEach>
-            </div>
         </div>
 
     </div>
@@ -177,8 +190,9 @@
             <div class="row row-cols-3">
                 <c:forEach var="pic" items="${movieVO.mv_pic}" varStatus="status">
                     <div class="col">
-                        <img src="${pageContext.request.contextPath}/upload/${pic}" class="w-100 "
-                             data-bs-toggle="modal" data-bs-target="#mv_pic_modal_${status.index}">
+                            <img src="${pageContext.request.contextPath}/upload/${pic}" class="img-fluid"
+                                 data-bs-toggle="modal" data-bs-target="#mv_pic_modal_${status.index}">
+
                     </div>
                     <div class="modal fade" id="mv_pic_modal_${status.index}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-fullscreen">
@@ -215,14 +229,14 @@
         </div>
 
     </div>
-    <div class="row justify-content-center d-flex">
+    <div class="row justify-content-center d-flex mb-5">
         <div class="col col-sm-8">
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col">
                     <span class="fs-4 fw-bolder">예고편</span>
                 </div>
             </div>
-            <div class="row row-cols-2">
+            <div class="row row-cols-2 g-3">
                 <c:forEach var="trailer" items="${movieVO.mv_trailer}">
                     <div class="col">
                         <div class="ratio ratio-16x9">
