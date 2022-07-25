@@ -16,7 +16,6 @@ import java.util.*;
 public class MovieWriteAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        //추후 관리자 인증 추가
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         Integer user_auth = (Integer) session.getAttribute("user_auth");
@@ -54,7 +53,6 @@ public class MovieWriteAction implements Action {
 
         List<String> trailer = Arrays.asList(
                 multi.getParameter("mv_trailer").split(","));
-        //str형식 yyyy-mm-dd
 
         String mv_main_pic = multi.getFilesystemName("mv_main_pic");
         String mv_poster = multi.getFilesystemName("mv_poster");
@@ -85,7 +83,6 @@ public class MovieWriteAction implements Action {
         movieVO.setMv_trailer(trailer);
 
         movieDAO.writeMovie(movieVO);
-        //추후 중복 같이 실패에 따라 alert창으로 알려주는 기능 추가
         request.setAttribute("result","write");
         return "/WEB-INF/views/movie/movieResult.jsp";
     }

@@ -30,40 +30,6 @@ public class MovieDAO {
 
     }
 
-    //영화 정보 가져오기
-//    public MovieVO getMovie(int mv_num) throws Exception {
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        MovieVO movieVO = null;
-//        String sql = null;
-//
-//        try {
-//            conn = DBUtil.getConnection();
-//            sql = "select * from movie_info where MV_NUM = ? ";
-//            pstmt = conn.prepareStatement(sql);
-//            pstmt.setInt(1, mv_num);
-//            rs = pstmt.executeQuery();
-//            if (rs.next()) {
-//                movieVO = new MovieVO();
-//                movieVO.setMv_num(rs.getInt("mv_num"));
-//                movieVO.setMv_title(rs.getString("mv_title"));
-//                movieVO.setMv_main_pic(rs.getString("mv_main_pic"));
-//                movieVO.setMv_poster(rs.getString("mv_poster"));
-//                movieVO.setMv_launch_date(rs.getDate("mv_launch_date"));
-//                movieVO.setMv_location(rs.getString("mv_location"));
-//
-//            }
-//
-//
-//        } catch (Exception e) {
-//            throw new Exception(e);
-//        } finally {
-//            DBUtil.executeClose(rs, pstmt, conn);
-//        }
-//
-//        return movieVO;
-//    }
 
     public MovieVO getMovieDetail(int mv_num) throws Exception {
         Connection conn = null;
@@ -319,7 +285,6 @@ public class MovieDAO {
                     "         join (select MV_NUM,MV_GENRE from MOVIE_DETAIL) a on s.MV_NUM = a.MV_NUM " +
                     "where rownum <=10 and MV_GENRE =?";
             pstmt = conn.prepareStatement(sql);
-            //추후 장르 선택 추가
             pstmt.setString(1, GENRE);
             rs = pstmt.executeQuery();
 
@@ -530,7 +495,6 @@ public class MovieDAO {
         try {
             if (mv_main_list_num <= 0 && mv_main_list_num > 4) {
                 throw new Exception();
-//                TODO 사용자 예외 만들기
             }
             conn = DBUtil.getConnection();
             sql = "MERGE INTO movie_main_list s " +

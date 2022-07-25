@@ -13,8 +13,6 @@ public class MovieWriteFormAction implements Action {
 
         HttpSession session = request.getSession();
         Integer user_auth = (Integer) session.getAttribute("user_auth");
-        //TODO 지우기
-        ;
 
         if (user_auth ==null) {
             request.setAttribute("result","try_login");

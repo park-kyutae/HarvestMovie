@@ -153,7 +153,6 @@ public class ReviewDAO {
                     }
                 }
                 reviewVO.setMv_num(mv_num);
-//                TODO 리뷰vo에서 유저넘 삭제
                 reviewVO.setUser_num(mem_num);
                 reviewVO.setMem_name(mem_name);
                 reviewVO.setReview_message(rv_message);

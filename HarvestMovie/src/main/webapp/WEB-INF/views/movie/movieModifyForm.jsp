@@ -138,7 +138,6 @@
                              width="300px" class="pic"><br>
                         <input type="file" accept="image/gif,image/jpeg" name="mv_poster"
                                class="form-control pic_btn" required><br>
-                        <%--                        TODO 안쓰는 클래스 아이디 네임 삭제--%>
                     </div>
                     <div>
                         <h4>메인 사진</h4>

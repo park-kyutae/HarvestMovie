@@ -152,7 +152,6 @@
                     <input type="file" accept="image/gif,image/jpeg"
                            name="mv_poster"
                            class="form-control pic_btn" required><br>
-                    <%--                        TODO 안쓰는 클래스 아이디 네임 삭제--%>
                 </div>
             </div>
             <div class="row">

@@ -86,4 +86,3 @@
 
 </body>
 </html>
-<%--&lt;%&ndash;TODO 평론가 인증 마크 추가&ndash;%&gt;--%>

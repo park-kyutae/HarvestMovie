@@ -19,16 +19,6 @@ $(function () {
         })
 
 
-    // $.urlParam = function (name) {
-    //     varresults = newRegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    //     if (results == null) {
-    //         return null;
-    //     } else {
-    //         return results[1] || 0;
-    //     }
-    // }
-    //
-
 
     $('#mv_trailer_btn').click(function () {
         $('#show_mv_trailer').children().remove();
