@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Responsive navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
 	<div class="container">
 		<a class="navbar-brand"
 			href="${pageContext.request.contextPath}/main/main.do">HarvestMovie</a>
@@ -53,17 +53,15 @@
 				<c:if test="${!empty user_num}">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false">[<span>${user_id}</span>]
-					</a>
-						<ul class="dropdown-menu dropdown-menu-end"
-							aria-labelledby="navbarDropdown">
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"><span>${user_id}</span></a>
+						<ul class="dropdown-menu dropdown-menu-end"	aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">Action</a></li>
 							<li><a class="dropdown-item" href="#">Another action</a></li>
 							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item" href="#">Something else
 									here</a></li>
 						</ul></li>
-					<li class="nav-item">[<span>${user_id}</span>] <a
+					<li class="nav-item"><a
 						class="nav-link active"
 						href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a>
 					</li>
