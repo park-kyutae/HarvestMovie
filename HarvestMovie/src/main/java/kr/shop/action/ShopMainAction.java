@@ -14,6 +14,7 @@ public class ShopMainAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		
 		ProductDAO dao = ProductDAO.getInstance();
 		List<ProductVO> productList = dao.getListPhotoProduct();

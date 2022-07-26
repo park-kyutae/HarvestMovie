@@ -5,6 +5,7 @@ import kr.controller.Action;
 import kr.movie.dao.MovieDAO;
 import kr.movie.vo.MovieVO;
 import kr.util.FileUtil;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +16,21 @@ import java.util.*;
 public class MovieWriteAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        //추후 관리자 인증 추가
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
+        Integer user_auth = (Integer) session.getAttribute("user_auth");
+        ;
+        if (user_auth ==null) {
+            request.setAttribute("result","try_login");
+            return "/WEB-INF/views/movie/movieResult.jsp";
+
+        } else if (user_auth != 9) {
+            request.setAttribute("result","wrong_id");
+            return "/WEB-INF/views/movie/movieResult.jsp";
+
+        }
+
+
         MovieDAO movieDAO = MovieDAO.getInstance();
 
         MovieVO movieVO = new MovieVO();
@@ -40,8 +53,6 @@ public class MovieWriteAction implements Action {
 
         List<String> trailer = Arrays.asList(
                 multi.getParameter("mv_trailer").split(","));
-        //str형식 yyyy-mm-dd
-        Date mv_launch_date = Date.valueOf(multi.getParameter("mv_launch_date"));
 
         String mv_main_pic = multi.getFilesystemName("mv_main_pic");
         String mv_poster = multi.getFilesystemName("mv_poster");
@@ -64,7 +75,7 @@ public class MovieWriteAction implements Action {
         movieVO.setMv_limit_age(Integer.parseInt(multi.getParameter("mv_limit_age")));
         movieVO.setMv_location(multi.getParameter("mv_location"));
         movieVO.setMv_summary(multi.getParameter("mv_summary"));
-        movieVO.setMv_launch_date(mv_launch_date);
+        movieVO.setMv_launch_date(multi.getParameter("mv_launch_date"));
         movieVO.setMv_staff_info(mv_staff_info);
 
 
@@ -72,7 +83,6 @@ public class MovieWriteAction implements Action {
         movieVO.setMv_trailer(trailer);
 
         movieDAO.writeMovie(movieVO);
-        //추후 중복 같이 실패에 따라 alert창으로 알려주는 기능 추가
         request.setAttribute("result","write");
         return "/WEB-INF/views/movie/movieResult.jsp";
     }

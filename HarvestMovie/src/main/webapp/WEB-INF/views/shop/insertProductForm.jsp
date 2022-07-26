@@ -16,6 +16,7 @@
 			<div class="py-5 text-center">
 				<h2>상품추가</h2>
 			</div>
+			
 			<form action="insertProduct.do" id="insertProduct_form" method="post" enctype="multipart/form-data" >
 				<div class="mb-3">
    					<label for="pd_name" class="form-label">상품명</label>
