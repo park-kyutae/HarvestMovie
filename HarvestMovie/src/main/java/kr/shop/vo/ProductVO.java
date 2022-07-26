@@ -1,5 +1,7 @@
 package kr.shop.vo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Date;
 
 public class ProductVO {
@@ -58,7 +60,13 @@ public class ProductVO {
 	}
 
 	public void setPd_photo(String pd_photo) {
-		this.pd_photo = pd_photo;
+		try {
+			this.pd_photo = URLEncoder.encode(pd_photo,"utf-8");
+		}catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		this.pd_photo=pd_photo;
+		
 	}
 
 	public Date getPd_regdate() {

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
@@ -30,21 +30,19 @@
 					<c:forEach var="product" items="${productList}">
 					<div class="col pb-5">
 						<div class="card shadow-sm">
-							<a href="#" class="">
+							<a href="productDetail.do?pd_num=${product.pd_num}" class="">
 								<div class="image-block"></div>
-								<img class="ratio" style="--bs-aspect-ratio: 100%;" src="${pageContext.request.contextPath}/upload/${product.pd_photo}">
+									<img class="ratio" height="700px" style="--bs-aspect-ratio: 100%;" src="${pageContext.request.contextPath}/upload/${product.pd_photo}">
+								
 							</a>
 						</div>
 						<div>
-							<a href="#" style="text-decoration: none;">	
+							<a href="/productDetail.do?pd_num=${product.pd_num}" style="text-decoration: none;">	
 								<span style="font-size:13px;color:#000000;">${product.pd_name}</span>
 							</a>
 							<div class="d-flex justify-content-between align-items-center">
-              				 	<div class="btn-group">
-                  					<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  					<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                				</div>
-                			<small class="text-muted">${product.pd_price}원</small>
+                			
+                			<small class="text-muted">${product.pd_price}</small>
               				</div>
 						</div>
 					</div>

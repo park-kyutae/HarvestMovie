@@ -1,7 +1,5 @@
 package kr.shop.action;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,18 +7,15 @@ import kr.controller.Action;
 import kr.shop.dao.ProductDAO;
 import kr.shop.vo.ProductVO;
 
-public class ShopMainAction implements Action{
+public class ProductDetailAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		
+		int pd_num = Integer.parseInt(request.getParameter("pd_num"));
 		ProductDAO dao = ProductDAO.getInstance();
-		List<ProductVO> productList = dao.getListPhotoProduct();
+		ProductVO product = dao.productDetail(pd_num);
+		request.setAttribute("product", product);
 		
-		request.setAttribute("productList", productList);
-		
-		return "/WEB-INF/views/shop/shopMain.jsp";
+		return "/WEB-INF/views/shop/productDetail.jsp";
 	}
 }
