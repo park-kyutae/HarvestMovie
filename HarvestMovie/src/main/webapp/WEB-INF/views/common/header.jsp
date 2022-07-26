@@ -52,8 +52,8 @@
 
 				<c:if test="${!empty user_num}">
 					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false"><span>${user_id}</span></a>
+						class="nav-link dropdown-toggle" id="navbarScrollingDropdown"
+						role="button"><span>${user_id}</span></a>
 						<ul class="dropdown-menu dropdown-menu-end"	aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">Action</a></li>
 							<li><a class="dropdown-item" href="#">Another action</a></li>
