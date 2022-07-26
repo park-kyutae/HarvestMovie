@@ -7,6 +7,7 @@
 <title>로그인 실패</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <input type="button" value="홈으로"
 				 onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 </body>

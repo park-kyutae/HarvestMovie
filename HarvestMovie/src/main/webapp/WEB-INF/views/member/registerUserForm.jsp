@@ -40,6 +40,7 @@ $(function() => {
 })()
 </script>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<!-- 메인 컨테이너 -->
 		<div class="row d-flex justify-content-end">

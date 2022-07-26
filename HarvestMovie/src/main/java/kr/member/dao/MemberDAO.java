@@ -127,8 +127,86 @@ public class MemberDAO {
 		}
 		
 		
-		//마이페이지 - 내정보 확인
-		//마이페이지 - 내정보 수정
+	      //마이페이지 - 내정보 확인
+	      public MemberVO getMember(int mem_num)throws Exception{
+	         Connection conn = null;
+	         PreparedStatement pstmt = null;
+	         ResultSet rs = null;
+	         MemberVO member = null;
+	         String sql = null;
+	         
+	         try {
+	            //JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+	            conn = DBUtil.getConnection();
+	            //SQL문 작성
+	            sql = "SELECT * FROM member m JOIN member_detail d "
+	               + "ON m.mem_num=d.mem_num WHERE m.mem_num=?";
+	            //JDBC 수행 3단계 : PreparedStatement 객체 생성
+	            pstmt = conn.prepareStatement(sql);
+	            //?에 데이터 바인딩
+	            pstmt.setInt(1, mem_num);
+	            
+	            //JDBC 수행 4단계
+	            rs = pstmt.executeQuery();
+	            if(rs.next()) {
+	               member = new MemberVO();
+	               member.setMem_num(rs.getInt("mem_num"));
+	               member.setId(rs.getString("id"));
+	               member.setAuth(rs.getInt("auth"));
+	               member.setPw(rs.getString("mem_pw"));
+	               member.setName(rs.getString("mem_name"));
+	               member.setEmail(rs.getString("mem_email"));
+	               member.setZipcode(rs.getString("mem_zipcode"));
+	               member.setAddr1(rs.getString("mem_addr1"));
+	               member.setAddr2(rs.getString("mem_addr2"));
+	               member.setPhoto(rs.getString("mem_photo"));
+	               member.setReg_date(rs.getDate("mem_reg_date"));
+	               member.setModify_date(rs.getDate("mem_modify_date"));
+	            }
+	            
+	         }catch(Exception e) {
+	            throw new Exception(e);
+	         }finally {
+	            //자원정리
+	            DBUtil.executeClose(rs, pstmt, conn);
+	         }
+	         return member;
+	      }
+	      //마이페이지 - 내정보 수정
+	      public void updateMember(MemberVO member)throws Exception{
+	         Connection conn = null;
+	         PreparedStatement pstmt = null;
+	         String sql = null;
+	         
+	         try {
+	            //JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+	            conn = DBUtil.getConnection();
+	            //SQL문 작성
+	            sql = "UPDATE member_detail SET mem_name=?,"
+	               + "mem_email=?,mem_zipcode=?,mem_addr1=?,"
+	               + "mem_addr2=?,modify_date=SYSDATE "
+	               + "WHERE mem_num=?";
+	            //JDBC 수행 3단계 : PreparedStatement 객체 생성
+	            pstmt = conn.prepareStatement(sql);
+	            //?에 데이터 바인딩
+	            pstmt.setString(1, member.getName());
+	            pstmt.setString(2, member.getEmail());
+	            pstmt.setString(3, member.getZipcode());
+	            pstmt.setString(4, member.getAddr1());
+	            pstmt.setString(5, member.getAddr2());
+	            pstmt.setInt(6, member.getMem_num());
+	            
+	            //JDBC 수행 4단계
+	            pstmt.executeUpdate();
+	            
+	         }catch(Exception e) {
+	            throw new Exception(e);
+	         }finally {
+	            //자원정리
+	            DBUtil.executeClose(null, pstmt, conn);
+	         }
+	         
+	      }
 		//마이페이지 - 내정보 삭제
 		//마이페이지 - 등급 신청
 
