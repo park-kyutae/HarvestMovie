@@ -9,5 +9,6 @@
 <body>
 <input type="button" value="홈으로"
 				 onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+				 <!-- ㅅㄷㄴㅅ -->
 </body>
 </html>
