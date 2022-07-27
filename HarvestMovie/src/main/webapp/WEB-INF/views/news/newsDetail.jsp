@@ -10,8 +10,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/news.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="page-main">
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
 		<h2>${news.news_title}</h2>
 		<ul class="detail-info">

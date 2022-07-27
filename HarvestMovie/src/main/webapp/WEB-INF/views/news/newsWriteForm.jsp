@@ -19,12 +19,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/news.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="container">
-	<div class="row d-flex justify-content-center">
-		<div class="col col-sm-12">
-			<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-		</div>
-	</div>
 	 <br>
 	 <div class="row d-flex justify-content-center">
 	 	<div class="col col-sm-12 ">
@@ -34,7 +30,7 @@
 					<br>
 				</div>
 	 			<form class="row needs-validation col-sm-9" novalidate method="post" action="newsWrite.do" enctype="multipart/form-data">
-	 		<div class="col d-flex justify-content-center">
+	 		<div class="col-sm d-flex justify-content-center">
 	 					<label for="news_title" class="form-label col-sm-1">뉴스 제목</label>
 	 					<input type="text" name="news_title" 
 					      id="news_title" maxlength="50" class="form-control"  required>
@@ -45,7 +41,7 @@
 	 		<div class="row d-flex justify-content-center">
 					<br>
 				</div>
-	 		<div class="d-flex justify-content-left">
+	 		<div class="col-sm d-flex justify-content-left">
 	 			<label for="news_photo" class="form-label col-sm-1">뉴스 사진</label>
 	 			<c:if test="${empty news.news_photo}">
 					<div class="news_photo">
