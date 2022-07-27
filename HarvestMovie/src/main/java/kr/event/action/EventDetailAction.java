@@ -30,7 +30,7 @@ public class EventDetailAction implements Action{
 		
 		request.setAttribute("event", event);
 		
-		return "/WEN-INF/views/event/eventDetail.jsp";
+		return "/WEB-INF/views/event/eventDetail.jsp";
 	}
 
 }
