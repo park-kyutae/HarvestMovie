@@ -23,6 +23,7 @@
 	src="${pageContext.request.contextPath}/js/product.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <input type="hidden" id="pd_num" value="${product.pd_num}"/>
 
 	<div>
