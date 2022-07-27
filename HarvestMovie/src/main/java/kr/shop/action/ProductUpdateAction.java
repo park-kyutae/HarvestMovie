@@ -39,8 +39,10 @@ public class ProductUpdateAction implements Action{
 		product.setPd_photo(pd_photo);
 		
 		dao.productUpdate(product);
-
 		
-		return "redirect:/shop/productDetail.do?pd_num="+pd_num;
+		request.setAttribute("product", product);
+		
+		//return "redirect:/shop/productDetail.do?pd_num="+pd_num;
+		return "/WEB-INF/views/shop/productUpdate.jsp";
 	}
 }

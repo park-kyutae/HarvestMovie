@@ -34,11 +34,11 @@
 					<span class="input-group-text">상품 소개</span>
 					<textarea class="form-control" aria-label="With textarea" name="pd_content" id="pd_content"></textarea>
 				</div>
+				<br>
 				<div class="mb-3">
 					<label for="pd_photo" class="form-label">사진 첨부파일</label>
 					<input class="form-control form-control-sm" id="pd_photo" type="file" name="pd_photo" accept="image/gif,image/png,image/jpeg">
 				</div>
-			
 				<div class="d-flex justify-content-end px-1">
 					<input type="submit" class="btn btn-secondary mx-2" value="등록">
 					<input type="button" class="btn btn-outline-secondary" value="취소" onclick="location.href='productManagement.do'">
