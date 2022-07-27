@@ -11,10 +11,10 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<jsp:include page="/WEB-INF/views/member/common/adminpage_header.jsp"/>
+<jsp:include page="/WEB-INF/views/member/common/mypage_header.jsp"/>
 <div class="container-fluid">
   <div class="row flex-nowrap">
-  <jsp:include page="/WEB-INF/views/member/common/adminpage_sidebar.jsp"/>
+  <jsp:include page="/WEB-INF/views/member/common/mypage_sidebar.jsp"/>
   
   </div>
  </div>

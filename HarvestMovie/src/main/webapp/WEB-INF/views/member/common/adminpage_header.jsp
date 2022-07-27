@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container-fluid">
-  <div class="row bg-secondary text-white">
+  <div class="row bg-primary text-white">
     <div class="col-12">
 		<h1>마이페이지</h1>
 	</div>

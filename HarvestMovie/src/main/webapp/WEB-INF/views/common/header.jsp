@@ -28,7 +28,7 @@
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 				<c:if test="${!empty user_num && user_auth == 9}">
 					<li class="nav-item"><a class="nav-link active"
-						href="${pageContext.request.contextPath}/member/memberList.do">회원관리</a>
+						href="${pageContext.request.contextPath}/member/adminPage.do">어드민페이지</a>
 					</li>
 				</c:if>
 
