@@ -27,7 +27,7 @@
 				</c:if>
 			</li>
 			<li>
-				${event.event_id}<br>
+				${event.id}<br>
 				조회 : ${event.event_hit}
 			</li>
 		</ul>
@@ -44,7 +44,7 @@
 		<ul class="detail-sub">
 			<li>
 				<%-- 좋아요 --%>
-				<img id="output_fav" src="${pageContext.request.contextPath }/images/fav01.gif" width="50">
+				<img id="output_fav" src="${pageContext.request.contextPath }/images/likes.png" width="50">
 				좋아요
 				<span id="output_fcount"></span>
 			</li>
@@ -55,7 +55,7 @@
 				작성일 : ${event.event_reg_date }
 				<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정, 삭제 가능 --%>
 				<c:if test="${user_num == event.mem_num }">
-					<input type="button" value="수정" onclick="location.href='updateForm.do?board_num=${event.event_board_num}'">
+					<input type="button" value="수정" onclick="location.href='eventUpdateForm.do?event_board_num=${event.event_board_num}'">
 					<input type="button" value="삭제" id="delete_btn">
 					<script type="text/javascript">
 						let delete_btn = document.getElementById('delete_btn');
