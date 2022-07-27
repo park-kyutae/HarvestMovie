@@ -13,6 +13,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/product.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div>
 	<h2 class="text-center bg-light">상품관리</h2>
 	<div class="container fliud">
