@@ -32,16 +32,18 @@ public class LoginUserAction implements Action {
 					HttpSession session = request.getSession();
 					session.setAttribute("user_num", member.getMem_num());
 					session.setAttribute("user_id", member.getId());
+					session.setAttribute("user_name", member.getName());
+					session.setAttribute("user_email", member.getEmail());
+					session.setAttribute("user_addr1", member.getAddr1());
+					session.setAttribute("user_addr2", member.getAddr2());
+					session.setAttribute("user_zip", member.getZipcode());
 					session.setAttribute("user_auth", member.getAuth());
 					session.setAttribute("user_photo", member.getPhoto());
-					
-					System.out.println("성공");
+					session.setAttribute("user_date", member.getReg_date());
+				
 					//인증 성공시 호출
 					return "redirect:/main/main.do";
 				}
-				System.out.println(check);
-				System.out.println(member);
-				System.out.println(dao);
 				//인증 실패시 호출
 		return "/WEB-INF/views/member/loginUser.jsp";
 	}
