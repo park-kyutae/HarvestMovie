@@ -17,7 +17,7 @@
 				<li class="nav-item"><a class="nav-link active"
 					href="${pageContext.request.contextPath}/board/list.do">게시판</a></li>
 				<li class="nav-item"><a class="nav-link active"
-					href="${pageContext.request.contextPath}/board/list.do">굿즈스토어</a></li>
+					href="${pageContext.request.contextPath}/shop/shopMain.do">굿즈스토어</a></li>
 				<li class="nav-item"><a class="nav-link active"
 					href="${pageContext.request.contextPath}/event/eventList.do">이벤트</a></li>
 				<li class="nav-item"><a class="nav-link active"

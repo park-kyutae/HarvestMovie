@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ReviewAction implements Action {
     private static final int REVIEW_COUNT = 10;
-
+  
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
