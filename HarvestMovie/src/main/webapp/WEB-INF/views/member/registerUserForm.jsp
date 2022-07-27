@@ -17,28 +17,6 @@
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <title>회원가입</title>
 </head>
-
-<script>
-//Example starter JavaScript for disabling form submissions if there are invalid fields
-$(function() => {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
-</script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">

@@ -21,7 +21,8 @@
   <div class="row flex-nowrap">
   <jsp:include page="/WEB-INF/views/member/common/mypage_sidebar.jsp"/>
     <!-- 메인 div -->
-    <div class="col-9 py-md-3 pl-md-5 bd-content">
+    <div class="col-9 bd-content">
+    <br>
     <h2>내가 남긴 리뷰</h2>
       <table class="table">
   <thead>

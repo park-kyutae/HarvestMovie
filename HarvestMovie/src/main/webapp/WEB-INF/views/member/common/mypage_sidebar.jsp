@@ -11,11 +11,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="col-3 sidebar">
-   <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+<div class="col sidebar">
+   <div class="p-3 mt-2" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">MyPage</span>
+      <span class="fs-4">마이페이지</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -32,24 +32,18 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="${pageContext.request.contextPath}/member/modifyUserForm.do" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           내 정보 수정
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="#" class="nav-link link-dark bg-red text-white">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Products
+          회원탈퇴
         </a>
       </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          Customers
-        </a>
-      </li>
-    </ul>
+      </ul>
   </div>
     </div>
     
