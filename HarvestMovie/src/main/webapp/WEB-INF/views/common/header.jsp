@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Responsive navbar-->
-<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
 	<div class="container">
 		<a class="navbar-brand"
 			href="${pageContext.request.contextPath}/main/main.do">HarvestMovie</a>
@@ -28,7 +28,7 @@
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 				<c:if test="${!empty user_num && user_auth == 9}">
 					<li class="nav-item"><a class="nav-link active"
-						href="${pageContext.request.contextPath}/member/memberList.do">회원관리</a>
+						href="${pageContext.request.contextPath}/member/adminPage.do">어드민페이지</a>
 					</li>
 				</c:if>
 
