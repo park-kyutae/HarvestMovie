@@ -18,19 +18,19 @@
 		   method="post" enctype="multipart/form-data">
 			<ul>
 				<li>
-					<label for="title">제목</label>
-					<input type="text" name="title" 
-					      id="title" maxlength="50">
+					<label for="event_title">제목</label>
+					<input type="text" name="event_title" 
+					      id="event_title" maxlength="50">
 				</li>
 				<li>
-					<label for="content">내용</label>
-					<textarea rows="5" cols="30" name="content"
-					     id="content"></textarea>
+					<label for="event_content">내용</label>
+					<textarea rows="5" cols="30" name="event_content"
+					     id="event_content"></textarea>
 				</li>
 				<li>
-					<label for="filename">파일</label>
-					<input type="file" name="filename" 
-					 id="filename" 
+					<label for="event_filename">파일</label>
+					<input type="file" name="event_filename" 
+					 id="event_filename" 
 					 accept="image/gif,image/png,image/jpeg">
 				</li>
 			</ul>

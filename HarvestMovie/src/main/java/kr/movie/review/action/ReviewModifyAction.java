@@ -5,13 +5,20 @@ import kr.movie.review.dao.ReviewDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class ReviewModifyAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        int mem_num = 999;
-        String mem_id = "test";
+        HttpSession session = request.getSession();
+        Integer user_num = (Integer) session.getAttribute("user_num");
+        ;
+        if (user_num == null) {
+            request.setAttribute("result","try_login");
+            return "/WEB-INF/views/movie/movieResult.jsp";
+
+        }
         request.setCharacterEncoding("utf-8");
 
 
@@ -22,8 +29,8 @@ public class ReviewModifyAction implements Action {
 
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
 
-        if (reviewDAO.checkDuplicatedReview(mv_num, mem_num)) {
-            reviewDAO.modifyReview(mv_num, mem_num, review_message);
+        if (reviewDAO.checkDuplicatedReview(mv_num, user_num)) {
+            reviewDAO.modifyReview(mv_num, user_num, review_message);
             request.setAttribute("result", "modify");
 
         } else {

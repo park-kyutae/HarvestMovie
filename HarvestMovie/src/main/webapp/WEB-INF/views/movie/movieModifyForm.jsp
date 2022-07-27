@@ -17,6 +17,7 @@
 
 </head>
 <body class="bg-light">
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <div class="container">
     <main>
@@ -83,7 +84,7 @@
                     <div class="input-group">
                         <span class="input-group-text">요약</span>
                         <textarea class="form-control" aria-label="With textarea" name="mv_summary"
-                                  rows="10" required>${movieVO.mv_summary}"</textarea>
+                                  rows="10" required>${movieVO.mv_summary}</textarea>
                     </div>
                     <br>
                     <h4>제작진</h4>
@@ -137,7 +138,6 @@
                              width="300px" class="pic"><br>
                         <input type="file" accept="image/gif,image/jpeg" name="mv_poster"
                                class="form-control pic_btn" required><br>
-                        <%--                        TODO 안쓰는 클래스 아이디 네임 삭제--%>
                     </div>
                     <div>
                         <h4>메인 사진</h4>

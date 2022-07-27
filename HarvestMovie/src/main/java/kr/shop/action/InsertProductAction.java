@@ -21,6 +21,8 @@ public class InsertProductAction implements Action{
 //			return "redirect:/member/loginForm.jsp";
 //		}
 		
+		request.setCharacterEncoding("utf-8");
+		
 		//로그인이 된경우
 		MultipartRequest multi = FileUtil.createFile(request);
 		

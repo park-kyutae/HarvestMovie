@@ -4,17 +4,20 @@ import kr.movie.vo.MovieVO;
 import kr.util.DBUtil;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MovieDAO {
-
-    public static final int DIRECTOR = 0;
-    public static final int ACTOR = 1;
-    public static final int  WRITER = 2;
+    private static final int MAX_LIST = 8;
+    private static final String GENRE = "SF";
+    private static final int DIRECTOR = 0;
+    private static final int ACTOR = 1;
+    private static final int WRITER = 2;
 
     //싱글턴 패턴
     private static MovieDAO instance = new MovieDAO();
@@ -27,40 +30,6 @@ public class MovieDAO {
 
     }
 
-    //영화 정보 가져오기
-//    public MovieVO getMovie(int mv_num) throws Exception {
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        MovieVO movieVO = null;
-//        String sql = null;
-//
-//        try {
-//            conn = DBUtil.getConnection();
-//            sql = "select * from movie_info where MV_NUM = ? ";
-//            pstmt = conn.prepareStatement(sql);
-//            pstmt.setInt(1, mv_num);
-//            rs = pstmt.executeQuery();
-//            if (rs.next()) {
-//                movieVO = new MovieVO();
-//                movieVO.setMv_num(rs.getInt("mv_num"));
-//                movieVO.setMv_title(rs.getString("mv_title"));
-//                movieVO.setMv_main_pic(rs.getString("mv_main_pic"));
-//                movieVO.setMv_poster(rs.getString("mv_poster"));
-//                movieVO.setMv_launch_date(rs.getDate("mv_launch_date"));
-//                movieVO.setMv_location(rs.getString("mv_location"));
-//
-//            }
-//
-//
-//        } catch (Exception e) {
-//            throw new Exception(e);
-//        } finally {
-//            DBUtil.executeClose(rs, pstmt, conn);
-//        }
-//
-//        return movieVO;
-//    }
 
     public MovieVO getMovieDetail(int mv_num) throws Exception {
         Connection conn = null;
@@ -71,7 +40,7 @@ public class MovieDAO {
         ResultSet rs = null;
         MovieVO movieVO = null;
         String sql = null;
-
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
             conn = DBUtil.getConnection();
@@ -86,14 +55,14 @@ public class MovieDAO {
             rs = pstmt1.executeQuery();
             if (rs.next()) {
                 movieVO = new MovieVO();
-
+                String mv_launch_date = simpleDateFormat.format(rs.getDate("mv_launch_date"));
                 movieVO.setMv_num(rs.getInt("mv_num"));
                 movieVO.setMv_title(rs.getString("mv_title"));
                 movieVO.setMv_main_pic(rs.getString("mv_main_pic"));
                 movieVO.setMv_poster(rs.getString("mv_poster"));
                 movieVO.setMv_genre(rs.getString("mv_genre"));
                 movieVO.setMv_location(rs.getString("mv_location"));
-                movieVO.setMv_launch_date(rs.getDate("mv_launch_date"));
+                movieVO.setMv_launch_date(mv_launch_date);
                 movieVO.setMv_runningtime(rs.getString("mv_runningtime"));
                 movieVO.setMv_limit_age(rs.getInt("mv_limit_age"));
                 movieVO.setMv_summary(rs.getString("mv_summary"));
@@ -162,11 +131,6 @@ public class MovieDAO {
     //메인페이지
 
 
-    //메인페이지 랭킹 구하기
-    public List<MovieVO> getRanking() {
-
-        return null;
-    }
 
     public float getRating(int mv_num, int mem_num) throws Exception {
         Connection conn = null;
@@ -218,7 +182,9 @@ public class MovieDAO {
             pstmt.setFloat(4, mv_num);
             pstmt.setFloat(5, mem_num);
             pstmt.setFloat(6, rating);
-            pstmt.executeUpdate();
+            if (pstmt.executeUpdate() > 0) {
+                isSuccess = true;
+            }
 
 
         } catch (Exception e) {
@@ -257,7 +223,9 @@ public class MovieDAO {
             pstmt.setInt(4, mem_num);
             pstmt.setInt(5, mv_num);
             pstmt.setInt(6, mem_num);
-            pstmt.executeUpdate();
+            if (pstmt.executeUpdate() > 0) {
+                isSuccess = true;
+            }
 
 
         } catch (Exception e) {
@@ -305,6 +273,7 @@ public class MovieDAO {
         String sql = null;
         List<MovieVO> movieVOList = new ArrayList<>();
         MovieVO movieVO = null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
         try {
             conn = DBUtil.getConnection();
             sql = "select * " +
@@ -316,17 +285,17 @@ public class MovieDAO {
                     "         join (select MV_NUM,MV_GENRE from MOVIE_DETAIL) a on s.MV_NUM = a.MV_NUM " +
                     "where rownum <=10 and MV_GENRE =?";
             pstmt = conn.prepareStatement(sql);
-            //추후 장르 선택 추가
-            pstmt.setString(1, "west");
+            pstmt.setString(1, GENRE);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 movieVO = new MovieVO();
+                String mv_launch_date = simpleDateFormat.format(rs.getDate("mv_launch_date"));
                 movieVO.setMv_num(rs.getInt("mv_num"));
                 movieVO.setMv_title(rs.getString("mv_title"));
                 movieVO.setMv_main_pic(rs.getString("mv_main_pic"));
                 movieVO.setMv_poster(rs.getString("mv_poster"));
-                movieVO.setMv_launch_date(rs.getDate("mv_launch_date"));
+                movieVO.setMv_launch_date(mv_launch_date);
                 movieVO.setMv_location(rs.getString("mv_location"));
                 movieVO.setAvg_rating(rs.getFloat("avg_rating"));
                 movieVOList.add(movieVO);
@@ -349,23 +318,26 @@ public class MovieDAO {
         String sql = null;
         List<MovieVO> ratingVO = new ArrayList<>();
         MovieVO movieVO = null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
         try {
             conn = DBUtil.getConnection();
             sql = "select * from MOVIE_INFO s " +
                     "left join (select i.MV_NUM,avg(MV_RATING) avg_rating from MOVIE_INFO i " +
                     "join MOVIE_RATINGS r on i.MV_NUM=r.MV_NUM " +
                     "group by i.MV_NUM) e " +
-                    "on s.MV_NUM = e.MV_NUM where rownum <=10 ";
+                    "on s.MV_NUM = e.MV_NUM where rownum <=? ";
             pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,MAX_LIST);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 movieVO = new MovieVO();
+                String mv_launch_date = simpleDateFormat.format(rs.getDate("mv_launch_date"));
                 movieVO.setMv_num(rs.getInt("mv_num"));
                 movieVO.setMv_title(rs.getString("mv_title"));
                 movieVO.setMv_main_pic(rs.getString("mv_main_pic"));
                 movieVO.setMv_poster(rs.getString("mv_poster"));
-                movieVO.setMv_launch_date(rs.getDate("mv_launch_date"));
+                movieVO.setMv_launch_date(mv_launch_date);
                 movieVO.setMv_location(rs.getString("mv_location"));
                 movieVO.setAvg_rating(rs.getFloat("avg_rating"));
                 ratingVO.add(movieVO);
@@ -394,7 +366,7 @@ public class MovieDAO {
         PreparedStatement pstmt6 = null;
         String sql = null;
         int movieNUM = 0;
-
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
             conn = DBUtil.getConnection();
@@ -416,7 +388,8 @@ public class MovieDAO {
             pstmt2.setString(2, movieVO.getMv_title());
             pstmt2.setString(3, movieVO.getMv_main_pic());
             pstmt2.setString(4, movieVO.getMv_poster());
-            pstmt2.setDate(5, movieVO.getMv_launch_date());
+            Date mv_launch_date = new Date(simpleDateFormat.parse(movieVO.getMv_launch_date()).getTime());
+            pstmt2.setDate(5, mv_launch_date);
             pstmt2.setString(6, movieVO.getMv_location());
 
             pstmt2.executeUpdate();
@@ -467,7 +440,7 @@ public class MovieDAO {
                     } else if (keys.equals("배우")) {
                         pstmt6.setInt(3, ACTOR);
                     } else {
-                        pstmt6.setInt(3,WRITER);
+                        pstmt6.setInt(3, WRITER);
                     }
                     pstmt6.addBatch();
                     pstmt6.clearParameters();
@@ -493,7 +466,27 @@ public class MovieDAO {
 
     }
 
-    public void setMainMovie(int mv_num, int mv_main_list_num) throws Exception{
+    public void deleteMovie(int mv_num) throws Exception {
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String sql = null;
+
+        try {
+            conn = DBUtil.getConnection();
+            sql = "delete movie_info where mv_num=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, mv_num);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            throw new Exception(e);
+        } finally {
+            DBUtil.executeClose(null, pstmt, conn);
+        }
+
+    }
+
+    public void setMainMovie(int mv_num, int mv_main_list_num) throws Exception {
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -502,7 +495,6 @@ public class MovieDAO {
         try {
             if (mv_main_list_num <= 0 && mv_main_list_num > 4) {
                 throw new Exception();
-//                TODO 사용자 예외 만들기
             }
             conn = DBUtil.getConnection();
             sql = "MERGE INTO movie_main_list s " +
@@ -514,10 +506,12 @@ public class MovieDAO {
                     "    INSERT (mv_main_list_num, mv_num)" +
                     "    VALUES (?,?)";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,mv_main_list_num);
-            pstmt.setInt(2,mv_num);
-            pstmt.setInt(3,mv_main_list_num);
-            pstmt.setInt(4,mv_num);
+            pstmt.setInt(1, mv_main_list_num);
+            pstmt.setInt(2, mv_num);
+            pstmt.setInt(3, mv_main_list_num);
+            pstmt.setInt(4, mv_num);
+
+            pstmt.executeUpdate();
         } catch (Exception e) {
             throw new Exception(e);
         } finally {
@@ -538,13 +532,14 @@ public class MovieDAO {
             conn = DBUtil.getConnection();
 
 
-            sql = "select * from MOVIE_INFO join MOVIE_DETAIL on  MOVIE_INFO.MV_NUM = MOVIE_DETAIL.MV_NUM join MOVIE_MAIN_LIST MML on MOVIE_DETAIL.MV_NUM = MML.MV_NUM";
+            sql = "select MML.MV_NUM,MV_MAIN_PIC from MOVIE_INFO join MOVIE_DETAIL on  MOVIE_INFO.MV_NUM = MOVIE_DETAIL.MV_NUM join MOVIE_MAIN_LIST MML on MOVIE_DETAIL.MV_NUM = MML.MV_NUM";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 movieVO = new MovieVO();
                 movieVO.setMv_main_pic(rs.getString("mv_main_pic"));
+                movieVO.setMv_num(rs.getInt("mv_num"));
                 movieVOList.add(movieVO);
 
             }
