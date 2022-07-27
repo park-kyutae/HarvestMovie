@@ -50,7 +50,7 @@ public class ProductDAO {
 		
 	}
 	//상품 총 레코드 수
-	public int getProductCount(String keyfield,String keyword)throws Exception{
+	public int getProductCount()throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -86,7 +86,7 @@ public class ProductDAO {
 		
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM product ORDER BY num DESC)a) WHERE rnum >= ? AND rnum <= ?";
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM product ORDER BY pd_num DESC)a) WHERE rnum >= ? AND rnum <= ?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, start);
@@ -97,6 +97,7 @@ public class ProductDAO {
 			
 			while(rs.next()) {
 				ProductVO product = new ProductVO();
+				product.setPd_num(rs.getInt("pd_num"));
 				product.setPd_name(rs.getString("pd_name"));
 				product.setPd_content(rs.getString("pd_content"));
 				product.setPd_price(rs.getInt("pd_price"));
@@ -214,6 +215,34 @@ public class ProductDAO {
 		}
 	}
 	//상품삭제
+	public void productDelete(int pd_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		String sql = null;
+		try {
+			conn = DBUtil.getConnection();
+			conn.setAutoCommit(false);
+			
+			sql = "DELETE FROM orders WHERE pd_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pd_num);
+			pstmt.executeUpdate();
+			
+			sql = "DELETE FROM product WHERE pd_num=?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, pd_num);
+			pstmt2.executeUpdate();
+			
+			conn.commit();
+		}catch(Exception e) {
+			conn.rollback();
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt2, null);
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 	
 	public boolean productOrder(int pd_num, int mem_num) throws Exception {
 		Connection conn = null;

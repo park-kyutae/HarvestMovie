@@ -24,7 +24,9 @@
 </head>
 <body>
 <input type="hidden" id="pd_num" value="${product.pd_num}"/>
+
 	<div>
+		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
 			<div class="py-5 text-center">
 				<h2>상품 상세페이지</h2>
@@ -38,7 +40,12 @@
 					<div class="col">
 						<figure>
 							<blockquote class="blockquote">
+							<c:if test="${product.pd_quantity eq 0}">
+								<p>품절 되었습니다. 재입고를 기다려주세요.</p>
+							</c:if>
+							<c:if test="${product.pd_quantity ne 0}">
 								<p>수량 : ${product.pd_quantity}</p>
+							</c:if>	
 							</blockquote>
 							<c:if test="${product.pd_quantity eq 0}">
 							<button id="btn-disable" class="btn btn-secondary" disabled>구매불가</button>
@@ -46,15 +53,29 @@
 							<c:if test="${product.pd_quantity ne 0}">
 							<button id="btn-order" class="btn btn-secondary" onclick="">구매하기</button>
 							</c:if>
-							<%--  <c:if test="${!empty user_num && user_auth == 3}">      관리자만 확인가능--%>
+							<c:if test="${!empty user_num && user_auth == 9}">
+							  <input type="hidden" name="pd_num" value="${product.pd_num}">     
 							<button id="btn-modify" name="btn-modify" class="btn btn-primary" onclick="location.href='productUpdateForm.do?pd_num=${product.pd_num}'">수정</button>
-							<button id="btn-delete" name="btn-delete" class="btn btn-danger" onclick="location.href='productDelete.do'">삭제</button>
-							<%-- </c:if> --%>
+							<button id="btn_delete" name="btn_delete" class="btn btn-danger">삭제</button>
+							<script type="text/javascript">
+								let btn_delete = document.getElementById('btn_delete');
+								//이벤트 연결
+								btn_delete.onclick=function(){
+								let choice = confirm('삭제하시겠습니까???');
+									if(choice){
+										location.replace('productDelete.do?pd_num=${product.pd_num}');
+									}
+								};
+							</script>
+							</c:if> 
+							<div class="d-md-flex justify-content-md-end">  
+								<button id="btn-list" name="btn-list" class="btn btn-secondary" onclick="location.href='shopMain.do'">목록</button>
+							</div>  
 						</figure>
 					</div>
 				</div>
 				<div class="col-md-5 order-md-1">
-					<img width="500px" height="700px"
+					<img class="mb-5" width="500px" height="700px"
 						src="${pageContext.request.contextPath}/upload/${product.pd_photo}">
 				</div>
 			</div>

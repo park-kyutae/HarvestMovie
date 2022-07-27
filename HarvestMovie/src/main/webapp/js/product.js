@@ -46,7 +46,7 @@ $(function(){
 		}
 	});
 	
-	//
+	//=============상품 주문================//
 	$('#btn-order').on('click', function() {
 		if(confirm("구매하시겠습니까?")){
 			const data = {
@@ -60,7 +60,6 @@ $(function(){
 				url: 'ProductOrder.do',
 				method: 'post',
 				dataType: 'json',
-				
 				data: data,
 				cache: false,
 	            timeout: 30000

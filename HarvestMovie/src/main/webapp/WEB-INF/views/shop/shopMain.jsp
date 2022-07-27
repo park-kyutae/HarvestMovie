@@ -42,17 +42,24 @@
 							</a>
 							<div class="d-flex justify-content-between align-items-center">
                 			
-                			<small class="text-muted">${product.pd_price}</small>
+                			<small class="text-muted">₩ ${product.pd_price}</small>
               				</div>
 						</div>
 					</div>
 					</c:forEach>
 				</div>
-				<%-- <c:if test="${!empty user_num && user_auth == 3}"> --%>
+				<c:if test="${!empty user_num && user_auth == 9}">
 				<div class="row">
 					<input type="button" class="btn btn-secondary my-2" value="상품관리" onclick="location.href='productManagement.do'">
 				</div>
-				<%--  </c:if> --%>
+				</c:if>
+				<!-- 임시 마이페이지 로그인후에만 이용가능 -->
+				<div class="row">
+					<input type="button" class="btn btn-secondary my-2" value="myPage" onclick="location.href='productMyPage.do?mem_num=${member.mem_num}'">
+				</div>
+				<div class="row">
+					<input type="button" class="btn btn-secondary my-2" value="EVENT" onclick="location.href='shopEvent.do'">
+				</div>
 			</div>
 		</div>	
 	</div>

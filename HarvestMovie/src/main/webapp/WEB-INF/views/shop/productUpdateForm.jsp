@@ -39,11 +39,11 @@
 					<span class="input-group-text">상품 소개</span>
 					<textarea class="form-control" aria-label="With textarea" name="pd_content" id="pd_content">${product.pd_content}</textarea>
 				</div>
+				<br>
 				<div class="mb-3">
 					<label for="pd_photo" class="form-label">사진 첨부파일</label>
 					<input class="form-control form-control-sm pic-btn" id="pd_photo" type="file" name="pd_photo" accept="image/gif,image/png,image/jpeg" required>
 					<c:if test="${!empty product.pd_photo}">
-					<br>
 					<span id="file_detail">
 						(${product.pd_photo})파일이 등록되어 있습니다. 
 					</span>
@@ -65,7 +65,7 @@
 			
 				<div class="d-flex justify-content-end px-1">
 					<input type="submit" class="btn btn-secondary mx-2" value="수정">
-					<input type="button" class="btn btn-outline-secondary" value="취소" onclick="location.href='shopMain.do'">
+					<input type="button" class="btn btn-outline-secondary" value="취소" onclick="window.history.back()">
 				</div>
 			</form>
 		</div>

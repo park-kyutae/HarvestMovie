@@ -1,16 +1,15 @@
 package kr.shop.action;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.controller.Action;
 import kr.shop.dao.ProductDAO;
+import kr.shop.vo.ProductVO;
+import kr.util.FileUtil;
 
-public class ProductOrderAction implements Action {
+public class ProductDeleteAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -20,17 +19,15 @@ public class ProductOrderAction implements Action {
 		if(user_num==null) {//로그인이 되지 않은 경우
 			return "redirect:/member/loginUserForm.do";
 		}
-		
 		int pd_num = Integer.parseInt(request.getParameter("pd_num"));
-		int mem_num = user_num; 
 		ProductDAO dao = ProductDAO.getInstance();
+		ProductVO product = dao.productDetail(pd_num);
 		
-		boolean isSuccess = dao.productOrder(pd_num, mem_num);
+		dao.productDelete(pd_num);
 		
-		Map<String, String> mapAjax = new HashMap<>();
-        mapAjax.put("isSuccess", String.valueOf(isSuccess));
+		//파일삭제
+		FileUtil.removeFile(request, product.getPd_photo());
 		
-		request.setAttribute("ajaxData", "1");
-		return "/WEB-INF/views/common/ajax_view.jsp";
+		return "redirect:/shop/shopMain.do";
 	}
 }
