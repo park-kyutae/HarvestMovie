@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<link href="${pageContext.request.contextPath}/css/sidebar.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -14,29 +16,10 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<div class="container">
-  <div class="row bg-secondary text-white">
-    <div class="col-12">
-		<h1>마이페이지1</h1>
-	</div>
-    <div class="col-4">사진 위치<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
-    <div class="col-6">.col-6<br>Subsequent columns continue along the new line.</div>
-  </div>
-
+<jsp:include page="/WEB-INF/views/member/common/mypage_header.jsp"/>
 <div class="container-fluid">
   <div class="row flex-nowrap">
-    <div class="col-3 bd-sidebar">
-      <ul class="nav">
-      	<li><a>내가 남긴 리뷰</a></li>
-        <li><a>내가 남긴 리뷰</a></li>
-        <li><a>내 정보 수정</a></li>
-        <li><a>내 정보 수정</a></li>
-        <li><a>내 정보 수정</a></li>
-        <li><a>회원 탈퇴</a></li>
-      </ul>
-      <br>
-    </div>
-    
+  <jsp:include page="/WEB-INF/views/member/common/mypage_sidebar.jsp"/>
     <!-- 메인 div -->
     <div class="col-9 py-md-3 pl-md-5 bd-content">
     <h2>내가 남긴 리뷰</h2>
@@ -101,12 +84,7 @@
   </tbody>
 </table>
     </div>
-    
-    
-    
-    
   </div>
-</div>
 </div>
 </body>
 </html>
