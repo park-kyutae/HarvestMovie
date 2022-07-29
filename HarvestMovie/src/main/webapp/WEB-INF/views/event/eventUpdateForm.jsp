@@ -22,16 +22,16 @@
 			<input type="hidden" name="event_board_num" value="${event.event_board_num }">
 			<ul>
 				<li>
-					<label for="title">제목</label>
-					<input type="text" name="title" id="title" value="${event.event_title }" maxlength="50">
+					<label for="event_title">제목</label>
+					<input type="text" name="event_title" id="event_title" value="${event.event_title }" maxlength="50">
 				</li>
 				<li>
-					<label for="content">제목</label>
-					<textarea rows="5" cols="30" name="content" id="content">${event.event_content }</textarea>
+					<label for="event_content">제목</label>
+					<textarea rows="5" cols="30" name="event_content" id="event_content">${event.event_content }</textarea>
 				</li>
 				<li>
-					<label for="filename">파일</label>
-					<input type="file" name="filename" id="filename" accept="image/gif,image/png,image/jpeg">
+					<label for="event_filename">파일</label>
+					<input type="file" name="event_filename" id="event_filename" accept="image/gif,image/png,image/jpeg">
 					<c:if test="${!empty event.event_filename}">
 					<br>
 					<span id="file_detail">

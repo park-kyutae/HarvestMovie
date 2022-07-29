@@ -28,7 +28,7 @@ public class EventListAction implements Action{
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,
-				Integer.parseInt(pageNum),count,20,10,"eventList.do");
+				Integer.parseInt(pageNum),count,10,10,"eventList.do");
 		
 		List<EventVO> list = null;
 		if(count > 0) {

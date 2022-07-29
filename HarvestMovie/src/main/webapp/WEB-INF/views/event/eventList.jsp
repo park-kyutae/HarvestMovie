@@ -6,18 +6,109 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 목록</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+   integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+   crossorigin="anonymous">
+<script
+   src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+   crossorigin="anonymous"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/eventBoard.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/event.css" type="text/css">
 </head>
 <body>
-<div class="page-main">
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<div class="container">
+	<br><br><br><br>
+    <div class="row">
+
+    	<h2>이벤트 게시판</h2>
+    </div>
+    <br><br>
+    
+    <div>
+    	<c:if test="${count == 0}">
+		<div >
+			표시할 게시물이 없습니다.
+		</div>
+		</c:if>
+		<c:if test="${count > 0}">
+		<div>
+		<table class="table table-striped table-hover table-borderless">
+		  <thead>
+			<tr style="border-bottom:7px solid #444">
+				<th scope="col">글번호</th>
+				<th scope="col">제목</th>
+				<th scope="col">작성자</th>
+				<th scope="col">작성일</th>
+				<th scope="col">조회</th>
+			</tr>
+		   </thead>
+		   </tbody>
+			<c:forEach var="event" items="${list}">
+			<tr>
+				<td>${event.event_board_num}</td>
+				<td><a href="eventDetail.do?event_board_num=${event.event_board_num}">${event.event_title}</a></td>
+				<td>${event.id}</td>
+				<td>${event.event_reg_date}</td>
+				<td>${event.event_hit}</td>
+			</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		</div>
+		</c:if>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+        	<div >
+		    <c:if test="${!empty user_num}">
+			<input type="button" value="글쓰기" class="btn btn-dark"
+			   onclick="location.href='eventWriteForm.do'">
+		 	</c:if>  
+			<input type="button" value="목록" class="btn btn-dark"
+			       onclick="location.href='eventList.do'"> 
+			<input type="button" value="홈으로" class="btn btn-dark"
+			 onclick="location.href='${pageContext.request.contextPath}/main/main.do'">        
+			 <div class="row-end float-end">  
+        
+        <form action="eventList.do" method="get" class="contentBox">
+        
+					<select name="keyfield">
+						<option value="1">제목</option>
+						<option value="2">작성자</option>
+						<option value="3">내용</option>
+					</select>
+					
+					<input type="search" size="16" 
+					  name="keyword" value="${param.keyword}">
+					 
+					<input type="submit" class="btn btn-dark" value="검색">
+		</form>
+        
+    </div> 
+		</div>
+        </div>
+      </div>
+      
+    <c:if test="${count > 0}">
+    <div class="text-center">
+				${page}
+	</div>
+	</c:if>
+    
+</div>
+
+<%-- <div >
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="content-main">
-		<h2>게시판 목록</h2>
-		<form id="search_form" action="eventList.do" 
-		                                    method="get">
-			<ul class="search">
+	<div >
+		<h2>이벤트 게시판</h2>
+		<form action="eventList.do" method="get">
+			<ul >
 				<li>
 					<select name="keyfield">
 						<option value="1">제목</option>
@@ -27,31 +118,31 @@
 				</li>
 				<li>
 					<input type="search" size="16" 
-					  name="keyword" id="keyword"
-					  value="${param.keyword}">
+					  name="keyword" value="${param.keyword}">
 				</li>
 				<li>
 					<input type="submit" value="검색">
 				</li>
 			</ul>
 		</form>
-		<div class="list-space align-right">
-		    <%-- <c:if test="${!empty user_num}"> --%>
+		<div >
+		    <c:if test="${!empty user_num}">
 			<input type="button" value="글쓰기"
 			   onclick="location.href='eventWriteForm.do'">
-			<%-- </c:if>  --%>  
+		 	</c:if>  
 			<input type="button" value="목록"
-			       onclick="location.href='list.do'"> 
+			       onclick="location.href='eventList.do'"> 
 			<input type="button" value="홈으로"
 			 onclick="location.href='${pageContext.request.contextPath}/main/main.do'">         
 		</div>
 		<c:if test="${count == 0}">
-		<div class="result-display">
+		<div >
 			표시할 게시물이 없습니다.
 		</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<table>
+		<div>
+		<table class="table">
 			<tr>
 				<th>글번호</th>
 				<th>제목</th>
@@ -59,24 +150,27 @@
 				<th>작성일</th>
 				<th>조회</th>
 			</tr>
-			<c:forEach var="board" items="${list}">
+			<c:forEach var="event" items="${list}">
 			<tr>
 				<td>${event.event_board_num}</td>
-				<td><a href="detail.do?board_num=${board.board_num}">${board.title}</a></td>
-				<td>${board.id}</td>
-				<td>${board.reg_date}</td>
-				<td>${board.hit}</td>
+				<td><a href="eventDetail.do?event_board_num=${event.event_board_num}">${event.event_title}</a></td>
+				<td>${event.id}</td>
+				<td>${event.event_reg_date}</td>
+				<td>${event.event_hit}</td>
 			</tr>
 			</c:forEach>
 		</table>
-		<div class="align-center">
+		<div class="text-center">
 			${page}
+		</div>
 		</div>
 		</c:if>
 	</div>
-</div>
+</div> --%>
 </body>
 </html>
+
+
 
 
 

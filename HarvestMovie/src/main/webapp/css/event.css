@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+table a:link{
+	color:black;
+	text-decoration:none;
+}
+table a:visited{
+	color:blue;
+	text-decoration:none;
+}
+table a:hover{
+	color:red;
+	text-decoration:underline;
+}
+table a:active{
+	color:white;
+	text-decoration:none;
+}
