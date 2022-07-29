@@ -1,11 +1,12 @@
 package kr.event.dao;
 
-import java.sql.Connection;    
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.event.vo.EventFavVO;
 import kr.event.vo.EventVO;
 import kr.util.DBUtil;
 import kr.util.StringUtil;
@@ -399,41 +400,41 @@ public class EventDAO {
 		return count;
 	}
 	//회원번호와 게시물 번호를 이용한 좋아요 정보
-//	public EventFavVO selectFav(int event_board_num, int mem_num) throws Exception{
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		EventFavVO fav = null;
-//		String sql = null;
-//		
-//		try {
-//			//커넥션풀로부터 커넥션을 할당
-//			conn = DBUtil.getConnection();
-//			//SQL문 작성
-//			sql = "SELECT * FROM event_fav WHERE event_board_num=? AND mem_num=?";
-//			//PreparedStatement 객체 생성
-//			pstmt = conn.prepareStatement(sql);
-//			//?에 데이터를 바인딩
-//			pstmt.setInt(1, event_board_num);
-//			pstmt.setInt(2, mem_num);
-//			//SQL문 실행
-//			rs=pstmt.executeQuery();
-//			if(rs.next()) {
-//				fav=new EventFavVO();
-//				fav.setEvent_fav_num(rs.getInt("event_fav_num"));
-//				fav.setEvent_board_num(rs.getInt("event_board_num"));
-//				fav.setMem_num(rs.getInt("mem_num"));
-//				
-//			}
-//		}catch(Exception e) {
-//			throw new Exception(e);
-//		}finally {
-//			//자원정리
-//			DBUtil.executeClose(rs, pstmt, conn);
-//		}
-//		
-//		return fav;
-//	}
+	public EventFavVO selectFav(int event_board_num, int mem_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		EventFavVO fav = null;
+		String sql = null;
+		
+		try {
+			//커넥션풀로부터 커넥션을 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "SELECT * FROM event_fav WHERE event_board_num=? AND mem_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터를 바인딩
+			pstmt.setInt(1, event_board_num);
+			pstmt.setInt(2, mem_num);
+			//SQL문 실행
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				fav=new EventFavVO();
+				fav.setEvent_fav_num(rs.getInt("event_fav_num"));
+				fav.setEvent_board_num(rs.getInt("event_board_num"));
+				fav.setMem_num(rs.getInt("mem_num"));
+				
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			//자원정리
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return fav;
+	}
 	//좋아요 삭제
 	public void deleteFav(int event_fav_num) throws Exception{
 		Connection conn = null;
