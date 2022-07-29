@@ -13,11 +13,11 @@
 </head>
 <body>
 <div class="container-fluid">
-  <div class="row bg-secondary text-white">
+  <div class="row bg-primary text-white">
     <div class="col-12">
-		<h1>마이페이지</h1>
+		<h1>어드민페이지</h1>
 	</div>
-    <div class="col-3 m-4">
+   <div class="d-flex col-2 m-4 justify-content-end">
     <c:if test="${!empty user_num && !empty user_photo}">
 	<img src="${pageContext.request.contextPath}/upload/${user_photo}" width="150" height="150" class="rounded-circle">
 	</c:if>
@@ -26,7 +26,7 @@
 	<img src="${pageContext.request.contextPath}/images/face.png" width="150" height="150" class="rounded-circle">
 	</c:if>
     </div>
-    <div class="col-6">사용자 이름 내 정보 수정<br>계정 생성일</div>
+    <div class="col-6"><span>${user_id}<br>계정 생성일: ${user_date}</div>
   </div>
  </div>
 </body>
