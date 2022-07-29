@@ -189,7 +189,7 @@ public class MemberDAO {
 			conn = DBUtil.getConnection();
 			// SQL문 작성
 			sql = "UPDATE member_detail SET mem_name=?," + "mem_email=?,mem_zipcode=?,mem_addr1=?,"
-					+ "mem_addr2=?,modify_date=SYSDATE " + "WHERE mem_num=?";
+					+ "mem_addr2=?,mem_modify_date=SYSDATE " + "WHERE mem_num=?";
 			// JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			// ?에 데이터 바인딩
@@ -283,12 +283,12 @@ public class MemberDAO {
 			// auto commit 해제
 			conn.setAutoCommit(false);
 
-			// zmember의 auth 값 변경
+			// member의 auth 값 변경
 			sql = "UPDATE member SET auth=0 WHERE mem_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mem_num);
 			pstmt.executeUpdate();
-			// zmember_detail의 레코드 삭제
+			// member_detail의 레코드 삭제
 			sql = "DELETE FROM member_detail WHERE mem_num=?";
 			pstmt2 = conn.prepareStatement(sql);
 			pstmt2.setInt(1, mem_num);
