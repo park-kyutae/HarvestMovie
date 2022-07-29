@@ -29,6 +29,7 @@
 			<div class="container-fluid">
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-8">
 					<c:forEach var="product" items="${productList}">
+					<input type="hidden" value="${product.pd_name}">
 					<div class="col pb-5">
 						<div class="card shadow-sm">
 							<a href="productDetail.do?pd_num=${product.pd_num}" class="">
@@ -56,7 +57,7 @@
 				</c:if>
 				<!-- 임시 마이페이지 로그인후에만 이용가능 -->
 				<div class="row">
-					<input type="button" class="btn btn-secondary my-2" value="myPage" onclick="location.href='productMyPage.do?mem_num=${member.mem_num}'">
+					<input type="button" class="btn btn-secondary my-2" value="임시myPage" onclick="location.href='productMyPage.do?mem_num=${mem_num}'">
 				</div>
 				<div class="row">
 					<input type="button" class="btn btn-secondary my-2" value="EVENT" onclick="location.href='shopEvent.do'">

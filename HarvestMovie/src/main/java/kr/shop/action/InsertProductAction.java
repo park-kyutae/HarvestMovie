@@ -14,12 +14,12 @@ import kr.util.FileUtil;
 public class InsertProductAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		HttpSession session = request.getSession();
-//		Integer user_num = (Integer)session.getAttribute("user_num");
-//		
-//		if(user_num==null) {
-//			return "redirect:/member/loginForm.jsp";
-//		}
+		HttpSession session = request.getSession();
+		Integer user_num = (Integer)session.getAttribute("user_num");
+		
+		if(user_num==null) {
+			return "redirect:/member/loginForm.jsp";
+		}
 		
 		request.setCharacterEncoding("utf-8");
 		

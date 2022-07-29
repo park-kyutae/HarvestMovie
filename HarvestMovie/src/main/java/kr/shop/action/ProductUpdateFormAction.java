@@ -12,11 +12,11 @@ public class ProductUpdateFormAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-//		HttpSession session = request.getSession();
-//		Integer user_num = (Integer)session.getAttribute("user_num");
-//		if(user_num == null) {
-//			return "redirect:/shop/shopMain.do";
-//		}
+		HttpSession session = request.getSession();
+		Integer user_num = (Integer)session.getAttribute("user_num");
+		if(user_num == null) {
+			return "redirect:/shop/shopMain.do";
+		}
 		
 		int pd_num = Integer.parseInt(request.getParameter("pd_num"));
 		ProductDAO dao = ProductDAO.getInstance();
