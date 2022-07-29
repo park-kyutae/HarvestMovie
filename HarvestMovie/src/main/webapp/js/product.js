@@ -52,28 +52,41 @@ $(function(){
 			const data = {
 				'pd_num': $('#pd_num').val()
 			}
-			/*$.ajax({
-				url: 'ProductCheck.do',
-				method: 'post',
-			})*/
 			$.ajax({
-				url: 'ProductOrder.do',
+				url: 'checkOrder.do',
 				method: 'post',
 				dataType: 'json',
 				data: data,
 				cache: false,
 	            timeout: 30000
 			}).done(function(param) {
-				     if (param.isSucess == 'false') {
-	                    alert('오류 발생');
+				     if (param.isSuccess =='false') {
+	                    alert('1인당 1개만 구매할 수 있습니다.');
 	                } else {
-	                    alert('구매성공!@!@!@!');
-	                    location.reload();
-	
+						$.ajax({
+							url: 'ProductOrder.do',
+							method: 'post',
+							dataType: 'json',
+							data: data,
+							cache: false,
+	            			timeout: 30000
+						}).done(function(param) {
+				     		if (param.isSuccess == 'false') {
+	                    		alert('오류 발생');
+	                		} else {
+	                    		alert('구매에 성공하셨습니다.');
+	                    		location.reload();
+	                		}
+						}).fail(function(error) {
+							console.log(JSON.stringify(error));
+						});
 	                }
 			}).fail(function(error) {
 				console.log(JSON.stringify(error));
 			});
+			
+			
+			
 		}else{
 			return false;
 		}
@@ -82,4 +95,40 @@ $(function(){
 	$('#btn-disable').on('click', function() {
 		alert('수량이 없습니다.');
 	})
+	
+	//================= 주문 취소 ==========//
+	$('.btn-cancel').on('click', function(){
+		if(confirm('주문을 취소하시겠습니까?')){
+			alert($('#pd_num').val());
+			alert($(this).data('ord'));
+			const data = {
+				'pd_num': $('#pd_num').val(),
+				'ord_num':$(this).data('ord')
+			}
+			$.ajax({
+				url:'orderCancel.do',
+				method:'post',
+				data:data,
+				dataType:'json',
+				cache:false,
+				timeoust:30000
+			}).done(function(param){
+				if(param.isSuccess == 'false'){
+					alert('오류발생!@');
+				}else{
+					alert('주문취소에 성공했습니다.');
+					location.reload();
+				}
+				
+			}).fail(function(error) {
+				console.log(JSON.stringify(error));
+			});
+			
+			
+		}else{
+			return false;
+		}
+	});
+	
+	//================= 주문 취소 ==========//
 });
