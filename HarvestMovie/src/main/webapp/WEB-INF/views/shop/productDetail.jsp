@@ -37,7 +37,7 @@
 						<span class="text-muted text-center">${product.pd_name}</span>
 					</h2>
 					<p class="lead">${product.pd_content}</p>
-					<p><em>1인당 1개만 구매 할 수 있습니다. <br>환불 불가</em></p>
+					<p><em>1인당 1개만 구매 할 수 있습니다. <br>주문취소 가능</em></p>
 					<div class="col">
 						<figure>
 							<blockquote class="blockquote">
