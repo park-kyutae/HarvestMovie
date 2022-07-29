@@ -20,7 +20,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="${pageContext.request.contextPath}/member/memberListForm.do" class="nav-link link-dark" aria-current="page">
+        <a href="${pageContext.request.contextPath}/member/adminpage.do" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           회원 관리
         </a>
