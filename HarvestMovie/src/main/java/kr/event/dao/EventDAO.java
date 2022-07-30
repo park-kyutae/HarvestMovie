@@ -1,6 +1,6 @@
 package kr.event.dao;
 
-import java.sql.Connection;    
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -192,6 +192,7 @@ public class EventDAO {
 				event.setEvent_filename(rs.getString("event_filename"));
 				event.setMem_num(rs.getInt("mem_num"));
 				event.setId(rs.getString("id"));
+				event.setPhoto(rs.getString("mem_photo"));
 			}
 			
 		}catch(Exception e) {

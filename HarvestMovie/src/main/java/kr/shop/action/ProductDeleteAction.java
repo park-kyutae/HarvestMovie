@@ -8,7 +8,7 @@ import kr.controller.Action;
 import kr.shop.dao.ProductDAO;
 import kr.shop.vo.ProductVO;
 import kr.util.FileUtil;
-
+  
 public class ProductDeleteAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

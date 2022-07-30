@@ -2,30 +2,24 @@ package kr.member.action;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.codehaus.jackson.map.ObjectMapper;
-
 import com.oreilly.servlet.MultipartRequest;
-
 import kr.controller.Action;
 import kr.member.dao.MemberDAO;
 import kr.member.vo.MemberVO;
 import kr.util.FileUtil;
-
+   
 public class UpdateMyPhotoAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String,String> mapAjax = 
-				new HashMap<String,String>();
+		Map<String,String> mapAjax = new HashMap<String,String>();
 		
 		HttpSession session = request.getSession();
-		Integer user_num = 
-				(Integer)session.getAttribute("user_num");
+		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num==null) {//로그인이 되지 않은 경우
 			mapAjax.put("result", "logout");
 		}else {//로그인 된 경우
@@ -34,8 +28,7 @@ public class UpdateMyPhotoAction implements Action{
 			MemberVO db_member = dao.getMember(user_num);
 			
 			//전송된 파일 업로드 처리
-			MultipartRequest multi = 
-					           FileUtil.createFile(request);
+			MultipartRequest multi = FileUtil.createFile(request);
 			
 			//서버에 저장된 파일명 반환
 			String photo = multi.getFilesystemName("photo");
