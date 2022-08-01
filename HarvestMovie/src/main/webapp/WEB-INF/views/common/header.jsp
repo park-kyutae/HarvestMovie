@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Responsive navbar-->
-<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light border-bottom">
 	<div class="container">
 		<a class="navbar-brand"
 			href="${pageContext.request.contextPath}/main/main.do">HarvestMovie</a>
