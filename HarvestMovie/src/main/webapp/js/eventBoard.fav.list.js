@@ -19,7 +19,7 @@ $(function(){
 		});
 	}
 	//좋아요 등록
-	$('#output_fav').click(function(){
+	/*$('#output_fav').click(function(){
 		$.ajax({
 			url:'eventWriteFav.do',
 			type:'post',
@@ -41,15 +41,15 @@ $(function(){
 			}
 			
 		});
-	});
+	});*/
 	//좋아요 표시
 	function displayFav(param){
 		let output;
-		if(param.status =='noFav'){
+		/*if(param.status =='noFav'){
 			output = '../images/hand-thumbs-up.svg';
 		}else{
 			output = '../images/hand-thumbs-up-fill.svg';
-		}
+		}*/
 		//문서 객체에 추가
 		$('#output_fav').attr('src',output);
 		$('#output_fcount').text(param.count);
