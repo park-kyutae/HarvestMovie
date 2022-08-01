@@ -22,6 +22,7 @@
 			<jsp:include page="/WEB-INF/views/member/common/mypage_sidebar.jsp" />
 			<div class="row">
 				<div class="col-12">
+				
 					<h2>회원 탈퇴</h2>
 					<form action="deleteUser.do" method="post" id="delete_form">
 						<ul>
