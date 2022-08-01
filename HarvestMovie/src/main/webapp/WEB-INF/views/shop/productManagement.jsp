@@ -1,22 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
-<title>상품관리페이지</title>
+<title>상품관리</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/product.js"></script>
+<script>
+console.log(${count})
+
+</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<div>
-	<h2 class="text-center bg-light">상품관리</h2>
-	<div class="container fliud">
+<jsp:include page="/WEB-INF/views/member/common/adminpage_header.jsp"/>
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+  <jsp:include page="/WEB-INF/views/member/common/adminpage_sidebar.jsp"/>
+  	<div>
+	<h2 class="text-start bg-light">상품관리</h2>
+	<div class="container fliud float-start">
 	<c:if test="${count} == 0">
 	<div class="result-display">
 		저장된 게시물이 없음~~!~!~
@@ -59,6 +68,8 @@
 		</div>
 	</div>
 	
-</div>
+</div>			
+  </div>
+ </div>
 </body>
 </html>
