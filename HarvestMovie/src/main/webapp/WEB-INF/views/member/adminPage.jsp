@@ -20,7 +20,7 @@ console.log(${count})
 <div class="container-fluid">
   <div class="row flex-nowrap">
   <jsp:include page="/WEB-INF/views/member/common/adminpage_sidebar.jsp"/>
-  	<div>
+  	<div class="col-9">
   	<h2>회원목록(관리자 전용)</h2>
 		<%-- <form id="search_form" action="adminpage.do" method="get">
 			<ul>
