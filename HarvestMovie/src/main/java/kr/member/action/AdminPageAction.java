@@ -44,7 +44,7 @@ public class AdminPageAction implements Action {
 		if(count > 0) {
 			list = dao.getListMemberByAdmin(page.getStartRow(),page.getEndRow(),keyfield,keyword);
 		}
-		
+		 
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());
