@@ -55,7 +55,10 @@
 						</tr>
 						<tr>
 							<th scope="row">비밀번호</th>
-							<td colspan="2">Larry the Bird</td>
+							<td colspan="2">●●●●●●</td>
+							<div class="col-3 pt-2">
+								<button type="button" id="pw_update" class="btn btn-primary">비밀번호 수정</button>
+							</div>
 						</tr>
 						<tr>
 							<th scope="row">이메일</th>

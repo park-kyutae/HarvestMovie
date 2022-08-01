@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import kr.controller.Action;
 import kr.shop.dao.ProductDAO;
 
@@ -20,7 +22,7 @@ public class ProductOrderAction implements Action {
 		if(user_num==null) {//로그인이 되지 않은 경우
 			return "redirect:/member/loginUserForm.do";
 		}
-		
+		ObjectMapper mapper = new ObjectMapper();
 		int pd_num = Integer.parseInt(request.getParameter("pd_num"));
 		int mem_num = user_num; 
 		ProductDAO dao = ProductDAO.getInstance();
@@ -30,7 +32,7 @@ public class ProductOrderAction implements Action {
 		Map<String, String> mapAjax = new HashMap<>();
         mapAjax.put("isSuccess", String.valueOf(isSuccess));
 		
-		request.setAttribute("ajaxData", "1");
+		request.setAttribute("ajaxData", mapper.writeValueAsString(mapAjax));
 		return "/WEB-INF/views/common/ajax_view.jsp";
 	}
 }
