@@ -420,7 +420,7 @@ public class MovieDAO {
             pstmt5 = conn.prepareStatement(sql);
             for (String trailer : movieVO.getMv_trailer()) {
                 pstmt5.setInt(1, movieNUM);
-                pstmt5.setString(2, trailer);
+                pstmt5.setString(2, trailer);test
                 pstmt5.addBatch();
                 pstmt5.clearParameters();
             }
