@@ -42,6 +42,7 @@
 					<input type="submit" class="form-control bg-primary text-white mt-2" value="수정">
 				</form>
   		</div>
+
   	</div>
   </div>
 
