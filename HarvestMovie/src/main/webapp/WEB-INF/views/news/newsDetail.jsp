@@ -34,7 +34,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
-		<div class="row d-flex justify-content-center">
+		<div class="row">
 			<div class="col col-sm-9">
 				<%-- 메인 틀 --%>
 				<div class="row d-flex justify-content-left">
@@ -62,7 +62,7 @@
 				</div>
 				<hr size="1" noshade="noshade" width="100%">
 			</div>
-			<div class="row d-flex justify-content-center">
+			<div class="row">
 				<div class="col col-sm-9">
 					<div class="row d-flex justify-content-center">
 						<div class="col col-sm my-2 d-flex justify-content-end">
@@ -91,7 +91,7 @@
 									class="btn btn-dark btn-sm mx-1">
 						</div>
 					</div>
-					<div class="row d-flex justify-content-center">
+					<div class="row">
 						<div class="col col-sm my-2 d-flex justify-content-center">
 							<c:if test="${empty news.news_photo}">
 								<div class="col col-sm d-flex justify-content-center" id="news_photo_main">
@@ -107,14 +107,59 @@
 						</div>
 					</div>
 				</div>
-				<div class="row d-flex justify-content-center">
+				<div class="row">
 					<div class="col col-sm-9 my-3 d-flex justify-content-center">
 						<p>${news.news_content}</p>
+					</div>
+					<div class="col col-sm-3">
+						<div class="row">
+							<div class="col col-sm">
+							많이 본 뉴스 순
+							</div>
+						</div>
+						<hr size="5" noshade="noshade" width="100%">
+						<div class="row">
+							<div class="col col-sm">
+								<c:if test="${count == 0}">
+							<div class="row">
+								<div class="col d-flex justify-content-center">
+										표시할 게시물이 없습니다.
+								</div>
+							</div>
+							</c:if>
+							<c:if test="${count > 0}">
+							<c:forEach var="news" items="${viewlist}">
+							<div class="row d-flex justify-content-center my-3">
+							<c:if test="${empty news.news_photo}">
+								<div class="col col-sm-1" id="news_photo_main">
+										<a href="newsDetail.do?news_num=${news.news_num}"><img src="${pageContext.request.contextPath}/images/blank.png" class="rounded img-fluid" id="news_photo"></a>
+								</div>
+							</c:if>
+							<c:if test="${!empty news.news_photo}">
+								<div class="col col-sm-1" id="news_photo_main">
+										<a href="newsDetail.do?news_num=${news.news_num}"><img src="${pageContext.request.contextPath}/upload/${news.news_photo}" class="rounded img-fluid" id="news_photo"></a>
+								</div>
+							</c:if>
+								<div class="col col-sm">
+									<div class="row">
+										<div class="col col-sm"><a href="newsDetail.do?news_num=${news.news_num}" id="atag">${news.news_title}</a></div>
+									</div>
+								</div>
+								<div class="col col-sm">
+				<div class="row ">
+					<div class="col d-flex justify-content-center">${news.news_hit}</div>
+				</div>
+			</div>
+								</div>
+								</c:forEach>
+								</c:if>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row d-flex justify-content-center">
+		<div class="row">
 			<div class="col col-sm-9 my-2">
 				<i class="bi bi-suit-heart output_fav"></i>
 				<img id="output_fav"
@@ -122,7 +167,7 @@
 					width="30"> 좋아요 <span id="output_fcount"></span>
 			</div>
 		</div>
-		<div class="row d-flex justify-content-center">
+		<div class="row">
 			<div class="col col-sm-9 card bg-light">
 				<!-- 댓글 시작 -->
 				<div class="col col-sm d-flex justify-content-center my-2">
