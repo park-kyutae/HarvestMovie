@@ -43,7 +43,7 @@ public class NewsUpdateAction implements Action{
 		//로그인한 회원번호와 작성자 회원번호가 일치
 		NewsVO news = new NewsVO();
 		news.setNews_num(news_num);
-		news.setNews_title(multi.getParameter("news_titile"));
+		news.setNews_title(multi.getParameter("news_title"));
 		news.setNews_content(multi.getParameter("news_content"));
 		news.setNews_photo(news_photo);
 		

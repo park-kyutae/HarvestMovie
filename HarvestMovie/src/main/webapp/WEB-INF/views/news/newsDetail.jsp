@@ -73,9 +73,6 @@
 									onclick="location.href='newsUpdateForm.do?news_num=${news.news_num}'">
 								<input type="button" value="삭제" id="delete_btn"
 									class="btn btn-danger btn-sm mx-1">
-								<input type="button" value="목록"
-									onclick="location.href='newslist.do'"
-									class="btn btn-dark btn-sm mx-1">
 								<script type="text/javascript">
 									let delete_btn = document
 											.getElementById('delete_btn');
@@ -89,6 +86,9 @@
 									};
 								</script>
 							</c:if>
+							<input type="button" value="목록"
+									onclick="location.href='newslist.do'"
+									class="btn btn-dark btn-sm mx-1">
 						</div>
 					</div>
 					<div class="row d-flex justify-content-center">
@@ -135,9 +135,7 @@
 							id="news_num">
 						<textarea rows="3" cols="100" name="news_re_content"
 							id="news_re_content" style="resize: none;" class="rep-content form-control"
-							<c:if test="${empty user_num}">disabled="disabled"</c:if>>
-							<c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if>
-						</textarea>
+							<c:if test="${empty user_num}">disabled="disabled"</c:if>><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
 						<c:if test="${!empty user_num}">
 							<div id="re_first">
 								<span class="letter-count">300/300</span>

@@ -29,6 +29,7 @@
 				<div class="col col-sm-9 my-4">
 					<form class="row needs-validation" novalidate method="post"
 						action="newsUpdate.do" enctype="multipart/form-data">
+						<input type="hidden" name="news_num" value="${news.news_num}">
 						<!-- 뉴스 제목 시작-->
 						<div class="row my-2 d-flex justify-content-center">
 							<div class="col col-sm ">

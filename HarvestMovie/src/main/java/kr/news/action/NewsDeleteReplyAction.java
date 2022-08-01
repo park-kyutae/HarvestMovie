@@ -14,7 +14,7 @@ import kr.news.dao.NewsDAO;
 import kr.news.vo.NewsReplyVO;
 
 public class NewsDeleteReplyAction implements Action{
-
+    
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		

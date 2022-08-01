@@ -23,10 +23,10 @@
 	src="${pageContext.request.contextPath}/js/product.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <input type="hidden" id="pd_num" value="${product.pd_num}"/>
 
 	<div>
-		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
 			<div class="py-5 text-center">
 				<h2>상품 상세페이지</h2>
@@ -37,6 +37,7 @@
 						<span class="text-muted text-center">${product.pd_name}</span>
 					</h2>
 					<p class="lead">${product.pd_content}</p>
+					<p><em>1인당 1개만 구매 할 수 있습니다. <br>환불 불가</em></p>
 					<div class="col">
 						<figure>
 							<blockquote class="blockquote">
@@ -79,7 +80,8 @@
 						src="${pageContext.request.contextPath}/upload/${product.pd_photo}">
 				</div>
 			</div>
-
+			<hr>
+			
 		</div>
 	</div>
 </body>

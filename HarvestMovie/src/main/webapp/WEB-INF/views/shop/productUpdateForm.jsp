@@ -12,6 +12,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/product.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div>
 		<div class="container">
 			<div class="py-5 text-center">

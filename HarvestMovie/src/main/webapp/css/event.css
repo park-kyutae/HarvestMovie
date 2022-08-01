@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+table a:link{
+	color:black;
+	text-decoration:none;
+}
+ table a:visited{
+	color:rgb(0, 0, 0);
+	text-decoration:none;
+}
+
+#main_link:visited{
+	color:rgb(0, 0, 0);
+	text-decoration:none;
+}
+/*
+table a:hover{
+	color:red;
+	text-decoration:underline;
+}
+table a:active{
+	color:white;
+	text-decoration:none;
+} */

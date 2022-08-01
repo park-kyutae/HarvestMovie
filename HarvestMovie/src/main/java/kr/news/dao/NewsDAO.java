@@ -154,47 +154,62 @@ public class NewsDAO {
 		return list;
 	}
 	// 글상세 많이본(조회순 목록)
-		public List<NewsVO> getListNewsViews() throws Exception {
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			List<NewsVO> viewlist = null;
-			String sql = null;
+	public List<NewsVO> getListNewsView(int start, int end, String keyfield, String keyword) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<NewsVO> viewlist = null;
+		String sql = null;
+		String sub_sql = "";
+		int cnt = 0;
 
-			try {
-				conn = DBUtil.getConnection();
+		try {
+			conn = DBUtil.getConnection();
 
-				sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM news n JOIN member m "
-						+ "USING (mem_num) JOIN member_detail d USING (mem_num) "
-						+ " ORDER BY n.news_hit DESC)a)";
-
-				pstmt = conn.prepareStatement(sql);
-
-				// ?에 데이터 바인딩
-
-				rs = pstmt.executeQuery();
-				viewlist = new ArrayList<NewsVO>();
-				while (rs.next()) {
-					NewsVO news = new NewsVO();
-					news.setNews_num(rs.getInt("news_num"));
-					news.setNews_title(StringUtil.useNoHtml(rs.getString("news_title")));
-					news.setNews_content(rs.getString("news_content"));
-					news.setNews_photo(rs.getString("news_photo"));
-					news.setNews_date(rs.getDate("news_date"));
-					news.setNews_modifydate(rs.getDate("news_modifydate"));
-					news.setNews_hit(rs.getInt("news_hit"));
-					news.setMem_num(rs.getInt("mem_num"));
-
-					viewlist.add(news);
-				}
-			} catch (Exception e) {
-				throw new Exception(e);
-			} finally {
-				DBUtil.executeClose(rs, pstmt, conn);
+			if (keyword != null && !"".equals(keyword)) {
+				if (keyfield.equals("1"))
+					sub_sql = "WHERE n.news_title LIKE ?";
+				else if (keyfield.equals("2"))
+					sub_sql = "WHERE m.id LIKE ?";
+				else if (keyfield.equals("3"))
+					sub_sql = "WHERE n.news_content LIKE ?";
 			}
-			return viewlist;
-		}
 
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum " + "FROM (SELECT * FROM news n JOIN member m "
+					+ "USING (mem_num) JOIN member_detail d " + "USING (mem_num) " + sub_sql
+					+ " ORDER BY n.news_hit DESC)a) " + "WHERE rnum >= ? AND rnum <= ?";
+
+			pstmt = conn.prepareStatement(sql);
+
+			// ?에 데이터 바인딩
+			if (keyword != null && !"".equals(keyword)) {
+				pstmt.setString(++cnt, "%" + keyword + "%");
+			}
+			pstmt.setInt(++cnt, start);
+			pstmt.setInt(++cnt, end);
+
+			rs = pstmt.executeQuery();
+			viewlist = new ArrayList<NewsVO>();
+			while (rs.next()) {
+				NewsVO news = new NewsVO();
+				news.setNews_num(rs.getInt("news_num"));
+				news.setNews_title(StringUtil.useNoHtml(rs.getString("news_title")));
+				news.setNews_content(rs.getString("news_content"));
+				news.setNews_photo(rs.getString("news_photo"));
+				news.setNews_date(rs.getDate("news_date"));
+				news.setNews_modifydate(rs.getDate("news_modifydate"));
+				news.setNews_hit(rs.getInt("news_hit"));
+				news.setMem_num(rs.getInt("mem_num"));
+
+				viewlist.add(news);
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return viewlist;
+	}
 	// 글상세
 	public NewsVO getNews(int news_num) throws Exception {
 		Connection conn = null;

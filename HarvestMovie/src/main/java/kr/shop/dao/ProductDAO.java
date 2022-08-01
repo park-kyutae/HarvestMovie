@@ -9,6 +9,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.shop.vo.OrdersVO;
+import kr.shop.vo.ProductDTO;
 import kr.shop.vo.ProductVO;
 import kr.util.DBUtil;
 
@@ -243,7 +245,7 @@ public class ProductDAO {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	
+	//구매하기
 	public boolean productOrder(int pd_num, int mem_num) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt1 = null;
@@ -265,6 +267,7 @@ public class ProductDAO {
 			pstmt2.setInt(1, pd_num);
 			rs = pstmt2.executeQuery();
 			int pd_quantity = 0;
+			
 			if(rs.next()) {
 				pd_quantity = rs.getInt("pd_quantity");
 				pd_quantity -= 1;
@@ -289,6 +292,126 @@ public class ProductDAO {
 			DBUtil.executeClose(rs, pstmt3, conn);
 		}
 	}
+	//1회이상 구매했는지? 체크
+	public boolean checkProductOrder(int pd_num,int mem_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM orders WHERE pd_num=? AND mem_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pd_num);
+			pstmt.setInt(2,  mem_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return false;
+			}
+			return true;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}	
+	}
 	
-
+	//회원별 구매목록
+	public List<ProductDTO> getOrderList(int mem_num)throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		ResultSet rs = null;
+		List<ProductDTO> list= null;
+		
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM orders o JOIN product p ON (o.pd_num=p.pd_num) WHERE mem_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_num);
+			rs = pstmt.executeQuery();
+			
+			list = new ArrayList<ProductDTO>();
+			while(rs.next()) {
+				OrdersVO orders = new OrdersVO();
+				orders.setMem_num(mem_num);
+				orders.setOrd_num(rs.getInt("ord_num"));
+				orders.setOrd_quantity(rs.getInt("ord_quantity"));
+				orders.setOrd_regdate(rs.getDate("ord_regdate"));
+				orders.setPd_num(rs.getInt("pd_num"));
+				ProductVO product = new ProductVO();
+				product.setPd_name(rs.getString("pd_name"));
+				product.setPd_content(rs.getString("pd_content"));
+				product.setPd_price(rs.getInt("pd_price"));
+				product.setPd_photo(rs.getString("pd_photo"));
+				ProductDTO dto = new ProductDTO();
+				dto.setOrdersVO(orders);
+				dto.setProductVO(product);
+				
+				list.add(dto);
+			}
+			return list;
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+	}
+	
+	//주문취소
+	public boolean productDeleteOrder(int pd_num,int ord_num)throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		ResultSet rs = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "DELETE FROM orders WHERE ord_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ord_num);
+			int success = pstmt.executeUpdate();
+			
+			sql = "SELECT * FROM PRODUCT WHERE PD_NUM = ?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, pd_num);
+			rs = pstmt2.executeQuery();
+			int pd_quantity = 0;
+			
+			if(rs.next()) {
+				pd_quantity = rs.getInt("pd_quantity");
+				pd_quantity += 1;
+			}
+			
+			sql = "UPDATE PRODUCT SET pd_quantity = ? WHERE pd_num = ?";
+			pstmt3 = conn.prepareStatement(sql);
+			pstmt3.setInt(1, pd_quantity);
+			pstmt3.setInt(2, pd_num);
+			int success2 = pstmt3.executeUpdate();
+			if(success != 0 && success2 != 0) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt3, null);
+			DBUtil.executeClose(null, pstmt2, null);
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+	}
+	
+	
+	
 }

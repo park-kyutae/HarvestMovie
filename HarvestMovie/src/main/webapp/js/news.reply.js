@@ -26,7 +26,7 @@ $(function(){
 				if(pageNum == 1){
 					//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
 					$('#output').empty();
-				}
+				};
 				
 				$(param.list).each(function(index,item){
 					let output = '<div class="item">';
@@ -38,12 +38,12 @@ $(function(){
 						output += '<span class="modify-date">최근 수정일 : ' + item.news_re_modifydate + '</span>'; 
 					}else{
 						output += '<span class="modify-date">등록일 : ' + item.news_re_date + '</span>';
-					}
+					};
 					
 					//로그인한 회원번호와 작성자의 회원번호 일치 여부 체크
 					if(param.user_num == item.mem_num){
-						output += ' <input type="button" data-renum="'+item.re_num+'" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-renum="'+item.re_num+'" value="삭제" class="delete-btn">';
+						output += ' <input type="button" data-renum="'+item.news_re_num+'" value="수정" class="modify-btn">';
+						output += ' <input type="button" data-renum="'+item.news_re_num+'" value="삭제" class="delete-btn">';
 					}
 					
 					output += '<hr size="1" noshade width="100%">';
@@ -79,9 +79,9 @@ $(function(){
 	
 	//댓글 등록
 	$('#re_form').submit(function(event){
-		if($('#re_content').val().trim()==''){
+		if($('#news_re_content').val().trim()==''){
 			alert('내용을 입력하세요!');
-			$('#re_content').val('').focus();
+			$('#news_re_content').val('').focus();
 			return false;
 		}
 		
@@ -192,7 +192,7 @@ $(function(){
 	function initModifyForm(){
 		$('.sub-item').show();
 		$('#mre_form').remove();
-	}
+	};
 	
 	//댓글 수정
 	$(document).on('submit','#mre_form',function(event){
@@ -200,7 +200,7 @@ $(function(){
 			alert('내용을 입력하세요!');
 			$('#mre_content').val('').focus();
 			return false;
-		}
+		};
 		
 		//폼에 입력한 데이터 반환
 		let form_data = $(this).serialize();
@@ -225,7 +225,7 @@ $(function(){
 					alert('타인의 글을 수정할 수 없습니다');
 				}else{
 					alert('수정 오류 발생');
-				}
+				};
 			},
 			error:function(){
 				alert('네크워크 오류 발생!');
@@ -244,7 +244,7 @@ $(function(){
 		$.ajax({
 			url:'newsDeleteReply.do',
 			type:'post',
-			data:{re_num:re_num},
+			data:{news_re_num:re_num},
 			dataType:'json',
 			cache:false,
 			timeout:30000,

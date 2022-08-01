@@ -17,15 +17,94 @@
    crossorigin="anonymous"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/eventBoard.js"></script>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/event.css" type="text/css">
 </head>
 <body>
-<!-- <div class="container">
-	<div class="row">
-		<di
-	</div>
-</div> -->
 
-<div >
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<div class="container">
+	<br><br><br><br>
+    <div class="row">
+			
+    	<h2>이벤트 게시판</h2>
+    </div>
+    <br><br>
+    
+    <div>
+    	<c:if test="${count == 0}">
+		<div >
+			표시할 게시물이 없습니다.
+		</div>
+		</c:if>
+		<c:if test="${count > 0}">
+		<div>
+		<table class="table table-hover">
+		  <thead>
+			<tr style="border-bottom:7px solid #444">
+				<th scope="col" width=70px>글번호</th>
+				<th scope="col">제목</th>
+				<th scope="col" width=70px>작성자</th>
+				<th scope="col" width=100px>작성일</th>
+				<th scope="col" width=100px>조회</th>
+			</tr>
+		   </thead>
+		   </tbody>
+			<c:forEach var="event" items="${list}">
+			<tr>
+				<td>${event.event_board_num}</td>
+				<td><a href="eventDetail.do?event_board_num=${event.event_board_num}">${event.event_title}</a></td>
+				<td>${event.id}</td>
+				<td>${event.event_reg_date}</td>
+				<td>${event.event_hit}</td>
+			</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		</div>
+		</c:if>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+        	<div >
+		    <c:if test="${!empty user_num}">
+			<input type="button" value="글쓰기" class="btn btn-dark"
+			   onclick="location.href='eventWriteForm.do'">
+		 	</c:if>  
+			<input type="button" value="목록" class="btn btn-dark"
+			       onclick="location.href='eventList.do'"> 
+			<input type="button" value="홈으로" class="btn btn-dark"
+			 onclick="location.href='${pageContext.request.contextPath}/main/main.do'">        
+			 <div class="row-end float-end">  
+        
+        <form action="eventList.do" method="get" class="contentBox">
+        
+					<select name="keyfield">
+						<option value="1">제목</option>
+						<option value="2">작성자</option>
+						<option value="3">내용</option>
+					</select>
+					
+					<input type="search" size="16" 
+					  name="keyword" value="${param.keyword}">
+					 
+					<input type="submit" class="btn btn-dark" value="검색">
+		</form>
+        
+    </div> 
+		</div>
+        </div>
+      </div>
+      
+    <c:if test="${count > 0}">
+    <div class="text-center">
+				${page}
+	</div>
+	</c:if>
+    
+</div>
+
+<%-- <div >
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div >
 		<h2>이벤트 게시판</h2>
@@ -64,7 +143,7 @@
 		</c:if>
 		<c:if test="${count > 0}">
 		<div>
-		<table>
+		<table class="table">
 			<tr>
 				<th>글번호</th>
 				<th>제목</th>
@@ -82,13 +161,13 @@
 			</tr>
 			</c:forEach>
 		</table>
-		<div>
+		<div class="text-center">
 			${page}
 		</div>
 		</div>
 		</c:if>
 	</div>
-</div>
+</div> --%>
 </body>
 </html>
 

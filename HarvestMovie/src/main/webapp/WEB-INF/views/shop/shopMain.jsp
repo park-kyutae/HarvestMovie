@@ -11,6 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div>
 		<%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
 		<section class="py-5 text-center container">
@@ -28,6 +29,7 @@
 			<div class="container-fluid">
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-8">
 					<c:forEach var="product" items="${productList}">
+					<input type="hidden" value="${product.pd_name}">
 					<div class="col pb-5">
 						<div class="card shadow-sm">
 							<a href="productDetail.do?pd_num=${product.pd_num}" class="">
@@ -55,7 +57,7 @@
 				</c:if>
 				<!-- 임시 마이페이지 로그인후에만 이용가능 -->
 				<div class="row">
-					<input type="button" class="btn btn-secondary my-2" value="myPage" onclick="location.href='productMyPage.do?mem_num=${member.mem_num}'">
+					<input type="button" class="btn btn-secondary my-2" value="임시myPage" onclick="location.href='productMyPage.do?mem_num=${mem_num}'">
 				</div>
 				<div class="row">
 					<input type="button" class="btn btn-secondary my-2" value="EVENT" onclick="location.href='shopEvent.do'">

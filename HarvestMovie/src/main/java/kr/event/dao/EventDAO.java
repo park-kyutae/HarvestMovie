@@ -1,14 +1,17 @@
 package kr.event.dao;
 
-import java.sql.Connection;    
+import java.sql.Connection;     
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 import kr.event.vo.EventFavVO;
+import kr.event.vo.EventReplyVO;
 import kr.event.vo.EventVO;
 import kr.util.DBUtil;
+import kr.util.DurationFromNow;
 import kr.util.StringUtil;
 
 public class EventDAO {
@@ -192,6 +195,7 @@ public class EventDAO {
 				event.setEvent_filename(rs.getString("event_filename"));
 				event.setMem_num(rs.getInt("mem_num"));
 				event.setId(rs.getString("id"));
+				event.setPhoto(rs.getString("mem_photo"));
 			}
 			
 		}catch(Exception e) {
@@ -461,11 +465,205 @@ public class EventDAO {
 	//내가 선택한 좋아요 목록
 	
 	//댓글 등록
+	public void insertEventReplyBoard(EventReplyVO eventReply) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn=DBUtil.getConnection();
+			//SQL문 작성
+			sql = "INSERT INTO event_reply (event_re_num, event_re_content, event_re_ip, mem_num, "
+					+ "event_board_num) VALUES (ereply_seq.nextval,?,?,?,?)";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setString(1, eventReply.getEvent_re_content());
+			pstmt.setString(2, eventReply.getEvent_re_ip());
+			pstmt.setInt(3, eventReply.getMem_num());
+			pstmt.setInt(4, eventReply.getEvent_board_num());
+			//SQL문 실행
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			//자원정리
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
 	//댓글 개수
+	public int getReplyEventCount(int event_board_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int count = 0;
+		
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "SELECT COUNT(*) FROM event_reply b JOIN member m ON"
+					+ " b.mem_num=m.mem_num WHERE b.event_board_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1,event_board_num);
+			//SQL문 실행
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			//자원정리
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return count;
+	}
+	
 	//댓글 목록
+	public List<EventReplyVO> getListReplyEvent(int start,int end,int event_board_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		List<EventReplyVO> list= null;
+		
+		try {
+			//커넥션풀로부터 커넥션을 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM "
+					+ "event_reply b JOIN member m USING (mem_num) WHERE "
+					+ "b.event_board_num=? ORDER BY b.event_re_num DESC)a) WHERE rnum>=? AND rnum<=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, event_board_num);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			//SQL문 실행
+			rs = pstmt.executeQuery();
+			list = new ArrayList<EventReplyVO>();
+			while(rs.next()) {
+				EventReplyVO reply = new EventReplyVO();
+				reply.setEvent_re_num(rs.getInt("event_re_num"));
+				//날짜 -> 1분전, 1시간전, 1일전 형식의 문자열로 반환
+				reply.setEvent_re_date(DurationFromNow.getTimeDiffLabel(rs.getString("event_re_date")));
+				if(rs.getString("event_re_modifydate")!=null) {
+					reply.setEvent_re_modifydate(DurationFromNow.getTimeDiffLabel
+							(rs.getString("event_re_modifydate")));
+				}
+				reply.setEvent_re_content(StringUtil.useBrNoHtml(rs.getString("event_re_content")));
+				reply.setEvent_board_num(rs.getInt("event_board_num"));
+				reply.setMem_num(rs.getInt("mem_num"));
+				reply.setId(rs.getString("id"));
+				
+				list.add(reply);
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			//자원정리
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		
+		return list;
+	}
+	
 	//댓글 상세
+	public EventReplyVO getReplyEvent(int event_re_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		EventReplyVO reply = null;
+		String sql = null;
+		
+		try {
+			//커넥션풀로부터 커넥션을 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "select * FROM event_reply WHERE event_re_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, event_re_num);
+			//SQL문 실행
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				reply=new EventReplyVO();
+				reply.setEvent_re_num(rs.getInt("event_re_num"));
+				reply.setMem_num(rs.getInt("mem_num"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			//자원 정리
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return reply;
+	}
+	
 	//댓글 수정
+	public void updateReplyEvent(EventReplyVO reply) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+
+		try {
+			//커넥션풀로부터 커넥션을 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "UPDATE event_reply SET event_re_content=?,"
+					+ "event_re_modifydate=SYSDATE,event_re_ip=? " 
+					+ "WHERE event_re_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터를 바인딩
+			pstmt.setString(1, reply.getEvent_re_content());
+			pstmt.setString(2, reply.getEvent_re_ip());
+			pstmt.setInt(3, reply.getEvent_re_num());
+			//SQL문 실행
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			//자원정리
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
 	//댓글 삭제
+	public void deleteReplyEvent(int event_re_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "DELETE FROM event_reply WHERE event_re_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, event_re_num);
+			//SQL문 실행
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 	
 }
 

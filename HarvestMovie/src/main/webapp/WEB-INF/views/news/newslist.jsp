@@ -20,6 +20,16 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/news.js"></script>
 <style type="text/css">
+#alink_red {
+	text-decoration: none;
+	color: red;
+	font-weight: bold;
+}
+#alink {
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}
 #atag {
   text-decoration: none;
   color: black;
@@ -74,7 +84,12 @@
 		<%--페이지 제목--%>
 		<%--최신글--%>
 		<div class="row d-flex justify-content-center">
-			<div class="col col-sm-9 my-2 d-flex justify-content-end">최신글 조회수</div>
+			<div class="col col-sm-9 my-2 d-flex justify-content-end">
+				<div class="col col-sm mx-1 d-flex justify-content-end">
+					<a href="${pageContext.request.contextPath}/news/newslist.do" id="alink_red" class="mx-2">최신글</a>
+					<a href="${pageContext.request.contextPath}/news/newslistview.do" id="alink">조회수</a>
+				</div>
+			</div>
 		</div>
 		<%--최신글--%>
 		<%--게시판 목록--%>
