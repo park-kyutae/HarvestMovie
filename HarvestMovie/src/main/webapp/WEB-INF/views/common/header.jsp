@@ -15,13 +15,11 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link active"
-					href="${pageContext.request.contextPath}/board/list.do">게시판</a></li>
-				<li class="nav-item"><a class="nav-link active"
-					href="${pageContext.request.contextPath}/shop/shopMain.do">굿즈스토어</a></li>
-				<li class="nav-item"><a class="nav-link active"
-					href="${pageContext.request.contextPath}/event/eventList.do">이벤트</a></li>
+					href="${pageContext.request.contextPath}/event/eventList.do">커뮤니티</a></li>
 				<li class="nav-item"><a class="nav-link active"
 					href="${pageContext.request.contextPath}/news/newslist.do">뉴스</a></li>
+				<li class="nav-item"><a class="nav-link active"
+					href="${pageContext.request.contextPath}/shop/shopMain.do">굿즈스토어</a></li>
 			</ul>
 		</div>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
