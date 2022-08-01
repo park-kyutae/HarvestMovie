@@ -27,7 +27,7 @@
 				<div class="text-center mt-5">
 				<h1>로그인</h1>
 				</div>
-				<div class="bg-light border border-secondary p-3 mt-2" style="height: 50px">
+				<div class="bg-light border border-secondary p-3 mt-2">
 			 <form class="navbar-form navbar-left" action="loginUser.do" method="post">
   			
 		<label for="exampleFormControlInput1" class="form-label">아이디</label>

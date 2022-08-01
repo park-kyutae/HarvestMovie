@@ -17,7 +17,8 @@
   <jsp:include page="/WEB-INF/views/member/common/mypage_sidebar.jsp"/>
   		<div class="col-9">	
   		<br>
-  		<h2>내 정보 수정</h2>
+  		<div class="col-8">
+  		<h2 class="d-inline">내 정보 수정</h2>
   		<form class="navbar-form navbar-left" action="modifyUser.do" method="post">
 					<label for="exampleFormControlInput1" class="form-label">아이디</label>
 					<input type="text" class="form-control" name="id" id="id" value="${user_id}" placeholder="아이디"> 
@@ -38,9 +39,10 @@
 					<label for="exampleFormControlInput1" class="form-label">우편번호</label>
 						<input type="text" class="form-control" name="zipcode" id="zipcode" value="${user_zip}" placeholder="우편번호">
 					</div>
-					<input type="cancle" class="form-control mt-2" value="취소">
+					<input type="button" class="form-control mt-2" value="취소">
 					<input type="submit" class="form-control bg-primary text-white mt-2" value="수정">
 				</form>
+				</div>
   		</div>
 
   	</div>

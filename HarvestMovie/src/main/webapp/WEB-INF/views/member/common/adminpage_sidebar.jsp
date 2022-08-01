@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="col sidebar">
+<div class="col-3 sidebar">
    <div class="p-3 mt-2" style="width: 280px;">
     <a href="${pageContext.request.contextPath}/member/adminPage.do" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>

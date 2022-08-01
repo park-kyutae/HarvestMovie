@@ -25,6 +25,7 @@
 			<div class="col-9 bd-content">
 				<br>
 				<h2>내 정보</h2>
+				<div class="col-9">
 				<table class="table" class="col-7">
 					<tbody>
 						<tr>
@@ -70,6 +71,7 @@
 						</tr>
 					</tbody>
 				</table>
+				</div>
 				
 				<div class="mt-3">
 				<h2 class="ma-3">내가 남긴 리뷰</h2>
