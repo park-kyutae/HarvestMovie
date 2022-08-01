@@ -23,7 +23,7 @@ console.log(${count})
 <div class="container-fluid">
   <div class="row flex-nowrap">
   <jsp:include page="/WEB-INF/views/member/common/adminpage_sidebar.jsp"/>
-  	<div>
+  	<div class="col-8 ma-3 pa-3">
 	<h2 class="text-start bg-light">상품관리</h2>
 	<div class="container fliud float-start">
 	<c:if test="${count} == 0">
