@@ -22,23 +22,29 @@
 			<jsp:include
 				page="/WEB-INF/views/member/common/adminpage_sidebar.jsp" />
 			<div class="col-7">
-				<h2 class="ma-3">${member.name}의 회원정보(관리자 전용)</h2>
+				<h2 class="ma-3">${member.name}님의 회원정보(관리자 전용)</h2>
 				<form action="detailUser.do" method="post" id="detail_form">
 					<input type="hidden" name="mem_num" value="${member.mem_num}">
 					<table class="table" class="col-7">
 						<tbody>
 							<tr>
 								<th scope="row">등급</th>
-								<td colspan="1"><c:if test="${member.auth != 9}">
-										<input class="form-check-input" type="radio" name="auth"
-											value="1" id="auth1"
-											<c:if test="${member.auth == 1}">checked</c:if> />정지
-									
-					<input class="form-check-input" type="radio" name="auth" value="2"
-											id="auth2" <c:if test="${member.auth == 2}">checked</c:if> />일반    
-					</c:if><c:if test="${member.auth == 9}">
-								<input type="radio" name="auth" value="3" id="auth3" checked>관리
-					</c:if></td>
+								<td colspan="1">
+									<c:if test="${member.auth != 9}">
+										<input class="form-check-input" type="radio" name="auth" value="1" id="auth1"
+											<c:if test="${member.auth == 1}">checked</c:if> />정지 
+										<input class="form-check-input" type="radio" name="auth" value="2" id="auth2" 
+											<c:if test="${member.auth == 2}">checked</c:if> />일반    
+										<input class="form-check-input" type="radio" name="auth" value="3" id="auth3" 
+											<c:if test="${member.auth == 3}">checked</c:if> />평론가 
+										<input class="form-check-input" type="radio" name="auth" value="4" id="auth4" 
+											<c:if test="${member.auth == 4}">checked</c:if> />기자  
+									</c:if>
+					
+									<c:if test="${member.auth == 9}">
+										<input type="radio" name="auth" value="3" id="auth3" checked>관리
+									</c:if>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">이름</th>

@@ -371,9 +371,9 @@ public class MemberDAO {
 				if (keyfield.equals("1"))
 					sub_sql = "WHERE id LIKE ?";
 				else if (keyfield.equals("2"))
-					sub_sql = "WHERE name LIKE ?";
+					sub_sql = "WHERE mem_name LIKE ?";
 				else if (keyfield.equals("3"))
-					sub_sql = "WHERE email LIKE ?";
+					sub_sql = "WHERE mem_email LIKE ?";
 			}
 
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM " + "(SELECT * FROM member m LEFT OUTER JOIN "
