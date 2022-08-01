@@ -27,7 +27,7 @@ public class DeleteUserAction implements Action{
 		//전송된 데이터 반환
 		String id = request.getParameter("id");
 		String email = request.getParameter("email");
-		String passwd = request.getParameter("passwd");
+		String passwd = request.getParameter("pw");
 		
 		//로그인한 아이디
 		String user_id = 

@@ -16,7 +16,8 @@
 <div class="container-fluid">
   <div class="row flex-nowrap">
   <jsp:include page="/WEB-INF/views/member/common/adminpage_sidebar.jsp"/>
-  	<div class="content-main">
+  	<div class="row">
+  	<div class="col-5">
 		<h2>${member.id}의 회원정보 (관리자 전용)</h2>
 		<form action="detailUser.do" method="post"
 		      id="detail_form">
@@ -57,6 +58,7 @@
 				</li>
 			</ul>    
 		</form>
+		</div>
 	</div>
   </div>
  </div>

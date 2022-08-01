@@ -222,7 +222,7 @@ public class MemberDAO {
 			// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
 			conn = DBUtil.getConnection();
 			// SQL문 작성
-			sql = "UPDATE member_detail SET passwd=? " + "WHERE mem_num=?";
+			sql = "UPDATE member_detail SET mem_pw=? " + "WHERE mem_num=?";
 
 			// JDBC 수행 3단계
 			pstmt = conn.prepareStatement(sql);
