@@ -38,7 +38,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark bg-red text-white">
+        <a href="${pageContext.request.contextPath}/member/deleteUserForm.do" class="nav-link link-dark bg-red">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           회원탈퇴
         </a>
