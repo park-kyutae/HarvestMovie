@@ -17,6 +17,7 @@
    crossorigin="anonymous"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/eventBoard.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/event.css" type="text/css">
 </head>
 <body>
@@ -25,7 +26,7 @@
 <div class="container">
 	<br><br><br><br>
     <div class="row">
-
+			
     	<h2>이벤트 게시판</h2>
     </div>
     <br><br>
@@ -38,14 +39,14 @@
 		</c:if>
 		<c:if test="${count > 0}">
 		<div>
-		<table class="table table-striped table-hover table-borderless">
+		<table class="table table-hover">
 		  <thead>
 			<tr style="border-bottom:7px solid #444">
-				<th scope="col">글번호</th>
+				<th scope="col" width=70px>글번호</th>
 				<th scope="col">제목</th>
-				<th scope="col">작성자</th>
-				<th scope="col">작성일</th>
-				<th scope="col">조회</th>
+				<th scope="col" width=70px>작성자</th>
+				<th scope="col" width=100px>작성일</th>
+				<th scope="col" width=100px>조회</th>
 			</tr>
 		   </thead>
 		   </tbody>
