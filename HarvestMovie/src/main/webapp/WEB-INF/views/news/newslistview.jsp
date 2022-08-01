@@ -86,8 +86,8 @@
 		<div class="row d-flex justify-content-center">
 			<div class="col col-sm-9 my-2 d-flex justify-content-end">
 				<div class="col col-sm mx-1 d-flex justify-content-end">
-					<a href="${pageContext.request.contextPath}/news/newslist.do" id="alink_red" class="mx-2">최신글</a>
-					<a href="${pageContext.request.contextPath}/news/newslistview.do" id="alink">조회수</a>
+					<a href="${pageContext.request.contextPath}/news/newslist.do" id="alink" class="mx-2">최신글</a>
+					<a href="${pageContext.request.contextPath}/news/newslistview.do" id="alink_red">조회수</a>
 				</div>
 			</div>
 		</div>
@@ -101,7 +101,7 @@
 		</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<c:forEach var="news" items="${list}">
+		<c:forEach var="news" items="${viewlist}">
 		<div class="row d-flex justify-content-center my-3">
 		<c:if test="${empty news.news_photo}">
 			<div class="col col-sm-2" id="news_photo_main">
