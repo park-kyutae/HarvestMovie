@@ -20,6 +20,12 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
+        <a href="${pageContext.request.contextPath}/shop/productMyPage.do" class="nav-link link-dark" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          구매 목록
+        </a>
+      </li>	
+      <li class="nav-item">
         <a href="#" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           내가 남긴 리뷰
