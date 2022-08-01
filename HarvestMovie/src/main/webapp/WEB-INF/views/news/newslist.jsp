@@ -19,6 +19,44 @@
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/news.js"></script>
+<style type="text/css">
+#atag {
+  text-decoration: none;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 500px;
+  height: 30px;
+  font-weight: bold;
+  display: block;
+  font-size: 16pt;
+}
+#acon {
+  text-decoration: none;
+  color: gray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 500px;
+  height: 20px;
+  font-weight: bold;
+  display: block;
+  font-size: 10pt;
+}
+#news_photo_main{
+	width:255px;
+    height:144px;
+    overflow:hidden;
+    margin:0;
+}
+
+#news_photo{
+	width:100%;
+    height:100%;
+    object-fit:cover;
+}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -29,18 +67,15 @@
 		<%--영화 뉴스 목록 시작--%>
 		<%--페이지 제목--%>
 		<div class="row d-flex justify-content-center">
-			<div class="col col-sm-9">
+			<div class="col col-sm-9 my-5">
 				<h2>영화 뉴스</h2>
 			</div>
 		</div>
 		<%--페이지 제목--%>
 		<%--최신글--%>
 		<div class="row d-flex justify-content-center">
-			<div class="col col-sm-9 d-flex justify-content-end">최신글 조회수</div>
+			<div class="col col-sm-9 my-2 d-flex justify-content-end">최신글 조회수</div>
 		</div>
-		<div class="row d-flex justify-content-center">
-			<br>
-			</div>
 		<%--최신글--%>
 		<%--게시판 목록--%>
 		<c:if test="${count == 0}">
@@ -50,34 +85,37 @@
 			</div>
 		</div>
 		</c:if>
-		<div class="row d-flex justify-content-center">
-			<br>
-		</div>
 		<c:if test="${count > 0}">
-		<c:forEach var="news" items="${newsList}">
-		<div class="row d-flex justify-content-center">
-			<div class="col col-sm-2 overflow-visible">
-				<img src="${pageContext.request.contextPath}/upload/${news.news_photo}"
-					width="100" height="100">
+		<c:forEach var="news" items="${list}">
+		<div class="row d-flex justify-content-center my-3">
+		<c:if test="${empty news.news_photo}">
+			<div class="col col-sm-2" id="news_photo_main">
+					<a href="newsDetail.do?news_num=${news.news_num}"><img src="${pageContext.request.contextPath}/images/blank.png" class="rounded img-fluid" id="news_photo"></a>
 			</div>
-			<div class="col col-sm-6">
+		</c:if>
+		<c:if test="${!empty news.news_photo}">
+			<div class="col col-sm-2" id="news_photo_main">
+					<a href="newsDetail.do?news_num=${news.news_num}"><img src="${pageContext.request.contextPath}/upload/${news.news_photo}" class="rounded img-fluid" id="news_photo"></a>
+			</div>
+		</c:if>
+			<div class="col col-sm-5">
 				<div class="row">
-					<div class="col "><a href="newsDetail.do?news_num=${news.news_num}">${news.news_title}</a></div>
+					<div class="col col-sm"><a href="newsDetail.do?news_num=${news.news_num}" id="atag">${news.news_title}</a></div>
 				</div>
 				<div class="row">
-					<div class="col ">${news.news_date}</div>
+					<div class="col text-muted"><a href="newsDetail.do?news_num=${news.news_num}" id="acon">${news.news_content}</a></div>
+				</div>
+				<div class="row">
+					<div class="col" style="font-size: 10pt; color: gray">${news.news_date}</div>
 				</div>
 			</div>
-			<div class="col col-sm-1">
+			<div class="col col-sm-2">
 				<div class="row ">
 					<div class="col d-flex justify-content-center">${news.news_hit}</div>
 				</div>
 			</div>
 			</div>
 			
-			<div class="row d-flex justify-content-center">
-			<br>
-			</div>
 			</c:forEach>
 			</c:if>
 			
@@ -87,20 +125,20 @@
 			<div class="row d-flex justify-content-center">
 				<div class="col d-flex justify-content-center">${page}</div>
 			</div>
-			<div class="row d-flex justify-content-center">
-			<div class="col col-sm-9">
-				<div class="col d-flex justify-content-end">
-				<c:if test="${!empty user_num}">
-					<input type="button" value="작성"
-						onclick="location.href='newsWriteForm.do'" class="col col-sm-1 btn btn-secondary btn-sm mx-1">
-				</c:if>  
-					<input type="button" value="목록"
-						onclick="location.href='newslist.do'" class="col col-sm-1 btn btn-secondary btn-sm mx-1">
-					<input type="button" value="홈으로"
-						onclick="location.href='${pageContext.request.contextPath}/main/main.do'"
-						class="col col-sm-1 btn btn-secondary btn-sm mx-1">
+			<div class="row d-flex justify-content-center my-3">
+				<div class="col col-sm-9">
+					<div class="col d-flex justify-content-end">
+					<c:if test="${user_num >3}">
+						<input type="button" value="작성"
+							onclick="location.href='newsWriteForm.do'" class="col col-sm-1 btn btn-secondary btn-sm mx-1">
+					</c:if>  
+						<input type="button" value="목록"
+							onclick="location.href='newslist.do'" class="col col-sm-1 btn btn-secondary btn-sm mx-1">
+						<input type="button" value="홈으로"
+							onclick="location.href='${pageContext.request.contextPath}/main/main.do'"
+							class="col col-sm-1 btn btn-secondary btn-sm mx-1">
+					</div>
 				</div>
-			</div>
 			</div>
 			<div class="row d-flex justify-content-center">
 			<br>

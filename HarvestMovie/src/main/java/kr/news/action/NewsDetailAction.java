@@ -25,9 +25,9 @@ public class NewsDetailAction implements Action{
 		//HTML를 허용하지 않음
 		board.setNews_title(StringUtil.useNoHtml(board.getNews_title()));
 		//HTML를 허용하지 않으면서 줄바꿈 처리
-		board.setNews_content(StringUtil.useNoHtml(board.getNews_content()));
+		board.setNews_content(StringUtil.useBrNoHtml(board.getNews_content()));
 		
-		request.setAttribute("board", board);
+		request.setAttribute("news", board);
 		
 		return "/WEB-INF/views/news/newsDetail.jsp";
 	}
