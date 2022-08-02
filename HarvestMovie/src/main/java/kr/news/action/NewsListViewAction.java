@@ -28,6 +28,7 @@ public class NewsListViewAction implements Action{
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,
 				Integer.parseInt(pageNum),count,6,10,"newslistview.do");
+
 		
 		List<NewsVO> viewlist = null;
 		if(count > 0) {

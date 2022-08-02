@@ -1,277 +1,186 @@
-$(function(){
-	let currentPage;
-	let count;
-	let rowCount;
-	
-	//댓글 목록
-	function selectList(pageNum){
-		currentPage = pageNum;
-		
-		//로딩 이미지 노출
-		$('#loading').show();
-		
-		$.ajax({
-			url:'newsListReply.do',
-			type:'post',
-			data:{pageNum:pageNum,news_num:$('#news_num').val()},
-			dataType:'json',
-			cache:false,
-			timeout:30000,
-			success:function(param){
-				//로딩 이미지 감추기
-				$('#loading').hide();
-				count = param.count;
-				rowCount = param.rowCount;
-				
-				if(pageNum == 1){
-					//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
-					$('#output').empty();
-				};
-				
-				$(param.list).each(function(index,item){
-					let output = '<div class="item">';
-					output += '<h4>' + item.id +'</h4>';
-					output += '<div class="sub-item">';
-					output += '<p>' + item.news_re_content + '</p>';
-					
-					if(item.news_re_modifydate){
-						output += '<span class="modify-date">최근 수정일 : ' + item.news_re_modifydate + '</span>'; 
-					}else{
-						output += '<span class="modify-date">등록일 : ' + item.news_re_date + '</span>';
-					};
-					
-					//로그인한 회원번호와 작성자의 회원번호 일치 여부 체크
-					if(param.user_num == item.mem_num){
-						output += ' <input type="button" data-renum="'+item.news_re_num+'" value="수정" class="modify-btn btn btn-primary btn-sm">';
-						output += ' <input type="button" data-renum="'+item.news_re_num+'" value="삭제" class="delete-btn btn btn-danger btn-sm">';
-					}
-					
-					
-					output += '</div>';
-					output += '</div>';
-					output += '<hr size="1" noshade width="100%">';
-					
-					//문서 객체에 추가
-					$('#output').append(output);
-				});//end of each
-				
-				//page button 처리
-				if(currentPage>=Math.ceil(count/rowCount)){
-					//다음 페이지가 없음
-					$('.paging-button').hide();
-				}else{
-					//다음 페이지가 존재
-					$('.paging-button').show();
-				}
-				
-			},
-			error:function(){
-				$('#loading').hide();
-				alert('네트워크 오류 발생');
-			}
-		});
-		
-	}
-	
-	//페이지 처리 이벤트 연결(다음 댓글 보기 버튼 클릭시 데이터 추가)
-	$('.paging-button input').click(function(){
-		selectList(currentPage + 1);
-	});
-	
-	//댓글 등록
-	$('#re_form').submit(function(event){
-		if($('#news_re_content').val().trim()==''){
-			alert('내용을 입력하세요!');
-			$('#news_re_content').val('').focus();
-			return false;
-		}
-		
-		//form 이하의 태그에 입력한 데이터를 모두 읽어옴
-		let form_data = $(this).serialize();
-		
-		//댓글 등록을 위한 서버 프로그램 연동
-		$.ajax({
-			url:'newsWriteReply.do',
-			type:'post',
-			data:form_data,
-			dataType:'json',
-			cache:false,
-			timeout:30000,
-			success:function(param){
-				if(param.result == 'logout'){
-					alert('로그인해야 작성할 수 있습니다.');
-				}else if(param.result == 'success'){
-					//폼 초기화
-					initForm();
-					//댓글 작성이 성공하면 새로 삽입한 글을 포함해서
-					//첫번째 페이지의 게시글을 다시 호출함
-					selectList(1);
-				}
-			},
-			error:function(){
-				alert('네트워크 오류 발생');
-			}
-		});
-		
-		//기본 이벤트 제거
-		event.preventDefault();
-	});
-	
-	//댓글 작성 폼 초기화
-	function initForm(){
-		$('textarea').val('');
-		$('#re_first .letter-count').text('300/300');
-	}
-	
-	//textarea에 내용 입력시 글자수 체크
-	$(document).on('keyup','textarea',function(){
-		//입력한 글자수 구함
-		let inputLength = $(this).val().length;
-		
-		if(inputLength > 300){//300자를 넘어선 경우
-			$(this).val($(this).val().substring(0,300));
-		}else{//300자 이하인 경우
-			let remain = 300 - inputLength;
-			remain += '/300';
-			if($(this).attr('id') == 'news_re_content'){//등록
-				//등록폼 글자수 처리
-				$('#re_first .letter-count').text(remain);
-			}else{//수정
-				//수정폼 글자수 처리
-				$('#mre_first .letter-count').text(remain);
-			}
-		}
-	});
-	
-	//댓글 수정 버튼 클릭시 수정폼 노출
-	$(document).on('click','.modify-btn',function(){
-		//댓글 번호
-		let news_re_num = $(this).attr('data-renum');
-		
-		//댓글 내용
-		let content = $(this).parent().find('p').html().replace(/<br>/gi,'\n');
-		                                          //g:지정문자열 모두,i:대소문자 무시
-		//댓글 수정폼 UI
-		let modifyUI = '<form id="mre_form">';
-		modifyUI += '<input type="hidden" name="news_re_num" id="mre_num" value="'+news_re_num+'">';
-		modifyUI += '<textarea rows="3" cols="50" style="resize: none;" name="news_re_content" id="mre_content" class="rep-content form-control">'+content+'</textarea>';
-		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
-		modifyUI += '<div id="mre_second" class="align-right">';
-		modifyUI += ' <input type="submit" value="수정" class="btn btn-primary btn-sm">';
-		modifyUI += ' <input type="button" value="취소" class="re-reset btn btn-dark btn-sm">';
-		modifyUI += '</div>';
-		modifyUI += '<hr size="1" noshade width="96%">';
-		modifyUI += '</form>';
-		
-		//이전에 이미 수정하는 댓글이 있을 경우 수정버튼을 클릭하면
-		//숨김 sub-item을 환원시키고 수정폼을 초기화함
-		initModifyForm();
-		
-		//지금 클릭해서 수정하고자 하는 데이터는 감추기
-		//수정버튼을 감싸고 있는 div
-		$(this).parent().hide();
-		
-		//수정폼을 수정하고자 하는 데이터가 있는 div에 노출
-		$(this).parents('.item').append(modifyUI);
-		
-		//입력한 글자수 셋팅
-		let inputLength = $('#mre_content').val().length;
-		let remain = 300 - inputLength;
-		remain += '/300';
-		
-		//문서 객체에 반영
-		$('#mre_first .letter-count').text(remain);
-		
-	});
-	
-	//수정폼에서 취소 버튼 클릭시 수정폼 초기화
-	$(document).on('click','.re-reset',function(){
-		initModifyForm();
-	});
-	
-	//댓글 수정 폼 초기화
-	function initModifyForm(){
-		$('.sub-item').show();
-		$('#mre_form').remove();
-	};
-	
-	//댓글 수정
-	$(document).on('submit','#mre_form',function(event){
-		if($('#mre_content').val().trim()==''){
-			alert('내용을 입력하세요!');
-			$('#mre_content').val('').focus();
-			return false;
-		};
-		
-		//폼에 입력한 데이터 반환
-		let form_data = $(this).serialize();
-		
-		//댓글 수정을 위한 서버 프로그램 연동
-		$.ajax({
-			url:'newsUpdateReply.do',
-			type:'post',
-			data:form_data,
-			dataType:'json',
-			cache:false,
-			timeout:30000,
-			success:function(param){
-				if(param.result == 'logout'){
-					alert('로그인해야 수정할 수 있습니다.');
-				}else if(param.result == 'success'){
-					$('#mre_form').parent().find('p').html($('#mre_content').val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'));
-					$('#mre_form').parent().find('.modify-date').text('최근 수정일 : 5초미만');
-					//수정폼 삭제 및 초기화
-					initModifyForm();
-				}else if(param.result == 'wrongAccess'){
-					alert('타인의 글을 수정할 수 없습니다');
-				}else{
-					alert('수정 오류 발생');
-				};
-			},
-			error:function(){
-				alert('네크워크 오류 발생!');
-			}
-		});
-		
-		//기본 이벤트 제거
-		event.preventDefault();
-	});
-	
-	//댓글 삭제
-	$(document).on('click','.delete-btn',function(){
-		//댓글 번호
-		let re_num = $(this).attr('data-renum');
-		
-		$.ajax({
-			url:'newsDeleteReply.do',
-			type:'post',
-			data:{news_re_num:re_num},
-			dataType:'json',
-			cache:false,
-			timeout:30000,
-			success:function(param){
-				if(param.result == 'logout'){
-					alert('로그인해야 삭제할 수 있습니다.');
-				}else if(param.result == 'success'){
-					alert('삭제 완료');
-					selectList(1);
-				}else if(param.result == 'wrongAccess'){
-					alert('타인의 글을 삭제할 수 없습니다.');
-				}else{
-					alert('삭제시 오류 발생!');
-				}
-			},
-			error:function(){
-				alert('네트워크 오류 발생!');
-			}
-		});
-		
-	});
-	
-	//초기 데이터(목록) 호출
-	selectList(1);
-	
-});
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>영화 뉴스</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/news.js"></script>
+<style type="text/css">
+#alink_red {
+	text-decoration: none;
+	color: red;
+	font-weight: bold;
+}
+#alink {
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}
+#main_link {
+	text-decoration: none;
+	color: black;
+}
+#atag {
+  text-decoration: none;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 500px;
+  height: 30px;
+  font-weight: bold;
+  display: block;
+  font-size: 16pt;
+}
+#acon {
+  text-decoration: none;
+  color: gray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 500px;
+  height: 20px;
+  font-weight: bold;
+  display: block;
+  font-size: 10pt;
+}
+#news_photo_main{
+	width:255px;
+    height:144px;
+    overflow:hidden;
+    margin:0;
+}
 
+#news_photo{
+	width:100%;
+    height:100%;
+    object-fit:cover;
+}
+</style>
+</head>
+<body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<div class="container">
+		<%--상단바 시작--%>
+			<%--상단바 끝--%>
 
+		<%--영화 뉴스 목록 시작--%>
+		<%--페이지 제목--%>
+		<div class="row d-flex justify-content-center">
+			<div class="col col-sm-9 my-5">
+				<h2><a href="${pageContext.request.contextPath}/news/newslist.do" id="main_link">영화 뉴스</a></h2>
+			</div>
+		</div>
+		<%--페이지 제목--%>
+		<%--최신글--%>
+		<div class="row d-flex justify-content-center">
+			<div class="col col-sm-9 my-2 d-flex justify-content-end">
+				<div class="col col-sm mx-1 d-flex justify-content-end">
+					<a href="${pageContext.request.contextPath}/news/newslist.do" id="alink" class="mx-2">최신글</a>
+					<a href="${pageContext.request.contextPath}/news/newslistview.do" id="alink_red">조회수</a>
+				</div>
+			</div>
+		</div>
+		<%--최신글--%>
+		<%--게시판 목록--%>
+		<c:if test="${count == 0}">
+		<div class="row">
+			<div class="col d-flex justify-content-center">
+					표시할 게시물이 없습니다.
+			</div>
+		</div>
+		</c:if>
+		<c:if test="${count > 0}">
+		<c:forEach var="news" items="${viewlist}">
+		<div class="row d-flex justify-content-center my-3">
+		<c:if test="${empty news.news_photo}">
+			<div class="col col-sm-2" id="news_photo_main">
+					<a href="newsDetail.do?news_num=${news.news_num}"><img src="${pageContext.request.contextPath}/images/blank.png" class="rounded img-fluid" id="news_photo"></a>
+			</div>
+		</c:if>
+		<c:if test="${!empty news.news_photo}">
+			<div class="col col-sm-2" id="news_photo_main">
+					<a href="newsDetail.do?news_num=${news.news_num}"><img src="${pageContext.request.contextPath}/upload/${news.news_photo}" class="rounded img-fluid" id="news_photo"></a>
+			</div>
+		</c:if>
+			<div class="col col-sm-5">
+				<div class="row">
+					<div class="col col-sm"><a href="newsDetail.do?news_num=${news.news_num}" id="atag">${news.news_title}</a></div>
+				</div>
+				<div class="row">
+					<div class="col text-muted"><a href="newsDetail.do?news_num=${news.news_num}" id="acon">${news.news_content}</a></div>
+				</div>
+				<div class="row">
+					<div class="col" style="font-size: 10pt; color: gray">${news.news_date}</div>
+				</div>
+			</div>
+			<div class="col col-sm-2">
+				<div class="col d-flex justify-content-center">
+					<img src="${pageContext.request.contextPath}/images/eye-fill.svg" class="mx-2">
+					${news.news_hit}
+					</div>
+			</div>
+			</div>
+			
+			</c:forEach>
+			</c:if>
+			
+			<%--게시판 목록--%>
+			<%--영화 뉴스 목록 끝--%>
 
+			<div class="row d-flex justify-content-center">
+				<div class="col d-flex justify-content-center">${page}</div>
+			</div>
+			<div class="row d-flex justify-content-center my-3">
+				<div class="col col-sm-9">
+					<div class="col d-flex justify-content-end">
+					<c:if test="${user_num >3}">
+						<input type="button" value="작성"
+							onclick="location.href='newsWriteForm.do'" class="col col-sm-1 btn btn-secondary btn-sm mx-1">
+					</c:if>  
+						<input type="button" value="목록"
+							onclick="location.href='newslist.do'" class="col col-sm-1 btn btn-secondary btn-sm mx-1">
+						<input type="button" value="홈으로"
+							onclick="location.href='${pageContext.request.contextPath}/main/main.do'"
+							class="col col-sm-1 btn btn-secondary btn-sm mx-1">
+					</div>
+				</div>
+			</div>
+			<div class="row d-flex justify-content-center">
+			<br>
+			</div>
+			<div class="row d-flex justify-content-center">
+			<div class="col col-sm-9">
+				<form id="search_form" action="newslist.do" method="get" class="d-flex justify-content-center">
+				<ul class="list-group list-group-horizontal" >
+					<li class="list-group-item">
+						<select name="keyfield" class="form-select form-select-sm">
+							<option value="1">제목</option>
+							<option value="2">작성자</option>
+							<option value="3">내용</option>
+						</select>
+					</li>
+					<li class="list-group-item"><input type="search" size="16" name="keyword" id="keyword"
+						value="${param.keyword}" class="form-control form-control-sm"></li>
+					<li class="list-group-item "><input type="submit" value="검색" class="btn btn-secondary btn-sm"></li>
+				</ul>
+			</form>
+			</div>
+			</div>
+		</div>
+</body>
+</html>

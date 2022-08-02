@@ -50,22 +50,22 @@
 					<label for="exampleFormControlInput1" class="form-label">이메일</label> 
 					<input type="email" class="form-control" name="email" id="email" placeholder="이메일">
 
+					<div class="row">
+					<div class="col-sm-6">
+					<label for="exampleFormControlInput1" class="form-label">우편번호</label>
+						<input type="text" class="form-control" name="zipcode" id="zipcode" readonly onclick="sample2_execDaumPostcode()" placeholder="우편번호">
+					</div>
+					<div class="col-sm-6 mt-2">
+					<br>
+						<label class="form-label">*클릭시 주소 검색</label>
+					</div>
+					</div>
 					<label for="exampleFormControlInput1" class="form-label">주소</label>
-					<input type="text" class="form-control" name="addr1" id="addr1" onclick="sample2_execDaumPostcode()" placeholder="주소">					
+					<input type="text" class="form-control" name="addr1" id="addr1" readonly placeholder="주소">					
 					
 					<label for="exampleFormControlInput1" class="form-label">상세주소</label>
 					<input type="text" class="form-control" name="addr2" id="addr2"	placeholder="상세주소">
-					
-					<div class="col-md-6">
-					<label for="exampleFormControlInput1" class="form-label">우편번호</label>
-						<input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="우편번호">
-					</div>
-					<div class="form-check">
- 					 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  					 <label class="form-check-label" for="flexCheckDefault">
-  						 약관에 동의
-					  </label>
-					</div>
+			
 					<input type="submit" class="form-control bg-primary text-white mt-2" value="회원 등록">
 				</form>
 				</div>
