@@ -156,18 +156,18 @@
                     <c:forEach var="reviewVO" items="${reviewVOList}">
                         <div class="col  rounded mx-3" style="background: #f2f2f2">
                             <div class="row">
-                                <div class="col col-sm-3 ratio" style="--bs-aspect-ratio: 17%">
-                                    <div class="mx-3 my-2" style="font-size: 110%">
+                                <div class="col col-sm-3">
+                                    <div class="mx-3 py-3" style="font-size: 110%" >
                                             ${reviewVO.mem_name}<c:if test="${reviewVO.isCritic == 'true'}"><img
                                             src="${pageContext.request.contextPath}/images/critic.svg"
                                             class="ratio-1x1 align-self-auto mx-1" height="57%">
-                                        </c:if>
+                                                </c:if>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col ratio border-top border-secondary" style="--bs-aspect-ratio: 90%">
-                                    <span class="fs-6 mx-3 mt-1">${reviewVO.review_message}</span>
+                                <div class="col ratio border-top border-secondary border-2" style="--bs-aspect-ratio: 90%">
+                                    <span class="fs-6 text-break px-4 mt-1">${reviewVO.review_message}</span>
                                 </div>
                             </div>
                         </div>

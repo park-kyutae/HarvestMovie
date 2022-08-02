@@ -59,12 +59,7 @@
                 <div class="col">
                     <span class="fw-bolder fs-3">평점 순위</span>
                 </div>
-                <c:if test="${memberVO.auth == 9 }">
-                        <div class="col col-sm-2">
-                            <div><input type="button" value="영화 작성" onclick="location.href='/movie/movieWriteForm.do'"
-                                        class="form-control"></div>
-                        </div>
-                </c:if>
+
             </div>
             <div class="row g-3">
                 <c:forEach var="ratingVO" items="${ratingVOList}">

@@ -7,16 +7,21 @@ import kr.movie.dao.MovieDAO;
 import kr.movie.review.dao.ReviewDAO;
 import kr.movie.review.vo.ReviewVO;
 import kr.movie.vo.MovieVO;
+import kr.util.DBUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class MovieDetailAction implements Action {
-    private static final int REVIEW_COUNT=3;//가져올 리뷰 개수
+    private static final int REVIEW_COUNT = 3;//가져올 리뷰 개수
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
@@ -29,9 +34,9 @@ public class MovieDetailAction implements Action {
         MovieVO movieVO = movieDAO.getMovieDetail(mv_num);
 
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
-        List<ReviewVO> reviewVOList = reviewDAO.getReviewList(mv_num,REVIEW_COUNT);
+        List<ReviewVO> reviewVOList = reviewDAO.getReviewList(mv_num, REVIEW_COUNT);
         List<String> memNameList = new ArrayList<>();
-        for (String memName: memNameList ) {
+        for (String memName : memNameList) {
             memNameList.add(memName);
         }
 
@@ -42,10 +47,10 @@ public class MovieDetailAction implements Action {
         }
 
 
-        request.setAttribute("memberVO",memberVO);
+        request.setAttribute("memberVO", memberVO);
 
-        request.setAttribute("movieVO",movieVO);
-        request.setAttribute("reviewVOList",reviewVOList);
+        request.setAttribute("movieVO", movieVO);
+        request.setAttribute("reviewVOList", reviewVOList);
         return "/WEB-INF/views/movie/movieDetail.jsp";
     }
 }

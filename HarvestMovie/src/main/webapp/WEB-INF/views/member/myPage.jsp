@@ -89,65 +89,17 @@
 
 				<div class="mt-3">
 					<h2 class="ma-3">내가 남긴 리뷰</h2>
-					<c:if test="${count == 0}">
-						<div>표시할 내용이 없습니다.</div>
-					</c:if>
-					<c:if test="${count > 0}">
-						<div class="ma-3 pa-3">
-							<table class="table ma-3">
-								<tr>
-									<th>ID</th>
-									<th>이름</th>
-									<th>이메일</th>
-									<th>가입일</th>
-									<th>등급</th>
-								</tr>
-								<c:forEach var="reviewVO" items="${list}">
-									<tr>
-										<td><c:if test="${reviewVO.auth > 0}">
-												<a href="detailUserForm.do?mem_num=${member.mem_num}"
-													style="text-decoration: none">${member.id}</a>
-											</c:if> <c:if test="${member.auth == 0}">${member.id}</c:if>
-											</td>
-										<td>${member.name}</td>
-										<td>${member.email}</td>
-										<td>${member.reg_date}</td>
-										<td><c:if test="${member.auth == 0}">탈퇴</c:if> <c:if
-												test="${member.auth == 1}">정지</c:if> <c:if
-												test="${member.auth == 2}">일반</c:if> <c:if
-												test="${member.auth == 3}">평론가</c:if> <c:if
-												test="${member.auth == 4}">기자</c:if> <c:if
-												test="${member.auth == 9}">관리</c:if></td>
-									</tr>
-								</c:forEach>
-							</table>
+                    <c:forEach var="reviewVO" items="${reviewVOList}">
+                            <div class="row mb-3">
+                                <div class="card col col-sm-10">
+                                    <div class="card-body pb-5">
+                                        <h5 class="card-title">${reviewVO.mv_title}</h5>
+                                        <p class="card-text">${reviewVO.review_message}</p>
+                                    </div>
+                                </div>
+                            </div>
+                    </c:forEach>
 						</div>
-					</c:if>
-					<div class="col-12 d-flex justify-content-center">${page}</div>
-					<form id="search_form" action="adminpage.do" method="get">
-						<ul>
-							<li>
-								<div class="col-2">
-									<select class="form-select" name="keyfield">
-										<option value="1">ID</option>
-										<option value="2">이름</option>
-										<option value="3">email</option>
-									</select>
-								</div>
-							</li>
-							<li>
-								<div class="col-3">
-									<input class="form-control" type="search" size="16"
-										name="keyword" id="keyword" value="${param.keyword}">
-								</div>
-							</li>
-							<li>
-								<div class="col-1">
-									<input class="btn btn-primary" type="submit" value="찾기">
-								</div>
-							</li>
-						</ul>
-					</form>
 					<div class="list-space align-right">
 						<input class="btn btn-primary" type="button" value="목록"
 							onclick="location.href='adminpage.do'"> <input
