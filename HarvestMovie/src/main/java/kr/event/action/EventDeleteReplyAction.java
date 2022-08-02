@@ -33,10 +33,12 @@ public class EventDeleteReplyAction implements Action{
 				HttpSession session = request.getSession();
 				Integer user_num = 
 						(Integer)session.getAttribute("user_num");
+				Integer user_auth= 
+						(Integer)session.getAttribute("user_auth");
 				if(user_num==null) {//로그인이 되지 않은 경우
 					mapAjax.put("result", "logout");
 				}else if(user_num!=null 
-						&& user_num == db_reply.getMem_num()) {
+						&& user_num == db_reply.getMem_num() || user_auth == 9) {
 					//로그인 회원번호와 작성자 회원번호 일치
 					dao.deleteReplyEvent(event_re_num);
 					

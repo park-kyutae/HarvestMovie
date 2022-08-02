@@ -23,7 +23,7 @@
 <body>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<div class="container">
+<div class="container col-md-7">
 	<br><br><br><br>
     <div class="row">
 			
@@ -47,6 +47,7 @@
 				<th scope="col" width=70px>작성자</th>
 				<th scope="col" width=100px>작성일</th>
 				<th scope="col" width=100px>조회</th>
+				<!-- <th scope="col" width=70px>추천</th> -->
 			</tr>
 		   </thead>
 		   </tbody>
@@ -57,6 +58,7 @@
 				<td>${event.id}</td>
 				<td>${event.event_reg_date}</td>
 				<td>${event.event_hit}</td>
+				<!-- <td>숫자</td> -->
 			</tr>
 			</c:forEach>
 			</tbody>
@@ -68,12 +70,12 @@
         <div class="col-xs-4">
         	<div >
 		    <c:if test="${!empty user_num}">
-			<input type="button" value="글쓰기" class="btn btn-dark"
+			<input type="button" value="글쓰기" class="btn btn-dark btn-sm"
 			   onclick="location.href='eventWriteForm.do'">
 		 	</c:if>  
-			<input type="button" value="목록" class="btn btn-dark"
+			<input type="button" value="목록" class="btn btn-dark btn-sm"
 			       onclick="location.href='eventList.do'"> 
-			<input type="button" value="홈으로" class="btn btn-dark"
+			<input type="button" value="홈으로" class="btn btn-dark btn-sm"
 			 onclick="location.href='${pageContext.request.contextPath}/main/main.do'">        
 			 <div class="row-end float-end">  
         
@@ -88,7 +90,7 @@
 					<input type="search" size="16" 
 					  name="keyword" value="${param.keyword}">
 					 
-					<input type="submit" class="btn btn-dark" value="검색">
+					<input type="submit" class="btn btn-dark btn-sm" value="검색">
 		</form>
         
     </div> 
