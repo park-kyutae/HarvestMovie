@@ -5,6 +5,7 @@ $(function () {
         return location.href.substring(hostIndex, location.href.indexOf('/'));
     }
 
+    var curr_rating=0;
     function get_rating() {
         $.ajax({
             url: 'movieGetRating.do',
@@ -22,7 +23,7 @@ $(function () {
                     if (index % 1 == 0.5 && index < param.mv_rating) {
                         $(this).attr('src', ctx + '/images/star_reverse.png');
 
-                    } else if (index < param.mv_rating && index < param.mv_rating) {
+                    } else if (index %1 ==0&& index < param.mv_rating) {
                         $(this).attr('src', ctx + '/images/star.png');
 
                     } else if (index % 1 == 0.5) {
@@ -36,7 +37,7 @@ $(function () {
                 })
 
 
-                mv_rating = param.mv_rating;
+                curr_rating = param.mv_rating;
 
             },
             error: function (request, status, error) {
@@ -66,10 +67,11 @@ $(function () {
             success: function (param) {
                 if (param.isSuccess == 'false') {
                     alert('오류 발생')
-                }else if (param.isSuccess == 'try_login') {
+                } else if (param.isSuccess == 'try_login') {
                     alert('로그인이 필요합니다.');
                 } else {
                     get_rating();
+                    curr_rating = rating;
                 }
 
             },
@@ -128,7 +130,7 @@ $(function () {
 
                 if (param.isSuccess == 'false') {
                     alert('오류 발생');
-                }else if (param.isSuccess == 'try_login') {
+                } else if (param.isSuccess == 'try_login') {
                     alert('로그인이 필요합니다.');
                 } else {
                     get_will_watch();
@@ -144,6 +146,52 @@ $(function () {
             }
         });
     })
+
+    $('.mv_star').hover(function () {
+        var ctx = getContextPath();
+        let id = $(this).attr('id')-0.5;
+        let index = 0;
+        $('.mv_star').each(function () {
+            if (index % 1 == 0 && index > id) {
+                $(this).attr('src', ctx + '/images/star_blank.png');
+
+            } else if (index%1==0.5  && index > id) {
+                $(this).attr('src', ctx + '/images/star_blank_reverse.png');
+
+            } else if (index % 1 == 0) {
+                $(this).attr('src', ctx + '/images/star.png');
+
+            } else {
+                $(this).attr('src', ctx + '/images/star_reverse.png');
+
+            }
+            index += 0.5;
+        })
+
+
+    }, function () {
+        var ctx = getContextPath();
+
+        let index = 0;
+        $('.mv_star').each(function () {
+            if (index % 1 == 0 && index < curr_rating) {
+                $(this).attr('src', ctx + '/images/star.png');
+
+            } else if (index%1 == 0.5 && index < curr_rating) {
+                $(this).attr('src', ctx + '/images/star_reverse.png');
+
+            } else if (index % 1 == 0) {
+                $(this).attr('src', ctx + '/images/star_blank.png');
+
+            } else {
+                $(this).attr('src', ctx + '/images/star_blank_reverse.png');
+
+            }
+            index += 0.5;
+        })
+    })
+
+
 
 
 })

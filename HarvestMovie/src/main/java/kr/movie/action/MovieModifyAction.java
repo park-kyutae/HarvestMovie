@@ -17,7 +17,7 @@ public class MovieModifyAction implements Action {
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         Integer user_auth = (Integer) session.getAttribute("user_auth");
-        int mv_num = Integer.parseInt(request.getParameter("mv_num"));
+
         if (user_auth ==null) {
             request.setAttribute("result","try_login");
             return "/WEB-INF/views/movie/movieResult.jsp";
@@ -39,6 +39,7 @@ public class MovieModifyAction implements Action {
 
         MultipartRequest multi =
                 FileUtil.createFile(request);
+        int mv_num = Integer.parseInt(multi.getParameter("mv_num"));
 
         Enumeration e = multi.getFileNames();
         while (e.hasMoreElements()) {
@@ -68,12 +69,9 @@ public class MovieModifyAction implements Action {
 
         for (int i = 1; i < 4; i++) {
             if (multi.getFilesystemName("mv_pic" + i) != null) {
-                mv_pic.set(i, multi.getFilesystemName("mv_pic" + i));
+                mv_pic.set(i-1, multi.getFilesystemName("mv_pic" + i));
             }
         }
-        mv_pic = fileNames;
-        mv_pic.remove(mv_main_pic);
-        mv_pic.remove(mv_poster);
 
 
         HashMap<String, List<String>> mv_staff_info = new HashMap<>();
@@ -81,6 +79,7 @@ public class MovieModifyAction implements Action {
         mv_staff_info.put("배우", Arrays.asList(multi.getParameter("mv_actor")));
         mv_staff_info.put("각본", Arrays.asList(multi.getParameter("mv_writer")));
 
+        movieVO.setMv_num(mv_num);
         movieVO.setMv_title(multi.getParameter("mv_title"));
         movieVO.setMv_main_pic(mv_main_pic);
         movieVO.setMv_poster(mv_poster);
@@ -96,8 +95,8 @@ public class MovieModifyAction implements Action {
         movieVO.setMv_pic(mv_pic);
         movieVO.setMv_trailer(trailer);
 
-        movieDAO.writeMovie(movieVO);
-        request.setAttribute("result","write");
+        movieDAO.modifyMovie(movieVO);
+        request.setAttribute("result","modify");
         return "/WEB-INF/views/movie/movieResult.jsp";
     }
 }

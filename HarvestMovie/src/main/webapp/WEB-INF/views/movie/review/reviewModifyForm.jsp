@@ -18,7 +18,7 @@
 
 <div class="container">
     <div class="row">
-        <a class="text-decoration-none text-dark" href="/movie/review/reivew.do?mv_num=${param.mv_num}">
+        <a class="text-decoration-none text-dark" href="/movie/review/review.do?mv_num=${param.mv_num}">
             <div class="col col-sm-3 fs-5" style="font-size: medium">
                 <img height="60%" src="${pageContext.request.contextPath}/images/back_arrow.svg"><span
                     class="align-middle">리뷰 수정</span>

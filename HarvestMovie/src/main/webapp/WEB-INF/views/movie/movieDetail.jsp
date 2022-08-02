@@ -128,7 +128,7 @@
 
 
         </div>
-        <div class="col col-sm-2 mt-3">
+        <div class="col col-sm-2 mt-3 ps-5">
             <c:forEach var="staff_job" items="${movieVO.mv_staff_info}">
                 <span class="fw-bolder">${staff_job.key}<br></span>
                 <span class="text-secondary">
@@ -156,12 +156,12 @@
                     <c:forEach var="reviewVO" items="${reviewVOList}">
                         <div class="col  rounded mx-3" style="background: #f2f2f2">
                             <div class="row">
-                                <div class="col col-sm-3">
-                                    <div class="mx-3 py-3" style="font-size: 110%" >
+                                <div class="col col-sm-3 ratio" style="--bs-aspect-ratio: 10%">
+                                    <div class="fs-5 mx-3 my-2" style="font-size: 110%">
                                             ${reviewVO.mem_name}<c:if test="${reviewVO.isCritic == 'true'}"><img
                                             src="${pageContext.request.contextPath}/images/critic.svg"
-                                            class="ratio-1x1 align-self-auto mx-1" height="57%">
-                                                </c:if>
+                                            class="ratio-1x1 align-self-auto mx-1" height="50%">
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                     <span class="fs-4 fw-bolder">사진들</span>
                 </div>
             </div>
-            <div class="row row-cols-3">
+            <div class="row row-cols-3 bg-dark p-3 rounded">
                 <c:forEach var="pic" items="${movieVO.mv_pic}" varStatus="status">
                     <div class="col">
                             <img src="${pageContext.request.contextPath}/upload/${pic}" class="img-fluid"
@@ -230,12 +230,12 @@
     </div>
     <div class="row justify-content-center d-flex mb-5">
         <div class="col col-sm-8">
-            <div class="row mb-2">
+            <div class="row mb-4">
                 <div class="col">
                     <span class="fs-4 fw-bolder">예고편</span>
                 </div>
             </div>
-            <div class="row row-cols-2 g-3">
+            <div class="row row-cols-2 g-3 bg-dark pt-1 pb-3 px-2 rounded">
                 <c:forEach var="trailer" items="${movieVO.mv_trailer}">
                     <div class="col">
                         <div class="ratio ratio-16x9">

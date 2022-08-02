@@ -20,7 +20,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class MovieDetailAction implements Action {
-    private static final int REVIEW_COUNT = 3;//가져올 리뷰 개수
+    private static final int REVIEW_START =1;
+    private static final int REVIEW_END = 3;//가져올 리뷰 개수
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -34,7 +35,10 @@ public class MovieDetailAction implements Action {
         MovieVO movieVO = movieDAO.getMovieDetail(mv_num);
 
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
-        List<ReviewVO> reviewVOList = reviewDAO.getReviewList(mv_num, REVIEW_COUNT);
+        List<ReviewVO> reviewVOList = reviewDAO.getReviewList(mv_num, REVIEW_START, REVIEW_END);
+        for (; reviewVOList.size() < 3; reviewVOList.add(new ReviewVO())) {
+
+        }
         List<String> memNameList = new ArrayList<>();
         for (String memName : memNameList) {
             memNameList.add(memName);

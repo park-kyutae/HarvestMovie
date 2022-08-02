@@ -40,3 +40,10 @@
         history.go(-1);
     </script>
 </c:if>
+<c:if test="${result == 'modify'}">
+
+    <script type="text/javascript">
+        alert('영화를 수정하였습니다.');
+        location.href = '/main/main.do'
+    </script>
+</c:if>

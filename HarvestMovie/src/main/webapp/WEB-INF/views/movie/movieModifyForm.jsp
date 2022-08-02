@@ -24,7 +24,7 @@
         <div>
             <br>
             <h4 class="mb-3">영화 정보</h4>
-            <form class="needs-validation" novalidate method="post" action="movieModify.do?mv_num=${param.mv_num}">
+            <form class="needs-validation" novalidate method="post" action="movieModify.do?mv_num=${param.mv_num}" enctype="multipart/form-data">
                 <div>
                     <div class="col-sm-6">
                         <label for="mv_title" class="form-label">제목</label>
@@ -91,9 +91,13 @@
                     <div class="col-sm-6">
 
                         <c:forEach var="staff" items="${movieVO.mv_staff_info}">
-                            <label for="mv_${staff.key}" class="form-label">${staff.key}</label>
+                            <label for="mv_${staff.key}" class="form-label">
+                                    <c:if test="${staff.key=='director'}">감독</c:if>
+                                    <c:if test="${staff.key=='actor'}">배우</c:if>
+                                    <c:if test="${staff.key=='writer'}">각본</c:if>
+                            </label>
                             <c:forEach var="staff_name" items="${staff.value}">
-                                <input type="text" value="${staff_name}"><br>
+                                <input type="text" value="${staff_name}" name="mv_${staff.key}"><br>
                                 <br>
                             </c:forEach>
                         </c:forEach>
@@ -118,7 +122,7 @@
 
                              </c:forEach>
                         </span>
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col col-md-6">
                                 <input type="text" id="mv_trailer" name="mv_trailer" placeholder class="form-control"
                                        required value="${trailer_str}">
@@ -137,14 +141,14 @@
                         <img src="${pageContext.request.contextPath}/upload/${movieVO.mv_poster}" id="mv_poster"
                              width="300px" class="pic"><br>
                         <input type="file" accept="image/gif,image/jpeg" name="mv_poster"
-                               class="form-control pic_btn" ><br>
+                               class="form-control pic_btn mt-2" ><br>
                     </div>
                     <div>
                         <h4>메인 사진</h4>
                         <img src="${pageContext.request.contextPath}/upload/${movieVO.mv_main_pic}" id="mv_main_pic"
                              width="300px" class="pic"><br>
                         <input type="file" accept="image/gif,image/jpeg" name="mv_main_pic"
-                               class="form-control pic_btn" ><br>
+                               class="form-control pic_btn mt-2" ><br>
                     </div>
                     <div>
                         <h4>영화 사진들</h4>
@@ -154,27 +158,27 @@
                                      class="pic img-fluid"
                                      id="mv_pic1" width="400px">
                                 <input type="file" accept="image/gif,image/jpeg" name="mv_pic1"
-                                       class="form-control pic_btn" ><br>
+                                       class="form-control pic_btn mt-2" ><br>
                             </div>
                             <div class="col col-md-4">
                                 <img src="${pageContext.request.contextPath}/upload/${movieVO.mv_pic[1]}"
                                      class="pic img-fluid"
                                      id="mv_pic2" width="400px">
                                 <input type="file" accept="image/gif,image/jpeg" name="mv_pic2"
-                                       class="form-control pic_btn" ><br>
+                                       class="form-control pic_btn mt-2" ><br>
                             </div>
                             <div class="col col-md-4">
                                 <img src="${pageContext.request.contextPath}/upload/${movieVO.mv_pic[2]}"
                                      class="pic img-fluid"
                                      id="mv_pic3" width="400px">
                                 <input type="file" accept="image/gif,image/jpeg" name="mv_pic3"
-                                       class="form-control pic_btn" ><br>
+                                       class="form-control pic_btn mt-2" ><br>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn-secondary btn-lg" style="float: right" type="submit">제출</button>
-                        <button class="btn btn-outline-secondary btn-lg" style="float: right" type="button"
+                        <button class="btn btn-secondary btn-lg " style="float: right" type="submit">제출</button>
+                        <button class="btn btn-outline-secondary btn-lg mx-2" style="float: right" type="button"
                                 onclick="history.go(-1)">취소
                         </button>
                     </div>

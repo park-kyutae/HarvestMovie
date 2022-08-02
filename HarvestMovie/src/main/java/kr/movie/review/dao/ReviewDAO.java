@@ -123,7 +123,7 @@ public class ReviewDAO {
     }
 
 
-    public List<ReviewVO> getReviewList(int mv_num, int count) throws Exception {
+    public List<ReviewVO> getReviewList(int mv_num, int start, int end) throws Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String sql = null;
@@ -133,24 +133,21 @@ public class ReviewDAO {
 
         try {
             conn = DBUtil.getConnection();
-            sql = "select r.*, d.MEM_NAME,m.AUTH from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM join MEMBER m on r.MEM_NUM = m.MEM_NUM where mv_num =? and rownum<=? order by REVIEW_NUM desc";
+            sql = " select * from (select rownum rn,t.* from (select r.*, d.MEM_NAME,m.AUTH from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM join MEMBER m on r.MEM_NUM = m.MEM_NUM order by REVIEW_NUM desc) t where mv_num =? ) where ?<=rn and rn<=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mv_num);
-            pstmt.setInt(2, count);
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, end);
             rs = pstmt.executeQuery();
-            for (int i = 0; i < count; i++) {
+            while (rs.next()) {
                 reviewVO = new ReviewVO();
                 int mem_num = 0;
-                String mem_name = "";
-                String rv_message = "";
                 boolean isCritic = false;
-                if (rs.next()) {
-                    mem_num = rs.getInt("mem_num");
-                    mem_name = rs.getString("mem_name");
-                    rv_message = rs.getString("review_message");
-                    if (rs.getInt("auth") == 3) {
-                        isCritic = true;
-                    }
+                mem_num = rs.getInt("mem_num");
+                String mem_name = rs.getString("mem_name");
+                String rv_message = rs.getString("review_message");
+                if (rs.getInt("auth") == 3) {
+                    isCritic = true;
                 }
                 reviewVO.setMv_num(mv_num);
                 reviewVO.setUser_num(mem_num);

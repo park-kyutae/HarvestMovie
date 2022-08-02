@@ -9,10 +9,14 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
     <title>리뷰</title>
-    <script type="text/javascript"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/review.js"></script>
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<input type="hidden" value="${param.mv_num}" id="mv_num">
 
 <div class="container">
     <div class="row">
@@ -62,7 +66,6 @@
     </div>
     </c:if>
     <c:forEach var="reviewVO" items="${reviewVOList}">
-        <c:if test="${reviewVO.user_num != 0}">
             <div class="row d-flex justify-content-center mb-3">
                 <div class="card col col-sm-6 ">
                     <div class="card-body">
@@ -80,8 +83,21 @@
                     </div>
                 </div>
             </div>
-        </c:if>
     </c:forEach>
+    <c:if test="${!empty reviewVOList}">
+        <div class="row d-flex justify-content-center mb-5" id="test">
+            <div class="col col-6 d-flex justify-content-center">
+                <span id="review_more" class="fs-5 text-secondary" style="cursor: pointer">더 보기</span>
+            </div>
+        </div>
+    </c:if>
+    <c:if test="${empty reviewVOList}">
+        <div class="row d-flex justify-content-center mb-5" id="test">
+            <div class="col col-6 d-flex justify-content-center">
+                <span class="fs-5 text-secondary" style="cursor: pointer">리뷰가 없습니다.</span>
+            </div>
+        </div>
+    </c:if>
 </div>
 
 </body>

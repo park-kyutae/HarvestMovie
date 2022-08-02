@@ -467,29 +467,38 @@ public class MovieDAO {
     }public void modifyMovie(MovieVO movieVO) throws Exception {
         Connection conn = null;
         ResultSet rs = null;
-        PreparedStatement pstmt1 = null;
         PreparedStatement pstmt2 = null;
         PreparedStatement pstmt3 = null;
         PreparedStatement pstmt4 = null;
         PreparedStatement pstmt5 = null;
         PreparedStatement pstmt6 = null;
+        PreparedStatement pstmt7 = null;
+        PreparedStatement pstmt8 = null;
         String sql = null;
-        int movieNUM = 0;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+        List<Integer> mv_pic_num = new ArrayList<>();
+        List<Integer> mv_trailer_num = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
 
 
-            sql = "select MOVIE_SEQ.nextval from dual";
-            pstmt1 = conn.prepareStatement(sql);
-            rs = pstmt1.executeQuery();
-
-            if (rs.next()) {
-                movieNUM = rs.getInt(1);
+            sql = "select * from movie_pic where mv_num=? order by mv_pic_num asc ";
+            pstmt7 = conn.prepareStatement(sql);
+            pstmt7.setInt(1,movieVO.getMv_num());
+            rs = pstmt7.executeQuery();
+            while (rs.next()) {
+                mv_pic_num.add(rs.getInt("mv_pic_num"));
             }
 
+            sql = "select * from movie_trailer where mv_num=? order by mv_trailer_num asc ";
+            pstmt8 = conn.prepareStatement(sql);
+            pstmt8.setInt(1,movieVO.getMv_num());
+            rs = pstmt8.executeQuery();
+            while (rs.next()) {
+                mv_trailer_num.add(rs.getInt("mv_trailer_num"));
+            }
 
             sql = "update movie_info set mv_title=?,mv_main_pic=?,mv_poster=?,mv_launch_date=?,mv_location=? where mv_num=?";
             pstmt2 = conn.prepareStatement(sql);
@@ -499,7 +508,7 @@ public class MovieDAO {
             Date mv_launch_date = new Date(simpleDateFormat.parse(movieVO.getMv_launch_date()).getTime());
             pstmt2.setDate(4, mv_launch_date);
             pstmt2.setString(5, movieVO.getMv_location());
-            pstmt2.setInt(6, movieNUM);
+            pstmt2.setInt(6, movieVO.getMv_num());
 
             pstmt2.executeUpdate();
 
@@ -509,42 +518,46 @@ public class MovieDAO {
             pstmt3.setString(2, movieVO.getMv_runningtime());
             pstmt3.setInt(3, movieVO.getMv_limit_age());
             pstmt3.setString(4, movieVO.getMv_summary());
-            pstmt3.setInt(5, movieNUM);
+            pstmt3.setInt(5, movieVO.getMv_num());
 
             pstmt3.executeUpdate();
 
 
-            sql = "update movie_pic set ";
+            sql = "update movie_pic set mv_pic=? where mv_pic_num=?";
             pstmt4 = conn.prepareStatement(sql);
+            int index = 0;
             for (String pic : movieVO.getMv_pic()) {
-                pstmt4.setInt(1, movieNUM);
-                pstmt4.setString(2, pic);
+                pstmt4.setString(1, movieVO.getMv_pic().get(index));
+                pstmt4.setInt(2, mv_pic_num.get(index));
                 pstmt4.addBatch();
                 pstmt4.clearParameters();
+                index++;
             }
             pstmt4.executeBatch();
             pstmt4.clearParameters();
 
 
-            sql = "INSERT Into MOVIE_TRAILER values (MOVIE_TRAILER_SEQ.nextval,?,?)";
+            sql = "update movie_trailer set mv_trailer=? where mv_trailer_num=?";
             pstmt5 = conn.prepareStatement(sql);
+            index = 0;
             for (String trailer : movieVO.getMv_trailer()) {
-                pstmt5.setInt(1, movieNUM);
-                pstmt5.setString(2, trailer);
+                pstmt5.setString(1, trailer);
+                pstmt5.setInt(2, mv_trailer_num.get(index));
                 pstmt5.addBatch();
                 pstmt5.clearParameters();
+                index++;
             }
             pstmt5.executeBatch();
             pstmt5.clearParameters();
 
 
-            sql = "insert into  MOVIE_STAFF_LIST values (movie_staff_seq.nextval,?,?,?)";
+            sql = "update movie_staff_list set mv_staff_name = ? where mv_num=? and mv_staff_job=?";
             pstmt6 = conn.prepareStatement(sql);
             for (String keys : movieVO.getMv_staff_info().keySet()) {
                 List<String> staffList = movieVO.getMv_staff_info().get(keys);
                 for (String staffName : staffList) {
-                    pstmt6.setInt(1, movieNUM);
-                    pstmt6.setString(2, staffName);
+                    pstmt6.setString(1, staffName);
+                    pstmt6.setInt(2, movieVO.getMv_num());
                     if (keys.equals("감독")) {
                         pstmt6.setInt(3, DIRECTOR);
                     } else if (keys.equals("배우")) {
@@ -566,12 +579,13 @@ public class MovieDAO {
             conn.rollback();
             throw new Exception(e);
         } finally {
+            DBUtil.executeClose(null, pstmt8, null);
+            DBUtil.executeClose(null, pstmt7, null);
             DBUtil.executeClose(null, pstmt6, null);
             DBUtil.executeClose(null, pstmt5, null);
             DBUtil.executeClose(null, pstmt4, null);
             DBUtil.executeClose(null, pstmt3, null);
-            DBUtil.executeClose(null, pstmt2, null);
-            DBUtil.executeClose(rs, pstmt1, conn);
+            DBUtil.executeClose(rs, pstmt2, conn);
         }
 
     }
