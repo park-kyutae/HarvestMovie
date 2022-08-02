@@ -35,7 +35,7 @@
 				<br>
 				<h2>내 정보</h2>
 				<div class="col-9">
-					<input type="hidden" name="mem_num" value="${member.mem_num}">
+				<input type="hidden" name="mem_num" value="${member.mem_num}">
 					<table class="table" class="col-7">
 						<tbody>
 							<tr>
@@ -43,7 +43,7 @@
 								<td colspan="2"><c:if
 										test="${!empty user_num && !empty user_photo}">
 										<img
-											src="${pageContext.request.contextPath}/upload/${user_photo}"
+											src="${pageContext.request.contextPath}/upload/${member.photo}"
 											width="100" height="100" class="my-photo rounded-circle">
 										<br>
 									</c:if> <c:if test="${!empty user_num && empty user_photo}">
@@ -77,11 +77,11 @@
 							</tr>
 							<tr>
 								<th scope="row">이메일</th>
-								<td colspan="2">${user_email}</td>
+								<td colspan="2">${member.email}</td>
 							</tr>
 							<tr>
 								<th scope="row">주소</th>
-								<td colspan="2">(${user_zip})${user_addr1} ${user_addr2}</td>
+								<td colspan="2">(${member.zipcode})${member.addr1} ${member.addr2}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -102,14 +102,13 @@
 									<th>가입일</th>
 									<th>등급</th>
 								</tr>
-								<c:forEach var="member" items="${list}">
+								<c:forEach var="reviewVO" items="${list}">
 									<tr>
-										<td><c:if test="${member.auth > 0}">
+										<td><c:if test="${reviewVO.auth > 0}">
 												<a href="detailUserForm.do?mem_num=${member.mem_num}"
 													style="text-decoration: none">${member.id}</a>
-											</c:if> <c:if test="${member.auth == 0}">
-					${member.id}
-					</c:if></td>
+											</c:if> <c:if test="${member.auth == 0}">${member.id}</c:if>
+											</td>
 										<td>${member.name}</td>
 										<td>${member.email}</td>
 										<td>${member.reg_date}</td>

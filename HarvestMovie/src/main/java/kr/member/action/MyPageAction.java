@@ -24,17 +24,17 @@ public class MyPageAction implements Action{
 			return "redirect:/member/loginForm.do";
 		}
 		
-		int mem_num = Integer.parseInt(request.getParameter("mem_num"));
-		
+		//로그인 된 경우
 		MemberDAO dao = MemberDAO.getInstance();
-		MemberVO member = dao.getMember(mem_num);
+		MemberVO member = dao.getMember(user_num);
+		
+		//Review
+		//ReviewDAO reviewdao = ReviewDAO.getInstance();
+		//ReviewVO review = reviewdao.getUserReviewMyPage(user_num);
 		
 		request.setAttribute("member", member);
-		
-		//ReviewDAO dao2 = ReviewDAO.getInstance();
-		//ReviewVO review = dao2.getUserReviewMyPage(mem_num);	
-
 		//request.setAttribute("review", review);
+
 		
 		return "/WEB-INF/views/member/myPage.jsp";
 	}
