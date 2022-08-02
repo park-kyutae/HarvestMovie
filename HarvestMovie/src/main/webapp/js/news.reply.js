@@ -145,19 +145,19 @@ $(function(){
 	//댓글 수정 버튼 클릭시 수정폼 노출
 	$(document).on('click','.modify-btn',function(){
 		//댓글 번호
-		let re_num = $(this).attr('data-renum');
+		let news_re_num = $(this).attr('data-renum');
 		
 		//댓글 내용
 		let content = $(this).parent().find('p').html().replace(/<br>/gi,'\n');
 		                                          //g:지정문자열 모두,i:대소문자 무시
 		//댓글 수정폼 UI
 		let modifyUI = '<form id="mre_form">';
-		modifyUI += '<input type="hidden" name="re_num" id="mre_num" value="'+news_re_num+'">';
-		modifyUI += '<textarea rows="3" cols="50" name="news_re_content" id="mre_content" class="rep-content">'+content+'</textarea>';
+		modifyUI += '<input type="hidden" name="news_re_num" id="mre_num" value="'+news_re_num+'">';
+		modifyUI += '<textarea rows="3" cols="50" name="news_re_content" id="mre_content" style="resize: none;" class="rep-content form-control">'+content+'</textarea>';
 		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
 		modifyUI += '<div id="mre_second" class="align-right">';
-		modifyUI += ' <input type="submit" value="수정">';
-		modifyUI += ' <input type="button" value="취소" class="re-reset">';
+		modifyUI += ' <input type="submit" value="수정" class="btn btn-primary btn-sm">';
+		modifyUI += ' <input type="button" value="취소" class="re-reset btn btn-dark btn-sm">';
 		modifyUI += '</div>';
 		modifyUI += '<hr size="1" noshade width="96%">';
 		modifyUI += '</form>';
@@ -239,12 +239,12 @@ $(function(){
 	//댓글 삭제
 	$(document).on('click','.delete-btn',function(){
 		//댓글 번호
-		let re_num = $(this).attr('data-renum');
+		let news_re_num = $(this).attr('data-renum');
 		
 		$.ajax({
 			url:'newsDeleteReply.do',
 			type:'post',
-			data:{re_num:re_num},
+			data:{news_re_num:news_re_num},
 			dataType:'json',
 			cache:false,
 			timeout:30000,
