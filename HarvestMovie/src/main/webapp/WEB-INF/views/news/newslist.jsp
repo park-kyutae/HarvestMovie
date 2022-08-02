@@ -30,6 +30,10 @@
 	color: black;
 	font-weight: bold;
 }
+#main_link {
+	text-decoration: none;
+	color: black;
+}
 #atag {
   text-decoration: none;
   color: black;
@@ -78,7 +82,7 @@
 		<%--페이지 제목--%>
 		<div class="row d-flex justify-content-center">
 			<div class="col col-sm-9 my-5">
-				<h2>영화 뉴스</h2>
+				<h2><a href="${pageContext.request.contextPath}/news/newslist.do" id="main_link">영화 뉴스</a></h2>
 			</div>
 		</div>
 		<%--페이지 제목--%>
@@ -126,7 +130,10 @@
 			</div>
 			<div class="col col-sm-2">
 				<div class="row ">
-					<div class="col d-flex justify-content-center">${news.news_hit}</div>
+					<div class="col d-flex justify-content-center">
+					<img src="${pageContext.request.contextPath}/images/eye-fill.svg" class="mx-2">
+					${news.news_hit}
+					</div>
 				</div>
 			</div>
 			</div>
@@ -163,15 +170,15 @@
 				<form id="search_form" action="newslist.do" method="get" class="d-flex justify-content-center">
 				<ul class="list-group list-group-horizontal" >
 					<li class="list-group-item">
-						<select name="keyfield">
+						<select name="keyfield" class="form-select form-select-sm">
 							<option value="1">제목</option>
 							<option value="2">작성자</option>
 							<option value="3">내용</option>
 						</select>
 					</li>
 					<li class="list-group-item"><input type="search" size="16" name="keyword" id="keyword"
-						value="${param.keyword}"></li>
-					<li class="list-group-item"><input type="submit" value="검색"></li>
+						value="${param.keyword}" class="form-control form-control-sm"></li>
+					<li class="list-group-item "><input type="submit" value="검색" class="btn btn-secondary btn-sm"></li>
 				</ul>
 			</form>
 			</div>

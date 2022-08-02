@@ -79,7 +79,7 @@
 										<c:if test="${!empty news.news_photo}">
 											<br>
 											<span id="file_detail"> (${news.news_photo})파일이 등록되어
-												있습니다. 다시 파일을 업로드하면 기r존 파일은 삭제됩니다. 
+												있습니다. 다시 파일을 업로드하면 기존 파일은 삭제됩니다. 
 												<input type="button" value="파일삭제" id="file_del">
 											</span>
 											<script type="text/javascript">

@@ -62,7 +62,7 @@ public class PagingUtil {
 		for (int i = startPage; i <= endPage; i++) {
 			if (i > totalPage) {
 				break;
-			}
+			}   
 			if (i == currentPage) {
 				page.append("&nbsp;<b><span style='color:red;'>");
 				page.append(i);
