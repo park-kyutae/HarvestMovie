@@ -26,7 +26,7 @@
 	<img src="${pageContext.request.contextPath}/images/face.png" width="150" height="150" class="rounded-circle">
 	</c:if>
     </div>
-    <div class="col-6"><span>${user_id}<br>계정 생성일: ${user_date}</div>
+    <div class="col-6"><span>${user_name}<br>계정 생성일: ${user_date}</div>
   </div>
  </div>
 </body>
