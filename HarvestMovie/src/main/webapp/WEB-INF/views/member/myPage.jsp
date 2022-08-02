@@ -25,11 +25,12 @@
 			<div class="col-9 bd-content">
 				<br>
 				<h2>내 정보</h2>
-				<table class="table">
+				<div class="col-9">
+				<table class="table" class="col-7">
 					<tbody>
 						<tr>
 							<th scope="row">사진</th>
-							<td>    
+							<td colspan="2">    
 							<c:if test="${!empty user_num && !empty user_photo}">
 								<img src="${pageContext.request.contextPath}/upload/${user_photo}" 
 										width="100" height="100" class="my-photo rounded-circle"><br>
@@ -46,19 +47,19 @@
 								<div class="col-3 pt-2">
 									<button type="button" id="photo_submit" class="btn btn-primary">등록</button>
 								</div>
-							</td>
 							</div>
+							</td>
 						</tr>
 						<tr>
 							<th scope="row">이름</th>
-							<td>${user_name}</td>
+							<td colspan="2">${user_name}</td>
 						</tr>
 						<tr>
 							<th scope="row">비밀번호</th>
-							<td colspan="2">●●●●●●</td>
-							<div class="col-3 pt-2">
-								<button type="button" id="pw_update" class="btn btn-primary">비밀번호 수정</button>
-							</div>
+							<td>●●●●●●</td>
+							<td><a href="${pageContext.request.contextPath}/member/modifyPasswordForm.do">
+							<button type="button" id="pw_update" class="btn btn-primary">비밀번호 수정</button>
+							</a></td>
 						</tr>
 						<tr>
 							<th scope="row">이메일</th>
@@ -70,8 +71,10 @@
 						</tr>
 					</tbody>
 				</table>
+				</div>
 				
-				<h2>내가 남긴 리뷰</h2>
+				<div class="mt-3">
+				<h2 class="ma-3">내가 남긴 리뷰</h2>
 				<table class="table">
 					<thead>
 						<tr>
@@ -101,8 +104,10 @@
 						</tr>
 					</tbody>
 				</table>
+				</div>
 
-				<h2>내가 남긴 댓글</h2>
+				<div class="mt-3">
+				<h2 >내가 남긴 댓글</h2>
 				<table class="table">
 					<thead>
 						<tr>
@@ -132,6 +137,7 @@
 						</tr>
 					</tbody>
 				</table>
+				</div>
 			</div>
 		</div>
 	</div>

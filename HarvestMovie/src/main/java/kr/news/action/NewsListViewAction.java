@@ -1,17 +1,18 @@
-package kr.board.action;
+//1번
+package kr.news.action;
+
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.board.dao.BoardDAO;
-import kr.board.vo.BoardVO;
 import kr.controller.Action;
+import kr.news.dao.NewsDAO;
+import kr.news.vo.NewsVO;
 import kr.util.PagingUtil;
 
-public class ListAction implements Action{
-
+public class NewsListViewAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -21,24 +22,24 @@ public class ListAction implements Action{
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
 		
-		BoardDAO dao = BoardDAO.getInstance();
-		int count = dao.getBoardCount(keyfield, keyword);
+		NewsDAO dao = NewsDAO.getInstance();
+		int count = dao.getNewsCount(keyfield, keyword);
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,
-				Integer.parseInt(pageNum),count,20,10,"list.do");
+				Integer.parseInt(pageNum),count,6,10,"newslist.do");
 		
-		List<BoardVO> list = null;
+		List<NewsVO> viewlist = null;
 		if(count > 0) {
-			list = dao.getListBoard(page.getStartRow(),
+			viewlist = dao.getListNewsView(page.getStartRow(),
 					       page.getEndRow(), keyfield, keyword);
 		}
 		
 		request.setAttribute("count", count);
-		request.setAttribute("list", list);
+		request.setAttribute("viewlist", viewlist);
 		request.setAttribute("page", page.getPage());
 		
-		return "/WEB-INF/views/board/list.jsp";
+		return "/WEB-INF/views/news/newslistview.jsp";
 	}
 
 }

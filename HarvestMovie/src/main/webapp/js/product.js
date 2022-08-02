@@ -99,8 +99,6 @@ $(function(){
 	//================= 주문 취소 ==========//
 	$('.btn-cancel').on('click', function(){
 		if(confirm('주문을 취소하시겠습니까?')){
-			alert($('#pd_num').val());
-			alert($(this).data('ord'));
 			const data = {
 				'pd_num': $('#pd_num').val(),
 				'ord_num':$(this).data('ord')

@@ -17,6 +17,12 @@ public class NewsWriteAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		HttpSession session = request.getSession();
+		Integer user_num = (Integer)session.getAttribute("user_num");
+		if(user_num == null) {//로그인이  되지 않은 경우
+			return "redirect:/member/loginUserForm.do";
+		}
+		
 		//로그인이 된 경우
 		MultipartRequest multi = 
 				FileUtil.createFile(request);
@@ -25,11 +31,10 @@ public class NewsWriteAction implements Action{
 		news.setNews_content(multi.getParameter("news_content"));
 		news.setNews_photo(
 				multi.getFilesystemName("news_photo"));
+		news.setMem_num(user_num);
 		
 		NewsDAO dao = NewsDAO.getInstance();
 		dao.insertNews(news);
-		
 		return "/WEB-INF/views/news/newsWrite.jsp";
 	}
-
 }

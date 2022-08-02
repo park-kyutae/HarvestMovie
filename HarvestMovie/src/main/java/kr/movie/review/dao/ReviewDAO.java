@@ -204,4 +204,39 @@ public class ReviewDAO {
         }
         return reviewVO;
     }
+
+    public ReviewVO getUserReviewMyPage(int mem_num) throws Exception {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        ReviewVO reviewVO = null;
+
+        try {
+            conn = DBUtil.getConnection();
+            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM where  d.MEM_NUM=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, mem_num);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                reviewVO = new ReviewVO();
+                boolean isCritic = false;
+                reviewVO.setMv_num(rs.getInt("mv_num"));
+                reviewVO.setUser_num(rs.getInt("mem_num"));
+                reviewVO.setReview_message(rs.getString("review_message"));
+                reviewVO.setMem_name(rs.getString("mem_name"));
+                if (rs.getInt("auth") == 3) {
+                    isCritic = true;
+                }
+                reviewVO.setIsCritic(isCritic);
+
+            }
+        } catch (Exception e) {
+            throw new Exception(e);
+        } finally {
+            DBUtil.executeClose(rs, pstmt, conn);
+
+        }
+        return reviewVO;
+    }
 }

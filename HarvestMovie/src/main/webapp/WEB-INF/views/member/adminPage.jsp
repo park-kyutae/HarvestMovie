@@ -11,8 +11,21 @@
 <title>어드민페이지</title>
 <script>
 console.log(${count})
-
 </script>
+<style>
+a:link {
+  color : black;
+}
+a:visited {
+  color : black;
+}
+a:hover {
+  color : red;
+}
+a:active {
+  color : green
+}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -20,8 +33,8 @@ console.log(${count})
 <div class="container-fluid">
   <div class="row flex-nowrap">
   <jsp:include page="/WEB-INF/views/member/common/adminpage_sidebar.jsp"/>
-  	<div>
-  	<h2>회원목록(관리자 전용)</h2>
+  	<div class="col-8 ma-3 pa-3">
+  	<h2 class="my-2">회원목록(관리자 전용)</h2>
 		<%-- <form id="search_form" action="adminpage.do" method="get">
 			<ul>
 				<li>
@@ -52,7 +65,8 @@ console.log(${count})
 		</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<table class="table">
+		<div class="ma-3 pa-3">
+		<table class="table ma-3">
 			<tr>
 				<th>ID</th>
 				<th>이름</th>
@@ -64,7 +78,7 @@ console.log(${count})
 			<tr>
 				<td>
 					<c:if test="${member.auth > 0}">
-					<a href="detailUserForm.do?mem_num=${member.mem_num}">${member.id}</a>
+					<a href="detailUserForm.do?mem_num=${member.mem_num}" style="text-decoration:none">${member.id}</a>
 					</c:if>
 					<c:if test="${member.auth == 0}">
 					${member.id}
@@ -77,13 +91,16 @@ console.log(${count})
 				<c:if test="${member.auth == 0}">탈퇴</c:if>
 				<c:if test="${member.auth == 1}">정지</c:if>
 				<c:if test="${member.auth == 2}">일반</c:if>
+				<c:if test="${member.auth == 3}">평론가</c:if>
+				<c:if test="${member.auth == 4}">기자</c:if>
 				<c:if test="${member.auth == 9}">관리</c:if>
 				</td>
 			</tr>
 			</c:forEach>
 		</table>
-		<div class="align-center">
+		<div class="px-auto mx-auto">
 			${page}
+		</div>
 		</div>
 		</c:if>
   	</div>
