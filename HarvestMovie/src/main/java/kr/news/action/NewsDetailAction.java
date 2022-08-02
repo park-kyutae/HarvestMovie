@@ -60,6 +60,3 @@ public class NewsDetailAction implements Action{
 }
 
 
-
-
-
