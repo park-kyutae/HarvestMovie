@@ -178,7 +178,7 @@ public class ReviewDAO {
 
         try {
             conn = DBUtil.getConnection();
-            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM join MEMBER m on d.MEM_NUM = m.MEM_NUM where mv_num =? and d.MEM_NUM=?";
+            sql = "select r.*, d.MEM_NAME, m.auth from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM join MEMBER m on d.MEM_NUM = m.MEM_NUM where mv_num =? and d.MEM_NUM=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mv_num);
             pstmt.setInt(2, mem_num);
