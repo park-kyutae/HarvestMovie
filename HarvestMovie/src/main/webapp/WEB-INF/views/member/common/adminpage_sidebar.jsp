@@ -32,6 +32,12 @@
                     상품 관리
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/movie/movieWriteForm.do" class="nav-link link-dark"
+                   aria-current="page">
+                    영화 작성
+                </a>
+            </li>
         </ul>
     </div>
 </div>

@@ -24,7 +24,7 @@
         <div>
             <br>
             <h4 class="mb-3">영화 정보</h4>
-            <form class="needs-validation" novalidate method="post" action="movieModify.do">
+            <form class="needs-validation" novalidate method="post" action="movieModify.do?mv_num=${param.mv_num}">
                 <div>
                     <div class="col-sm-6">
                         <label for="mv_title" class="form-label">제목</label>
@@ -137,14 +137,14 @@
                         <img src="${pageContext.request.contextPath}/upload/${movieVO.mv_poster}" id="mv_poster"
                              width="300px" class="pic"><br>
                         <input type="file" accept="image/gif,image/jpeg" name="mv_poster"
-                               class="form-control pic_btn" required><br>
+                               class="form-control pic_btn" ><br>
                     </div>
                     <div>
                         <h4>메인 사진</h4>
                         <img src="${pageContext.request.contextPath}/upload/${movieVO.mv_main_pic}" id="mv_main_pic"
                              width="300px" class="pic"><br>
                         <input type="file" accept="image/gif,image/jpeg" name="mv_main_pic"
-                               class="form-control pic_btn" required><br>
+                               class="form-control pic_btn" ><br>
                     </div>
                     <div>
                         <h4>영화 사진들</h4>
@@ -154,21 +154,21 @@
                                      class="pic img-fluid"
                                      id="mv_pic1" width="400px">
                                 <input type="file" accept="image/gif,image/jpeg" name="mv_pic1"
-                                       class="form-control pic_btn" required><br>
+                                       class="form-control pic_btn" ><br>
                             </div>
                             <div class="col col-md-4">
                                 <img src="${pageContext.request.contextPath}/upload/${movieVO.mv_pic[1]}"
                                      class="pic img-fluid"
                                      id="mv_pic2" width="400px">
                                 <input type="file" accept="image/gif,image/jpeg" name="mv_pic2"
-                                       class="form-control pic_btn" required><br>
+                                       class="form-control pic_btn" ><br>
                             </div>
                             <div class="col col-md-4">
                                 <img src="${pageContext.request.contextPath}/upload/${movieVO.mv_pic[2]}"
                                      class="pic img-fluid"
                                      id="mv_pic3" width="400px">
                                 <input type="file" accept="image/gif,image/jpeg" name="mv_pic3"
-                                       class="form-control pic_btn" required><br>
+                                       class="form-control pic_btn" ><br>
                             </div>
                         </div>
                     </div>
