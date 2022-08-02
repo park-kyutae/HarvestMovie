@@ -24,11 +24,38 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/news.reply.js"></script>
 <style type="text/css">
-#news_photo {
+#news_photo_main {
 	max-width: 100%;
 	height: auto;
 	display: block;
 }
+#atag {
+  text-decoration: none;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 140px;
+  height: 20px;
+  display: block;
+  font-size: 10pt;
+}
+#news_photo_view{
+	width:80px;
+    height:40px;
+    overflow:hidden;
+    margin:0;
+}
+#news_photo_view2{
+	width:100%;
+    height:100%;
+    object-fit:cover;
+}
+#news_hit_view{
+	display: block;
+  font-size: 9pt;
+}
+
 </style>
 </head>
 <body>
@@ -87,21 +114,22 @@
 								</script>
 							</c:if>
 							<input type="button" value="목록"
-									onclick="location.href='newslist.do'"
-									class="btn btn-dark btn-sm mx-1">
+								onclick="location.href='newslist.do'"
+								class="btn btn-dark btn-sm mx-1">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col col-sm my-2 d-flex justify-content-center">
 							<c:if test="${empty news.news_photo}">
-								<div class="col col-sm d-flex justify-content-center" id="news_photo_main">
-								</div>
+								<div class="col col-sm d-flex justify-content-center"
+									id="news_photo_main"></div>
 							</c:if>
 							<c:if test="${!empty news.news_photo}">
-								<div class="col col-sm d-flex justify-content-center" id="news_photo_main">
+								<div class="col col-sm d-flex justify-content-center"
+									id="news_photo_main">
 									<img
 										src="${pageContext.request.contextPath}/upload/${news.news_photo}"
-										class="rounded img-fluid" id="news_photo">
+										class="rounded img-fluid" id="news_photo_main">
 								</div>
 							</c:if>
 						</div>
@@ -113,45 +141,55 @@
 					</div>
 					<div class="col col-sm-3">
 						<div class="row">
-							<div class="col col-sm">
-							많이 본 뉴스 순
-							</div>
+							<div class="col col-sm" style="font-weight: bold;">많이 본 영화 뉴스</div>
 						</div>
 						<hr size="5" noshade="noshade" width="100%">
 						<div class="row">
 							<div class="col col-sm">
 								<c:if test="${count == 0}">
-							<div class="row">
-								<div class="col d-flex justify-content-center">
-										표시할 게시물이 없습니다.
-								</div>
-							</div>
-							</c:if>
-							<c:if test="${count > 0}">
-							<c:forEach var="news" items="${viewlist}">
-							<div class="row d-flex justify-content-center my-3">
-							<c:if test="${empty news.news_photo}">
-								<div class="col col-sm-1" id="news_photo_main">
-										<a href="newsDetail.do?news_num=${news.news_num}"><img src="${pageContext.request.contextPath}/images/blank.png" class="rounded img-fluid" id="news_photo"></a>
-								</div>
-							</c:if>
-							<c:if test="${!empty news.news_photo}">
-								<div class="col col-sm-1" id="news_photo_main">
-										<a href="newsDetail.do?news_num=${news.news_num}"><img src="${pageContext.request.contextPath}/upload/${news.news_photo}" class="rounded img-fluid" id="news_photo"></a>
-								</div>
-							</c:if>
-								<div class="col col-sm">
 									<div class="row">
-										<div class="col col-sm"><a href="newsDetail.do?news_num=${news.news_num}" id="atag">${news.news_title}</a></div>
+										<div class="col d-flex justify-content-center">표시할 게시물이
+											없습니다.</div>
 									</div>
-								</div>
-								<div class="col col-sm">
-				<div class="row ">
-					<div class="col d-flex justify-content-center">${news.news_hit}</div>
-				</div>
-			</div>
-								</div>
-								</c:forEach>
+								</c:if>
+								<c:if test="${count > 0}">
+									<c:forEach var="news" items="${viewlist}">
+										<div class="row d-flex justify-content-center">
+											<c:if test="${empty news.news_photo}">
+												<div class="col col-sm-1" id="news_photo_view">
+													<a href="newsDetail.do?news_num=${news.news_num}"><img
+														src="${pageContext.request.contextPath}/images/blank.png"
+														class="rounded img-fluid" id="news_photo_view2"></a>
+												</div>
+											</c:if>
+											<c:if test="${!empty news.news_photo}">
+												<div class="col col-sm-1" id="news_photo_view">
+													<a href="newsDetail.do?news_num=${news.news_num}"><img
+														src="${pageContext.request.contextPath}/upload/${news.news_photo}"
+														class="rounded img-fluid" id="news_photo_view2"></a>
+												</div>
+											</c:if>
+											<div class="col col-sm">
+												<div class="row">
+													<div class="col col-sm">
+														<a href="newsDetail.do?news_num=${news.news_num}"
+															id="atag">${news.news_title}</a>
+													</div>
+												</div>
+											</div>
+											<div class="col col-sm">
+												<div class="row ">
+													<div class="col d-flex justify-content-center" id="news_hit_view">
+													<img src="${pageContext.request.contextPath}/images/eye-fill.svg" class="mx-1">
+													${news.news_hit}
+													</div>
+												</div>
+											</div>
+											<div class="row my-1">
+													<hr size="1" noshade="noshade" width="100">
+											</div>
+										</div>
+									</c:forEach>
 								</c:if>
 							</div>
 						</div>
@@ -161,45 +199,52 @@
 		</div>
 		<div class="row">
 			<div class="col col-sm-9 my-2">
-				<i class="bi bi-suit-heart output_fav"></i>
-				<img id="output_fav"
+				<i class="bi bi-suit-heart output_fav"></i> <img id="output_fav"
 					src="${pageContext.request.contextPath}/images/heart1.svg"
 					width="30"> 좋아요 <span id="output_fcount"></span>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row my-3">
 			<div class="col col-sm-9 card bg-light">
 				<!-- 댓글 시작 -->
 				<div class="col col-sm d-flex justify-content-center my-2">
-				<div id="reply_div">
-					<div class="col my-2">
-					<span class="re-title">댓글 달기</span>
+					<div id="reply_div">
+						<div class="col my-2">
+							<span class="re-title">댓글 달기</span>
+						</div>
+						<form id="re_form" class="mb-4">
+							<input type="hidden" name="news_num" value="${news.news_num}"
+								id="news_num">
+							<textarea rows="3" cols="100" name="news_re_content"
+								id="news_re_content" style="resize: none;"
+								class="rep-content form-control"
+								<c:if test="${empty user_num}">disabled="disabled"</c:if>><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
+								<c:if test="${!empty user_num}">
+								<div id="re_first">
+									<span class="letter-count">300/300</span>
+								</div>
+								<div id="re_second" class="align-right">
+									<input type="submit" value="등록" class="btn btn-primary btn-sm">
+								</div>
+							</c:if>
+						</form>
 					</div>
-					<form id="re_form" class="mb-4">
-						<input type="hidden" name="news_num" value="${news.news_num}"
-							id="news_num">
-						<textarea rows="3" cols="100" name="news_re_content"
-							id="news_re_content" style="resize: none;" class="rep-content form-control"
-							<c:if test="${empty user_num}">disabled="disabled"</c:if>><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
-						<c:if test="${!empty user_num}">
-							<div id="re_first">
-								<span class="letter-count">300/300</span>
-							</div>
-							<div id="re_second" class="align-right">
-								<input type="submit" value="등록" class="btn btn-primary btn-sm">
-							</div>
-						</c:if>
-					</form>
-				</div>
+					
 				</div>
 				<!-- 댓글 목록 출력 시작 -->
-				<div id="output"></div>
+					<div class="row d-flex justify-content-center my-2">
+					<div class="col col-sm-9 d-flex justify-content-center bg-white rounded border">
+					<div class="col col-sm">
+					<div id="output"></div>
 				<div class="paging-button" style="display: none;">
 					<input type="button" value="다음글 보기">
 				</div>
 				<div id="loading" style="display: none;">
 					<img
 						src="${pageContext.request.contextPath}/images/ajax-loader.gif">
+				</div>
+					</div>
+					</div>
 				</div>
 				<!-- 댓글 목록 출력 끝 -->
 				<!-- 댓글 끝 -->

@@ -42,13 +42,14 @@ $(function(){
 					
 					//로그인한 회원번호와 작성자의 회원번호 일치 여부 체크
 					if(param.user_num == item.mem_num){
-						output += ' <input type="button" data-renum="'+item.news_re_num+'" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-renum="'+item.news_re_num+'" value="삭제" class="delete-btn">';
+						output += ' <input type="button" data-renum="'+item.news_re_num+'" value="수정" class="modify-btn btn btn-primary btn-sm">';
+						output += ' <input type="button" data-renum="'+item.news_re_num+'" value="삭제" class="delete-btn btn btn-danger btn-sm">';
 					}
 					
+					
+					output += '</div>';
+					output += '</div>';
 					output += '<hr size="1" noshade width="100%">';
-					output += '</div>';
-					output += '</div>';
 					
 					//문서 객체에 추가
 					$('#output').append(output);
@@ -153,11 +154,11 @@ $(function(){
 		//댓글 수정폼 UI
 		let modifyUI = '<form id="mre_form">';
 		modifyUI += '<input type="hidden" name="news_re_num" id="mre_num" value="'+news_re_num+'">';
-		modifyUI += '<textarea rows="3" cols="50" name="news_re_content" id="mre_content" class="rep-content">'+content+'</textarea>';
+		modifyUI += '<textarea rows="3" cols="50" style="resize: none;" name="news_re_content" id="mre_content" class="rep-content form-control">'+content+'</textarea>';
 		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
 		modifyUI += '<div id="mre_second" class="align-right">';
-		modifyUI += ' <input type="submit" value="수정">';
-		modifyUI += ' <input type="button" value="취소" class="re-reset">';
+		modifyUI += ' <input type="submit" value="수정" class="btn btn-primary btn-sm">';
+		modifyUI += ' <input type="button" value="취소" class="re-reset btn btn-dark btn-sm">';
 		modifyUI += '</div>';
 		modifyUI += '<hr size="1" noshade width="96%">';
 		modifyUI += '</form>';

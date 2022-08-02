@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import kr.controller.Action;
 import kr.news.dao.NewsDAO;
 import kr.news.vo.NewsVO;
+import kr.util.StringUtil;
 
 public class NewsUpdateFormAction implements Action{
 
@@ -28,6 +29,8 @@ public class NewsUpdateFormAction implements Action{
 			//로그인한 회원번호와 작성자 회원번호 불일치
 			return "/WEB-INF/views/common/notice.jsp";
 		}
+		
+		news.setNews_title(StringUtil.parseQuot(news.getNews_title()));
 		
 		//로그인이 되어 있고 로그인한 회원번호와 작성자 회원번호 일치
 		request.setAttribute("news", news);

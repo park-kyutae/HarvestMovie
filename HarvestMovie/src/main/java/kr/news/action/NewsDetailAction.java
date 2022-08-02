@@ -52,6 +52,7 @@ public class NewsDetailAction implements Action{
 		request.setAttribute("viewlist", viewlist);
 		request.setAttribute("page", page.getPage());
 		request.setAttribute("news", board);
+		request.setAttribute("count", count);
 		
 		return "/WEB-INF/views/news/newsDetail.jsp";
 	}
