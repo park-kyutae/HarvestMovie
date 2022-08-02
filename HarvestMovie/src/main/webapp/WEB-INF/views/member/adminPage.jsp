@@ -49,7 +49,7 @@ a:active {
 				<th>이메일</th>
 				<th>가입일</th>
 				<th>등급</th>
-			</tr>
+			</tr> 
 			<c:forEach var="member" items="${list}">
 			<tr>
 				<td>

@@ -26,7 +26,15 @@ public class StringUtil {
 		if(str == null) return null;
 		
 		return str.replaceAll("<", "&lt;")
-				  .replaceAll(">", "&gt;");
+				  .replaceAll(">", "&gt;")
+				  .replaceAll("\"", "&quot;");
+	}
+	
+	//큰 따옴표 처리
+	public static String parseQuot(String str) {
+		if(str == null) return null;
+		
+		return str.replaceAll("\"", "&quot;");
 	}
 	
 	//문자열을 지정한 문자열 개수 이후에 ...으로 처리
