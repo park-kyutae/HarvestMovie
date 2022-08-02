@@ -22,13 +22,11 @@
 	<div class="container">
 		<!-- 메인 컨테이너 -->
 		<div class="row d-flex justify-content-end">
-			<div class="row">
-				<div class="col">
-					<!-- 첫번쨰 div -->
-				</div>
-			</div>
-			<div class="row d-flex justify-content-center"></div>
-			<div class="col-sm-6 ">
+					<div class="col-6 col-sm-6 mt-4">
+					<!-- 첫번쨰 div -->				 
+							<img src="${pageContext.request.contextPath}/upload/main_cat.png" style="height: 90%" class="rounded-circle">
+					</div>
+			<div class="col-6 col-sm-6">
 				<!-- 두번쨰 div -->
 				<div class="text-center mt-5">
 				<h1>회원가입</h1>

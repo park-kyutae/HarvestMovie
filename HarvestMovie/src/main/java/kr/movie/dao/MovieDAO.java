@@ -464,6 +464,116 @@ public class MovieDAO {
             DBUtil.executeClose(rs, pstmt1, conn);
         }
 
+    }public void modifyMovie(MovieVO movieVO) throws Exception {
+        Connection conn = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt1 = null;
+        PreparedStatement pstmt2 = null;
+        PreparedStatement pstmt3 = null;
+        PreparedStatement pstmt4 = null;
+        PreparedStatement pstmt5 = null;
+        PreparedStatement pstmt6 = null;
+        String sql = null;
+        int movieNUM = 0;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            conn = DBUtil.getConnection();
+            conn.setAutoCommit(false);
+
+
+            sql = "select MOVIE_SEQ.nextval from dual";
+            pstmt1 = conn.prepareStatement(sql);
+            rs = pstmt1.executeQuery();
+
+            if (rs.next()) {
+                movieNUM = rs.getInt(1);
+            }
+
+
+            sql = "update movie_info set mv_title=?,mv_main_pic=?,mv_poster=?,mv_launch_date=?,mv_location=? where mv_num=?";
+            pstmt2 = conn.prepareStatement(sql);
+            pstmt2.setString(1, movieVO.getMv_title());
+            pstmt2.setString(2, movieVO.getMv_main_pic());
+            pstmt2.setString(3, movieVO.getMv_poster());
+            Date mv_launch_date = new Date(simpleDateFormat.parse(movieVO.getMv_launch_date()).getTime());
+            pstmt2.setDate(4, mv_launch_date);
+            pstmt2.setString(5, movieVO.getMv_location());
+            pstmt2.setInt(6, movieNUM);
+
+            pstmt2.executeUpdate();
+
+            sql = "update movie_detail set mv_genre=?,mv_runningtime=?,mv_limit_age=?,mv_summary=? where mv_num=?";
+            pstmt3 = conn.prepareStatement(sql);
+            pstmt3.setString(1, movieVO.getMv_genre());
+            pstmt3.setString(2, movieVO.getMv_runningtime());
+            pstmt3.setInt(3, movieVO.getMv_limit_age());
+            pstmt3.setString(4, movieVO.getMv_summary());
+            pstmt3.setInt(5, movieNUM);
+
+            pstmt3.executeUpdate();
+
+
+            sql = "update movie_pic set ";
+            pstmt4 = conn.prepareStatement(sql);
+            for (String pic : movieVO.getMv_pic()) {
+                pstmt4.setInt(1, movieNUM);
+                pstmt4.setString(2, pic);
+                pstmt4.addBatch();
+                pstmt4.clearParameters();
+            }
+            pstmt4.executeBatch();
+            pstmt4.clearParameters();
+
+
+            sql = "INSERT Into MOVIE_TRAILER values (MOVIE_TRAILER_SEQ.nextval,?,?)";
+            pstmt5 = conn.prepareStatement(sql);
+            for (String trailer : movieVO.getMv_trailer()) {
+                pstmt5.setInt(1, movieNUM);
+                pstmt5.setString(2, trailer);
+                pstmt5.addBatch();
+                pstmt5.clearParameters();
+            }
+            pstmt5.executeBatch();
+            pstmt5.clearParameters();
+
+
+            sql = "insert into  MOVIE_STAFF_LIST values (movie_staff_seq.nextval,?,?,?)";
+            pstmt6 = conn.prepareStatement(sql);
+            for (String keys : movieVO.getMv_staff_info().keySet()) {
+                List<String> staffList = movieVO.getMv_staff_info().get(keys);
+                for (String staffName : staffList) {
+                    pstmt6.setInt(1, movieNUM);
+                    pstmt6.setString(2, staffName);
+                    if (keys.equals("감독")) {
+                        pstmt6.setInt(3, DIRECTOR);
+                    } else if (keys.equals("배우")) {
+                        pstmt6.setInt(3, ACTOR);
+                    } else {
+                        pstmt6.setInt(3, WRITER);
+                    }
+                    pstmt6.addBatch();
+                    pstmt6.clearParameters();
+
+                }
+            }
+            pstmt6.executeBatch();
+            pstmt6.clearParameters();
+
+            conn.commit();
+
+        } catch (Exception e) {
+            conn.rollback();
+            throw new Exception(e);
+        } finally {
+            DBUtil.executeClose(null, pstmt6, null);
+            DBUtil.executeClose(null, pstmt5, null);
+            DBUtil.executeClose(null, pstmt4, null);
+            DBUtil.executeClose(null, pstmt3, null);
+            DBUtil.executeClose(null, pstmt2, null);
+            DBUtil.executeClose(rs, pstmt1, conn);
+        }
+
     }
 
     public void deleteMovie(int mv_num) throws Exception {

@@ -29,26 +29,29 @@ $(function(){
 				}
 				
 				$(param.list).each(function(index,item){
-					let output = '<div class="item">';
+					let output = '<div class="row">'
+					output += '<div style="text-align:left" class="col item">';
 					output += '<h4>' + item.id + '</h4>';
-					output += '<div class="sub-item">';
+					output += '</div>';
+					output += '<div style="text-align:left" class="col-6 sub-item">';
 					output += '<p>' + item.event_re_content + '</p>';
-					
+					output += '</div>';
+					output += '<div class="col ">';
 					//javaScript의 if는 안에 데이터를 입력하면 true로 인식
 					if(item.event_re_modifydate){
 						output +='<span class="modify-date">최근 수정일 : '+item.event_re_modifydate+'</span>';
 					}else{
 						output +='<span class="modify-date">등록일 : '+item.event_re_date+'</span>';
 					}
-					
+					output += '<br>';
 					//로그인한 회원번호와 작성자의 회원번호 일치 여부 체크
 					if(param.user_num == item.mem_num){
 						output += ' <input type="button" data-renum="'+item.event_re_num+'" value="수정" class="modify-btn">';
 						output += ' <input type="button" data-renum="'+item.event_re_num+'" value="삭제" class="delete-btn">';
 					}
+					output += '</div>';
+					output += '</div>';
 					output += '<hr size="1" noshade width="100%">';
-					output += '</div>';
-					output += '</div>';
 					
 					//문서 객체에 추가
 					$('#output').append(output);
@@ -144,22 +147,22 @@ $(function(){
 	});
 	
 	//댓글 수정 버튼 클릭시 수정폼 노출
-	$(document).on('click','modify-btn',function(){
+	$(document).on('click','.modify-btn',function(){
 		//댓글번호 
 		let event_re_num = $(this).attr('data-renum');
 		
 		//댓글 내용
-		let content = $(this).parent().find('p').html().replace(/<br>/gi,'\n');
-																//g:지정문자열 모두, i:대소문자 무시
+		let content = $(this).parent().parent().find('.sub-item').find('p').html().replace(/<br>/gi,'\n');
+															//g:지정문자열 모두, i:대소문자 무시
 		let modifyUI = '<form id="mre_form">';
 		modifyUI += '<input type="hidden" name="event_re_num" id="mre_num" value="'+event_re_num+'">';
-		modifyUI += '<textarea rows="3" cols="50" name="event_re_content" id="mre_content" class="rep-content">'+content+'</textarea>';
+		modifyUI += '<textarea rows="3" style="width:100%;" name="event_re_content" id="mre_content" class="rep-content">'+content+'</textarea>';
 		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
 		modifyUI += '<div id="mre_second" class="align-right">';
 		modifyUI += ' <input type="submit" value="수정">';
 		modifyUI += ' <input type="button" value="취소" class="re-reset">';
 		modifyUI += '</div>';
-		modifyUI += '<hr size="1" noshade width="96%">';
+		/*modifyUI += '<hr size="1" noshade width="96%">';*/
 		modifyUI += '</form>';
 		
 		//이전에 이미 수정하는 댓글이 있을 경우 수정버튼을 클릭하면
@@ -168,10 +171,11 @@ $(function(){
 		
 		//지금 클릭해서 수정하고자 하는 데이터는 감추기
 		//수정버튼을 감싸고 있는 div
+		$(this).parent().parent().find('.sub-item').find('p').hide();
 		$(this).parent().hide();
 		
 		//수정폼을 수정하고자 하는 데이터가 있는 div에 노출
-		$(this).parents('.item').append(modifyUI);
+		$(this).parent().parent().append(modifyUI);
 		
 		//입력한 글자수 셋팅
 		let inputLength = $('#mre_content').val().length;
@@ -191,7 +195,8 @@ $(function(){
 	
 	//댓글 수정 폼 초기화
 	function initModifyForm(){
-		$('.sub-item').show();
+		$('.sub-item').find('p').show();
+		$('.col').show();
 		$('#mre_form').remove();
 	}
 	

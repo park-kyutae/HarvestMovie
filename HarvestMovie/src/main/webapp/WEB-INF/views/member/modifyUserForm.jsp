@@ -29,17 +29,22 @@
 					<label for="exampleFormControlInput1" class="form-label">이메일</label> 
 					<input type="email" class="form-control" name="email" id="email" value="${user_email}" placeholder="이메일">
 
+					<div class="row">
+					<div class="col-sm-6">
+					<label for="exampleFormControlInput1" class="form-label">우편번호</label>
+						<input type="text" class="form-control" name="zipcode" id="zipcode" readonly onclick="sample2_execDaumPostcode()" placeholder="우편번호">
+					</div>
+					<div class="col-sm-6 mt-2">
+					<br>
+						<label class="form-label">*클릭시 주소 검색</label>
+					</div>
+					</div>
 					<label for="exampleFormControlInput1" class="form-label">주소</label>
-					<input type="text" class="form-control" name="addr1" id="addr1" value="${user_addr1}" onclick="sample2_execDaumPostcode()" placeholder="주소">					
+					<input type="text" class="form-control" name="addr1" id="addr1" readonly placeholder="주소">					
 					
 					<label for="exampleFormControlInput1" class="form-label">상세주소</label>
-					<input type="text" class="form-control" name="addr2" id="addr2"	value="${user_addr2}" placeholder="상세주소">
-					
-					<div class="col-md-6">
-					<label for="exampleFormControlInput1" class="form-label">우편번호</label>
-						<input type="text" class="form-control" name="zipcode" id="zipcode" value="${user_zip}" placeholder="우편번호">
-					</div>
-					<input type="button" class="form-control mt-2" value="취소">
+					<input type="text" class="form-control" name="addr2" id="addr2"	placeholder="상세주소">
+					<input type="button" class="form-control mt-2" value="취소" onclick="location.href='myPage.do'">
 					<input type="submit" class="form-control bg-primary text-white mt-2" value="수정">
 				</form>
 				</div>

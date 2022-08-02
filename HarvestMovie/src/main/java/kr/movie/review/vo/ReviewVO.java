@@ -3,6 +3,16 @@ package kr.movie.review.vo;
 public class ReviewVO {
     private int review_num;
     private int mv_num;
+
+    public String getMv_title() {
+        return mv_title;
+    }
+
+    public void setMv_title(String mv_title) {
+        this.mv_title = mv_title;
+    }
+
+    private String  mv_title;
     private int user_num;
     private String review_message;
     private String mem_name;
