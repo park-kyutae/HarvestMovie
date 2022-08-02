@@ -33,7 +33,7 @@
 </c:if>
 <c:if test="${!check}">
 	<script>
-		alert('입력한 정보가 정확하지 않습니다!');
+		alert('입력한 정보가 정확하지 않습니다2!');
 		history.go(-1);
 	</script>
 </c:if>

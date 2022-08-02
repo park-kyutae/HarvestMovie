@@ -19,19 +19,27 @@ public class EventDeleteAction implements Action{
 			return "redirect:/member/loginForm.do";
 		}
 		
+		
+		
 		int event_board_num = Integer.parseInt(request.getParameter("event_board_num"));
 		EventDAO dao = EventDAO.getInstance();
 		EventVO db_event= dao.getEvent(event_board_num);
-		if(user_num != db_event.getMem_num()) {
-			//로그인한 회원번호와 작성자 회원번호가 불일치
-			return "/WEB-INF/views/common/notice.jsp";
-		}
+		/*
+		 * if(user_num != db_event.getMem_num()) { //로그인한 회원번호와 작성자 회원번호가 불일치 return
+		 * "/WEB-INF/views/common/notice.jsp"; }
+		 */
 		
+		Integer user_auth=(Integer)session.getAttribute("user_auth");
+		
+		if(user_num == db_event.getMem_num() || user_auth == 9){
 		//로그인한 회원번호와 작성자 회원번호가 일치
 		dao.deleteEvent(event_board_num);
 		//파일 삭제
 		FileUtil.removeFile(request, db_event.getEvent_filename());
-		
+		}else if(user_num != db_event.getMem_num()) {
+			//로그인한 회원번호와 작성자 회원번호가 불일치
+			return "/WEB-INF/views/event/eventList.jsp";
+		}
 	
 		return "redirect:/event/eventList.do";
 	}

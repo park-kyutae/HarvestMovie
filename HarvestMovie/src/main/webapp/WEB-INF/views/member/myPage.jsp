@@ -100,12 +100,6 @@
                             </div>
                     </c:forEach>
 						</div>
-					<div class="list-space align-right">
-						<input class="btn btn-primary" type="button" value="목록"
-							onclick="location.href='adminpage.do'"> <input
-							class="btn btn-secondary" type="button" value="홈으로"
-							onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
-					</div>
 				</div>
 			</div>
 		</div>

@@ -53,6 +53,7 @@ $(function(){
 		//문서 객체에 추가
 		$('#output_fav').attr('src',output);
 		$('#output_fcount').text(param.count);
+		
 	}
 	//초기 데이터 표시
 	selectData($('#event_board_num').val());
