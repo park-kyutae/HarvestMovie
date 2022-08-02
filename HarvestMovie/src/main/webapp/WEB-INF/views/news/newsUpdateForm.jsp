@@ -22,7 +22,7 @@
 		<div class="row d-flex justify-content-center">
 			<div class="row d-flex justify-content-center">
 				<div class="col col-sm my-5">
-					<h4>영화 뉴스 작성</h4>
+					<h4>영화 뉴스 수정</h4>
 				</div>
 			</div>
 			<div class="row d-flex justify-content-center">
