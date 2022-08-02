@@ -70,7 +70,7 @@
     <div class="row 첨부파일">
     	<c:if test="${!empty event.event_filename}">
 		<div style="text-align:center">
-			<img src="${pageContext.request.contextPath}/upload/${event.event_filename}">
+			<img src="${pageContext.request.contextPath}/upload/${event.event_filename}"  class="rounded" style="max-width: 80%; height: auto;">
 		</div>
 		</c:if>
     </div>
@@ -117,10 +117,10 @@
     <br>
     
     
-    
-    <div class="row 댓글">
+   
+    <div class="row">
      <hr size="1" noshade="noshade" width="100%">
-    	<div class="bg-secondary  bg-opacity-25"" >
+    	<div class="bg-secondary  bg-opacity-25" >
     	
 			<span class="re-title">댓글 달기</span>
 			<form id="re_form">
@@ -139,6 +139,7 @@
 				</c:if>
 				
 			</form>
+			 <hr size="5" noshade="noshade" width="100%">
 			<br>
 			
 		</div>
@@ -147,7 +148,7 @@
 		
 		<!-- 댓글 목록 출력 시작 -->
 	
-		<div class=" col-md-12 text-center" id="output"></div>
+		<div class="bg-secondary  bg-opacity-25 col-md-12 text-center" id="output"></div>
 		<div class="paging-button" style="display:none;">
 			<input type="button" value="다음글 보기">
 		</div>
@@ -158,6 +159,11 @@
 		<!-- 댓글 끝 -->
     
     </div>
+    
+    <div>
+    <br><br>
+    </div>
+    
 </div>
 
 

@@ -30,7 +30,7 @@ $(function(){
 				
 				$(param.list).each(function(index,item){
 					let output = '<div class="row">'
-					output += '<div class="col item">';
+					output += '<div style="text-align:left" class="col item">';
 					output += '<h4>' + item.id + '</h4>';
 					output += '</div>';
 					output += '<div style="text-align:left" class="col-6 sub-item">';
@@ -162,7 +162,7 @@ $(function(){
 		modifyUI += ' <input type="submit" value="수정">';
 		modifyUI += ' <input type="button" value="취소" class="re-reset">';
 		modifyUI += '</div>';
-		modifyUI += '<hr size="1" noshade width="96%">';
+		/*modifyUI += '<hr size="1" noshade width="96%">';*/
 		modifyUI += '</form>';
 		
 		//이전에 이미 수정하는 댓글이 있을 경우 수정버튼을 클릭하면

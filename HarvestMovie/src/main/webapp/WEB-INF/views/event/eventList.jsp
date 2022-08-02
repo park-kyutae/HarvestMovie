@@ -27,7 +27,7 @@
 	<br><br><br><br>
     <div class="row">
 			
-    	<h2>이벤트 게시판</h2>
+    	<h2>커뮤니티</h2>
     </div>
     <br><br>
     
@@ -73,8 +73,7 @@
 			<input type="button" value="글쓰기" class="btn btn-dark btn-sm"
 			   onclick="location.href='eventWriteForm.do'">
 		 	</c:if>  
-			<input type="button" value="목록" class="btn btn-dark btn-sm"
-			       onclick="location.href='eventList.do'"> 
+			
 			<input type="button" value="홈으로" class="btn btn-dark btn-sm"
 			 onclick="location.href='${pageContext.request.contextPath}/main/main.do'">        
 			 <div class="row-end float-end">  
