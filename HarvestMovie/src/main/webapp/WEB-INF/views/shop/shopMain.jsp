@@ -50,18 +50,6 @@
 					</div>
 					</c:forEach>
 				</div>
-				<c:if test="${!empty user_num && user_auth == 9}">
-				<div class="row">
-					<input type="button" class="btn btn-secondary my-2" value="상품관리" onclick="location.href='productManagement.do'">
-				</div>
-				</c:if>
-				<!-- 임시 마이페이지 로그인후에만 이용가능 -->
-				<div class="row">
-					<input type="button" class="btn btn-secondary my-2" value="임시myPage" onclick="location.href='productMyPage.do?mem_num=${mem_num}'">
-				</div>
-				<div class="row">
-					<input type="button" class="btn btn-secondary my-2" value="EVENT" onclick="location.href='shopEvent.do'">
-				</div>
 			</div>
 		</div>	
 	</div>
