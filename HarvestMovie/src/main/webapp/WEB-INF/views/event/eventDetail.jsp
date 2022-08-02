@@ -26,22 +26,24 @@
 
  <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-<div class="container">
-<br><br><br>
+<div class="container col-md-7">
+<br><br><%-- <br>
 <div>
 <a style="color:rgb(0,0,0); text-decoration:none;" href="${pageContext.request.contextPath}/event/eventList.do">
-<h2>이벤트 게시판</h2>
+<h2 style="font-style: italic">이벤트 게시판</h2>
 </a>
-</div>
+</div> --%>
 <br><br>
 <br>
- <hr size="5" noshade="noshade" width="100%">
- <hr size="5" noshade="noshade" width="100%">
-    <div style="text-align:left" class="row 제목">
+<!--  <hr size="5" noshade="noshade" width="100%">
+ <hr size="5" noshade="noshade" width="100%"> -->
+    <div style="text-align:left; font-weight : 900; " class="row 제목">
     <h2>${event.event_title}</h2>
     </div>
-    <hr size="5" noshade="noshade" width="100%" color="black">
-    <div style="text-align:center" class="row 회원 상세정보">
+   
+    <div style="text-align:center" class="row 회원 상세정보 bg-dark text-white bg-opacity-50">
+    	
+    	 <hr size="5" noshade="noshade" width="100%" color="black">
         <div class="프로필 col-md-3">
         <c:if test="${!empty event.photo}">
 				<img src="${pageContext.request.contextPath}/upload/${event.photo}" width="90" height="100" class="my-photo">
@@ -50,6 +52,7 @@
 				<img src="${pageContext.request.contextPath}/images/face.png" width="90" height="100" class="my-photo">
 				</c:if>
         </div>
+        <br>
         
         
         <div class="id, 작성일, 출처 col-md-7" style="text-align:left">
@@ -59,16 +62,15 @@
 				<div><c:if test="${!empty event.event_modify_date }">
 				최근 수정일 : ${event.event_modify_date }
 				</c:if></div>
-				 <br>
         </div>
-       
-        <hr size="5" noshade="noshade" width="100%" color="black" >
-        
+        <div><br></div>
     </div>
+    <br><br>
+    
     <div class="row 첨부파일">
     	<c:if test="${!empty event.event_filename}">
 		<div style="text-align:center">
-			<img src="${pageContext.request.contextPath}/upload/${event.event_filename}">
+			<img src="${pageContext.request.contextPath}/upload/${event.event_filename}"  class="rounded" style="max-width: 80%; height: auto;">
 		</div>
 		</c:if>
     </div>
@@ -88,7 +90,7 @@
 		   		</div>
 				<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정, 삭제 가능 --%>
 				<div class="row-end float-end">
-				<c:if test="${user_num == event.mem_num }">
+				<c:if test="${user_num == event.mem_num || user_auth == 9}">
 					<input type="button" value="수정" onclick="location.href='eventUpdateForm.do?event_board_num=${event.event_board_num}'">
 					<input type="button" value="삭제" id="delete_btn">
 					<script type="text/javascript">
@@ -113,14 +115,18 @@
         </div>
     </div>
     <br>
-    <div class="row 댓글">
+    
+    
+   
+    <div class="row">
      <hr size="1" noshade="noshade" width="100%">
-    	<div id="reply_div">
+    	<div class="bg-secondary  bg-opacity-25" >
+    	
 			<span class="re-title">댓글 달기</span>
 			<form id="re_form">
 				<input type="hidden" name="event_board_num" value="${event.event_board_num}" id="event_board_num">
 				<textarea rows="3"  style="width:100%;" name="event_re_content" 
-				  id="re_content" class="rep-content"
+				  id="event_re_content" class="rep-content"
 				  <c:if test="${empty user_num}">disabled="disabled"</c:if>
 				  ><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
 				<c:if test="${!empty user_num}">
@@ -131,11 +137,18 @@
 				</div>
 				</div>
 				</c:if>
+				
 			</form>
-			 <hr size="1" noshade="noshade" width="100%">
+			 <hr size="5" noshade="noshade" width="100%">
+			<br>
+			
 		</div>
+		
+		
+		
 		<!-- 댓글 목록 출력 시작 -->
-		<div id="output"></div>
+	
+		<div class="bg-secondary  bg-opacity-25 col-md-12 text-center" id="output"></div>
 		<div class="paging-button" style="display:none;">
 			<input type="button" value="다음글 보기">
 		</div>
@@ -146,7 +159,15 @@
 		<!-- 댓글 끝 -->
     
     </div>
+    
+    <div>
+    <br><br>
+    </div>
+    
 </div>
+
+
+
 
 <!-- --------------------------------------------------------------------- -->
 <%-- 

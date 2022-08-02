@@ -25,7 +25,7 @@
 
 <div class="container">
     <div class="row 게시판 만들기">
-   	 <h2>이벤트 게시판 글쓰기</h2>
+   	 <h2>커뮤니티 글쓰기</h2>
     </div>
     <form id="write_form" action="eventWrite.do" 
 		   method="post" enctype="multipart/form-data">

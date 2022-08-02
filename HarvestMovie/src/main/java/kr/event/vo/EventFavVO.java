@@ -4,6 +4,19 @@ public class EventFavVO {
 	private int event_fav_num;
 	private int event_board_num;
 	private int mem_num;
+	
+	private int event_favCount;
+	
+	public int getEvent_favCount() {
+		return event_favCount;
+	}
+	public void setEvent_favCount(int event_favCount) {
+		this.event_favCount = event_favCount;
+	}
+	
+	
+	
+	
 	public int getEvent_fav_num() {
 		return event_fav_num;
 	}

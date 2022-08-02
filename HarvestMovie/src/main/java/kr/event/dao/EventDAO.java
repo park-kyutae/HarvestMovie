@@ -118,7 +118,7 @@ public class EventDAO {
 				if (keyfield.equals("1"))
 					sub_sql = "WHERE b.event_title LIKE ?";
 				else if (keyfield.equals("2"))
-					sub_sql = "WHERE m.event_id LIKE ?";
+					sub_sql = "WHERE m.id LIKE ?";
 				else if (keyfield.equals("3"))
 					sub_sql = "WHERE b.event_content LIKE ?";
 			}
@@ -149,7 +149,7 @@ public class EventDAO {
 				event.setEvent_filename(rs.getString("event_filename"));
 				event.setMem_num(rs.getInt("mem_num"));
 				event.setId(rs.getString("id")); 
-				 
+				
 
 				list.add(event);
 			}
@@ -161,6 +161,9 @@ public class EventDAO {
 		}
 		return list;
 	}
+	
+
+	
 	//글상세
 	public EventVO getEvent(int event_board_num)throws Exception{
 		Connection conn = null;
@@ -323,6 +326,10 @@ public class EventDAO {
 			pstmt.setInt(1, event_board_num);
 			pstmt.executeUpdate();
 			//댓글 삭제
+			sql = "DELETE FROM event_reply WHERE event_board_num=?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, event_board_num);
+			pstmt2.executeUpdate();
 			
 			//부모글 삭제
 			sql = "DELETE FROM event WHERE event_board_num=?";
