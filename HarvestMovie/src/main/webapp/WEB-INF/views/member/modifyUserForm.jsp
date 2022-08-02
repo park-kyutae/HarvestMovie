@@ -39,7 +39,7 @@
 					<label for="exampleFormControlInput1" class="form-label">우편번호</label>
 						<input type="text" class="form-control" name="zipcode" id="zipcode" value="${user_zip}" placeholder="우편번호">
 					</div>
-					<input type="button" class="form-control mt-2" value="취소">
+					<input type="button" class="form-control mt-2" value="취소" onclick="location.href='myPage.do'">
 					<input type="submit" class="form-control bg-primary text-white mt-2" value="수정">
 				</form>
 				</div>

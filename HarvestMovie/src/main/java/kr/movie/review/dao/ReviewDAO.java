@@ -214,7 +214,7 @@ public class ReviewDAO {
 
         try {
             conn = DBUtil.getConnection();
-            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM where  d.MEM_NUM=?";
+            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM where d.MEM_NUM=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mem_num);
             rs = pstmt.executeQuery();

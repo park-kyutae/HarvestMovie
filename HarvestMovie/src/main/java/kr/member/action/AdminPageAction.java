@@ -33,7 +33,7 @@ public class AdminPageAction implements Action {
 		
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
-		
+		 
 		MemberDAO dao = MemberDAO.getInstance();
 		int count = dao.getMemberCountByAdmin(keyfield, keyword);
 		//페이지 처리

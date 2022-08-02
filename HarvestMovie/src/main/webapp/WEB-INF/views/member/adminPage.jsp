@@ -35,30 +35,6 @@ a:active {
   <jsp:include page="/WEB-INF/views/member/common/adminpage_sidebar.jsp"/>
   	<div class="col-8 ma-3 pa-3">
   	<h2 class="my-2">회원목록(관리자 전용)</h2>
-		<%-- <form id="search_form" action="adminpage.do" method="get">
-			<ul>
-				<li>
-					<select name="keyfield">
-						<option value="1">ID</option>
-						<option value="2">이름</option>
-						<option value="3">email</option>
-					</select>
-				</li>
-				<li>
-					<input type="search" size="16" name="keyword"
-					       id="keyword" value="${param.keyword}">
-				</li>
-				<li>
-					<input type="submit" value="찾기">
-				</li>
-			</ul>
-		</form> --%>
-		<%-- <div class="list-space align-right">
-			<input type="button" value="목록" 
-			     onclick="location.href='adminpage.do'">
-			<input type="button" value="홈으로"
-			     onclick="location.href='${pageContext.request.contextPath}/main/main.do'">     
-		</div> --%>
 		<c:if test="${count == 0}">
 		<div>
 			표시할 내용이 없습니다.
@@ -73,7 +49,7 @@ a:active {
 				<th>이메일</th>
 				<th>가입일</th>
 				<th>등급</th>
-			</tr>
+			</tr> 
 			<c:forEach var="member" items="${list}">
 			<tr>
 				<td>
@@ -98,12 +74,42 @@ a:active {
 			</tr>
 			</c:forEach>
 		</table>
-		<div class="px-auto mx-auto">
-			${page}
-		</div>
 		</div>
 		</c:if>
-  	</div>
+		<div class="col-12 d-flex justify-content-center">
+			${page}
+		</div>
+		 <form id="search_form" action="adminpage.do" method="get">
+			<ul>
+				<li>
+				<div class="col-2">
+					<select class="form-select" name="keyfield">
+						<option value="1">ID</option>
+						<option value="2">이름</option>
+						<option value="3">email</option>
+					</select>
+				</div>
+				</li>
+				<li>
+				<div class="col-3">
+					<input class="form-control" type="search" size="16" name="keyword"
+					       id="keyword" value="${param.keyword}">
+				</div>
+				</li>
+				<li>
+				<div class="col-1">
+					<input class="btn btn-primary" type="submit" value="찾기">
+				</div>
+				</li>
+			</ul>
+		</form>
+		<div class="list-space align-right">
+			<input class="btn btn-primary" type="button" value="목록" 
+			     onclick="location.href='adminpage.do'">
+			<input class="btn btn-secondary" type="button" value="홈으로"
+			     onclick="location.href='${pageContext.request.contextPath}/main/main.do'">     
+		</div>
+		 	</div>
   </div>
  </div>
 </body>
