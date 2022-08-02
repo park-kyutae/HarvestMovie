@@ -32,12 +32,6 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          내가 남긴 댓글
-        </a>
-      </li>
-      <li>
         <a href="${pageContext.request.contextPath}/member/modifyUserForm.do" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           내 정보 수정

@@ -42,19 +42,19 @@
 							</tr>
 							<tr>
 								<th scope="row">이름</th>
-								<td colspan="1">${user_name}</td>
+								<td colspan="1">${member.name}</td>
 							</tr>
 							<tr>
 								<th scope="row">이메일</th>
-								<td colspan="1">${user_email}</td>
+								<td colspan="1">${member.email}</td>
 							</tr>
 							<tr>
 								<th scope="row">우편번호</th>
-								<td colspan="1">${user_zip}</td>
+								<td colspan="1">${member.zipcode}</td>
 							</tr>
 							<tr>
 								<th scope="row">주소</th>
-								<td colspan="1">${user_addr1}${user_addr2}</td>
+								<td colspan="1">${member.addr1}${member.addr2}</td>
 							</tr>
 						</tbody>
 					</table>
