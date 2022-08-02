@@ -205,30 +205,29 @@ public class ReviewDAO {
         return reviewVO;
     }
 
-    public ReviewVO getUserReviewMyPage(int mem_num) throws Exception {
+    public List<ReviewVO> getUserReviewMyPage(int mem_num, int count) throws Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String sql = null;
         ResultSet rs = null;
+        List<ReviewVO> reviewVOList = new ArrayList<>();
         ReviewVO reviewVO = null;
 
         try {
             conn = DBUtil.getConnection();
-            sql = "select r.*, d.MEM_NAME from review_info r join MEMBER_DETAIL d on r.MEM_NUM=d.MEM_NUM where d.MEM_NUM=?";
+            sql = "select i.*,m.mv_title from review_info i join movie_info m on i.mv_num = m.mv_num where mem_num = ? and rownum<=? order by REVIEW_NUM desc";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, mem_num);
+            pstmt.setInt(2, count);
             rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 reviewVO = new ReviewVO();
-                boolean isCritic = false;
-                reviewVO.setMv_num(rs.getInt("mv_num"));
-                reviewVO.setUser_num(rs.getInt("mem_num"));
-                reviewVO.setReview_message(rs.getString("review_message"));
-                reviewVO.setMem_name(rs.getString("mem_name"));
-                if (rs.getInt("auth") == 3) {
-                    isCritic = true;
-                }
-                reviewVO.setIsCritic(isCritic);
+                String rv_message = rs.getString("review_message");
+                String mv_title = rs.getString("mv_title");
+                reviewVO.setReview_message(rv_message);
+                reviewVO.setMv_title(mv_title);
+
+                reviewVOList.add(reviewVO);
 
             }
         } catch (Exception e) {
@@ -237,6 +236,8 @@ public class ReviewDAO {
             DBUtil.executeClose(rs, pstmt, conn);
 
         }
-        return reviewVO;
+        return reviewVOList;
     }
+
+
 }
