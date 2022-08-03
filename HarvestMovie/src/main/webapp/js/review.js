@@ -1,5 +1,8 @@
 $(function () {
-
+    function getContextPath() {
+        var hostIndex = location.href.indexOf(location.host) + location.host.length;
+        return location.href.substring(hostIndex, location.href.indexOf('/'));
+    }
     let review_count = 1;
     $('#review_more').click(function () {
 
@@ -17,6 +20,7 @@ $(function () {
             success: function (param) {
                 if (param.reviewVOList.length > 0) {
                     $(param.reviewVOList).each(function (index, item) {
+                        let ctx = getContextPath();
                         let output =
                             '<div class="row d-flex justify-content-center mb-3">' +
                             '<div class="card col col-sm-6 ">' +
@@ -30,7 +34,7 @@ $(function () {
                             '<div class="d-flex justify-content-end">';
                         if (param.memberVO.auth == 9) {
                             output += '<input type="button" value="삭제" class="btn btn-secondary' +
-                                'onClick="location.href=\'/movie/review/reviewDelete.do?mv_num=' +
+                                'onClick="location.href=\''+ctx+'/movie/review/reviewDelete.do?mv_num=' +
                                 item.mv_num +
                                 '&rv_user_num=' + item.user_num + '\'">';
                         }
