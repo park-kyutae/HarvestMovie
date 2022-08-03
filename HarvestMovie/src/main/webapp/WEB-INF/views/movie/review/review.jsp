@@ -20,7 +20,7 @@
 
 <div class="container">
     <div class="row">
-        <a href="/movie/movieDetail.do?mv_num=${param.mv_num}" class="text-decoration-none text-dark">
+        <a href="${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${param.mv_num}" class="text-decoration-none text-dark">
             <div class="col col-sm-3 fs-5" style="font-size: medium">
                 <img height="60%" src="${pageContext.request.contextPath}/images/back_arrow.svg">
                 <span class="align-middle">코멘트</span>

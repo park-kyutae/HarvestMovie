@@ -47,7 +47,7 @@
         <div class="row">
             <c:forEach var="ratingVO" items="${ratingVOList}">
                 <div class="col col-sm-2">
-                    <a href="/movie/movieDetail.do?mv_num=${ratingVO.mv_num}"><img class="ratio"
+                    <a href="${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${ratingVO.mv_num}"><img class="ratio"
                                                                                    src="${pageContext.request.contextPath}/upload/${ratingVO.mv_poster}"
                                                                                    style="--bs-aspect-ratio: 100%" ;
                                                                                    width="71%"></a><br>
@@ -66,7 +66,7 @@
         <div class="row">
             <c:forEach var="genreVO" items="${genreVOList}">
             <div class="col col-sm-2">
-                <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}"><img class="ratio"
+                <a href="${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${genreVO.mv_num}"><img class="ratio"
                                                                               src="${pageContext.request.contextPath}/upload/${genreVO.mv_poster}"
                                                                               style="--bs-aspect-ratio: 100%" ;
                                                                               width="71%"></a><br>

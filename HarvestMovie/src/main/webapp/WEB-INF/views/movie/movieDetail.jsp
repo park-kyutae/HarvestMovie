@@ -147,11 +147,11 @@
                     <span class="fs-4 fw-bolder">리뷰</span>
                 </div>
                 <a class="fs-5 text-secondary col col-sm-3 d-flex justify-content-end m-1 text-decoration-none "
-                   href="/movie/review/review.do?mv_num=${movieVO.mv_num}">
+                   href="${pageContext.request.contextPath}/movie/review/review.do?mv_num=${movieVO.mv_num}">
                     더 보기
                 </a>
             </div>
-            <a href="/movie/review/review.do?mv_num=${movieVO.mv_num}" class="text-decoration-none text-black">
+            <a href="${pageContext.request.contextPath}/movie/review/review.do?mv_num=${movieVO.mv_num}" class="text-decoration-none text-black">
                 <div class="row">
                     <c:forEach var="reviewVO" items="${reviewVOList}">
                         <div class="col  rounded mx-3" style="background: #f2f2f2">
