@@ -42,9 +42,9 @@
                     <p class="card-text">${myReviewVO.review_message}</p>
                     <div class="d-flex justify-content-end">
                         <input type="button" value="수정" class="btn btn-outline-secondary mx-2"
-                               onclick="location.href='/movie/review/reviewModifyForm.do?mv_num=${param.mv_num}'">
+                               onclick="location.href='${pageContext.request.contextPath}/movie/review/reviewModifyForm.do?mv_num=${param.mv_num}'">
                         <input type="button" value="삭제" class="btn btn-secondary"
-                               onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}&rv_user_num=${myReviewVO.user_num}'">
+                               onclick="location.href='${pageContext.request.contextPath}/movie/review/reviewDelete.do?mv_num=${param.mv_num}&rv_user_num=${myReviewVO.user_num}'">
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
     <div class="row d-flex justify-content-center my-1 mx-0">
         <div class="col col-sm-6 d-flex justify-content-end p-0 m-0">
             <input type="button" value="리뷰 작성" class="btn btn-secondary"
-                   onclick="location.href='/movie/review/reviewWriteForm.do?mv_num=${param.mv_num}'">
+                   onclick="location.href='${pageContext.request.contextPath}/movie/review/reviewWriteForm.do?mv_num=${param.mv_num}'">
 
         </div>
     </div>
@@ -76,7 +76,7 @@
                             <c:if test="${memberVO.auth ==9}">
 
                             <input type="button" value="삭제" class="btn btn-secondary"
-                                   onclick="location.href='/movie/review/reviewDelete.do?mv_num=${param.mv_num}&rv_user_num=${reviewVO.user_num}'">
+                                   onclick="location.href='${pageContext.request.contextPath}/movie/review/reviewDelete.do?mv_num=${param.mv_num}&rv_user_num=${reviewVO.user_num}'">
                             </c:if>
 
                         </div>

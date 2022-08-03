@@ -3,7 +3,7 @@
 <c:if test="${result == 'modify_main'}">
     <script>
         alert('메인 영화를 수정 했습니다.');
-        location.href = '/movie/movieDetail.do?mv_num=${param.mv_num}';
+        location.href='${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${param.mv_num}';
         //TODO 경로 통일
     </script>
 
@@ -13,7 +13,7 @@
     <script type="text/javascript">
         alert('영화를 추가했습니다.');
         //추후 수정
-        location.href = '/main/main.do'
+        location.href='${pageContext.request.contextPath}/main/main.do'
     </script>
 </c:if>
 <c:if test="${result == 'delete'}">
@@ -21,7 +21,7 @@
     <script type="text/javascript">
         alert('영화를 삭제했습니다.');
         //추후 수정
-        location.href = '/main/main.do'
+        location.href='${pageContext.request.contextPath}/main/main.do'
     </script>
 </c:if>
 <c:if test="${result == 'try_login'}">
@@ -44,6 +44,6 @@
 
     <script type="text/javascript">
         alert('영화를 수정하였습니다.');
-        location.href = '/main/main.do'
+        location.href='${pageContext.request.contextPath}/main/main.do'
     </script>
 </c:if>

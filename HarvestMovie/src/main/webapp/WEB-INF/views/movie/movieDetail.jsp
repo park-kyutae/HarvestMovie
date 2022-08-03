@@ -104,10 +104,10 @@
                         <div class="row  d-flex justify-content-end">
                             <div class="col  d-flex justify-content-end">
                                 <button type="button" class="btn btn-outline-secondary btn-sm mx-2"
-                                        onclick="location.href='/movie/movieModifyForm.do?mv_num=${movieVO.mv_num}'">수정
+                                        onclick="location.href='${pageContext.request.contextPath}/movie/movieModifyForm.do?mv_num=${movieVO.mv_num}'">수정
                                 </button>
                                 <button type="button" class="btn btn-danger btn-sm"
-                                        onclick="location.href='/movie/movieDelete.do?mv_num=${movieVO.mv_num}'">삭제
+                                        onclick="location.href='${pageContext.request.contextPath}/movie/movieDelete.do?mv_num=${movieVO.mv_num}'">삭제
                                 </button>
                             </div>
                         </div>
