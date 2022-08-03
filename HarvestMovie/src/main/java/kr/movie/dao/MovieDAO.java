@@ -325,7 +325,7 @@ public class MovieDAO {
                     "left join (select i.MV_NUM,avg(MV_RATING) avg_rating from MOVIE_INFO i " +
                     "join MOVIE_RATINGS r on i.MV_NUM=r.MV_NUM " +
                     "group by i.MV_NUM) e " +
-                    "on s.MV_NUM = e.MV_NUM where rownum <=? ";
+                    "on s.MV_NUM = e.MV_NUM where rownum <=? order by avg_rating desc nulls last ";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,MAX_LIST);
             rs = pstmt.executeQuery();
