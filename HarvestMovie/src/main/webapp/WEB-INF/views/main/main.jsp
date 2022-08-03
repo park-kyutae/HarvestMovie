@@ -31,7 +31,7 @@
                     <c:forEach var="mainVO" items="${mainVOList}" varStatus="status">
                         <c:if test="${status.count ==1}">
                             <div class="carousel-item active">
-                                <a href="/movie/movieDetail.do?mv_num=${mainVO.mv_num}">
+                                <a href="${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${mainVO.mv_num}">
                                     <img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
                                          class="d-block w-100">
                                 </a>
@@ -39,7 +39,7 @@
                         </c:if>
                         <c:if test="${status.count !=1}">
                             <div class="carousel-item">
-                                <a href="/movie/movieDetail.do?mv_num=${mainVO.mv_num}">
+                                <a href="${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${mainVO.mv_num}">
                                     <img src="${pageContext.request.contextPath}/upload/${mainVO.mv_main_pic}"
                                          class="d-block w-100"></a>
                             </div>
@@ -65,7 +65,7 @@
                 <c:forEach var="ratingVO" items="${ratingVOList}">
                     <div class="col col-sm-3">
                         <div class="ratio" style="--bs-aspect-ratio: 140%">
-                            <a href="/movie/movieDetail.do?mv_num=${ratingVO.mv_num}">
+                            <a href="${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${ratingVO.mv_num}">
                                 <img class=" rounded " style="width: 100%; height: 100%"
                                      src="${pageContext.request.contextPath}/upload/${ratingVO.mv_poster}">
                             </a><br>
@@ -91,7 +91,7 @@
                     <div class="col col-sm-3">
 
                         <div class="ratio" style="--bs-aspect-ratio: 140%">
-                            <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}">
+                            <a href="${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${genreVO.mv_num}">
                                 <img class=" rounded " style="width: 100%; height: 100%"
                                      src="${pageContext.request.contextPath}/upload/${genreVO.mv_poster}">
                             </a><br>
@@ -125,7 +125,7 @@
 <%--    ${genreVO.mv_location}<br>--%>
 <%--    평점 <br>--%>
 <%--    ${genreVO.avg_rating}<br>--%>
-<%--    <a href="/movie/movieDetail.do?mv_num=${genreVO.mv_num}"><img--%>
+<%--    <a href="${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${genreVO.mv_num}"><img--%>
 <%--            src="${pageContext.request.contextPath}/upload/${genreVO.mv_poster}"></a><br>--%>
 <%--</c:forEach>--%>
 <%--    <br><br><br>-------------------별점---------------<br><br><br>--%>
@@ -138,7 +138,7 @@
 <%--    ${ratingVO.mv_location}<br>--%>
 <%--    평점 <br>--%>
 <%--    ${ratingVO.avg_rating}<br>--%>
-<%--    <a href="/movie/movieDetail.do?mv_num=${ratingVO.mv_num}"><img--%>
+<%--    <a href="${pageContext.request.contextPath}/movie/movieDetail.do?mv_num=${ratingVO.mv_num}"><img--%>
 <%--            src="${pageContext.request.contextPath}/upload/${ratingVO.mv_poster}"></a><br>--%>
 <%--</c:forEach>--%>
 <%--</span>--%>
