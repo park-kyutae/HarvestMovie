@@ -39,8 +39,9 @@ $(function () {
                             '</div>' +
                             '</div>';
                         $('#test').before(output);
-
                     })
+                    review_count += 1;
+
                 } else {
                     alert('리뷰가 없습니다.')
                 }
