@@ -1,9 +1,10 @@
 $(function () {
+    //
+    // function getContextPath() {
+    //     var hostIndex = location.href.indexOf(location.host) + location.host.length;
+    //     return location.href.substring(hostIndex, location.href.indexOf('/'));
+    // }
 
-    function getContextPath() {
-        var hostIndex = location.href.indexOf(location.host) + location.host.length;
-        return location.href.substring(hostIndex, location.href.indexOf('/'));
-    }
 
     var curr_rating=0;
     function get_rating() {
@@ -21,16 +22,16 @@ $(function () {
                 var index = 0;
                 $('.mv_star').each(function () {
                     if (index % 1 == 0.5 && index < param.mv_rating) {
-                        $(this).attr('src', ctx + '/images/star_reverse.png');
+                        $(this).attr('src', '../images/star_reverse.png');
 
                     } else if (index %1 ==0&& index < param.mv_rating) {
-                        $(this).attr('src', ctx + '/images/star.png');
+                        $(this).attr('src', '../images/star.png');
 
                     } else if (index % 1 == 0.5) {
-                        $(this).attr('src', ctx + '/images/star_blank_reverse.png');
+                        $(this).attr('src', '../images/star_blank_reverse.png');
 
                     } else {
-                        $(this).attr('src', ctx + '/images/star_blank.png');
+                        $(this).attr('src', '../images/star_blank.png');
 
                     }
                     index += 0.5;
@@ -95,14 +96,14 @@ $(function () {
             cache: false,
             timeout: 30000,
             success: function (param) {
-                var ctx = getContextPath();
+                var location;
 
                 if (param.mv_will_watch_num == '0') {
-                    ctx += '/images/unchecked.svg'
+                    location = '../images/unchecked.svg'
                 } else {
-                    ctx += '/images/checked.svg';
+                    location = '../images/checked.svg';
                 }
-                $('#mv_will_watch').attr('src', ctx)
+                $('#mv_will_watch').attr('src', location)
                 mv_will_watch_num = param.mv_will_watch_num;
 
             },
@@ -148,21 +149,20 @@ $(function () {
     })
 
     $('.mv_star').hover(function () {
-        var ctx = getContextPath();
         let id = $(this).attr('id')-0.5;
         let index = 0;
         $('.mv_star').each(function () {
             if (index % 1 == 0 && index > id) {
-                $(this).attr('src', ctx + '/images/star_blank.png');
+                $(this).attr('src', '../images/star_blank.png');
 
             } else if (index%1==0.5  && index > id) {
-                $(this).attr('src', ctx + '/images/star_blank_reverse.png');
+                $(this).attr('src', '../images/star_blank_reverse.png');
 
             } else if (index % 1 == 0) {
-                $(this).attr('src', ctx + '/images/star.png');
+                $(this).attr('src', '../images/star.png');
 
             } else {
-                $(this).attr('src', ctx + '/images/star_reverse.png');
+                $(this).attr('src', '../images/star_reverse.png');
 
             }
             index += 0.5;
@@ -170,21 +170,20 @@ $(function () {
 
 
     }, function () {
-        var ctx = getContextPath();
 
         let index = 0;
         $('.mv_star').each(function () {
             if (index % 1 == 0 && index < curr_rating) {
-                $(this).attr('src', ctx + '/images/star.png');
+                $(this).attr('src', '../images/star.png');
 
             } else if (index%1 == 0.5 && index < curr_rating) {
-                $(this).attr('src', ctx + '/images/star_reverse.png');
+                $(this).attr('src', '../images/star_reverse.png');
 
             } else if (index % 1 == 0) {
-                $(this).attr('src', ctx + '/images/star_blank.png');
+                $(this).attr('src', '../images/star_blank.png');
 
             } else {
-                $(this).attr('src', ctx + '/images/star_blank_reverse.png');
+                $(this).attr('src', '../images/star_blank_reverse.png');
 
             }
             index += 0.5;
